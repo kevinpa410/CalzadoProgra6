@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="zapateriaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="zapateriaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="idCategoria" />
@@ -13,12 +13,22 @@
           <Property Name="nombre" Type="varchar" MaxLength="50" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Gestion_Entradas_Salidas">
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="idContacto" />
+          </Key>
+          <Property Name="idContacto" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="int" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Entradas_Salidas">
           <Key>
             <PropertyRef Name="idEntradas_Salidas" />
           </Key>
           <Property Name="idEntradas_Salidas" Type="int" Nullable="false" />
           <Property Name="fecha" Type="date" />
+          <Property Name="idGestion" Type="int" />
           <Property Name="idZapato" Type="int" Nullable="false" />
           <Property Name="cantidadTotal" Type="int" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
@@ -28,6 +38,7 @@
             <PropertyRef Name="idProveedor" />
           </Key>
           <Property Name="idProveedor" Type="int" Nullable="false" />
+          <Property Name="idContacto" Type="int" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
           <Property Name="telefono" Type="int" />
           <Property Name="pais" Type="varchar" MaxLength="50" />
@@ -51,12 +62,18 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="TipoGestion">
+          <Key>
+            <PropertyRef Name="idGestion" />
+          </Key>
+          <Property Name="idGestion" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Ubicacion">
           <Key>
             <PropertyRef Name="idUbicacion" />
           </Key>
           <Property Name="idUbicacion" Type="int" Nullable="false" />
-          <Property Name="idZapato" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="cantidad" Type="int" />
         </EntityType>
@@ -92,39 +109,59 @@
           <Property Name="idZapato" Type="int" Nullable="false" />
           <Property Name="idProveedor" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FKGestion_Entradas_Salidas_Usuario">
+        <EntityType Name="ZapatoUbicacion">
+          <Key>
+            <PropertyRef Name="idUbicacion" />
+            <PropertyRef Name="idZapato" />
+          </Key>
+          <Property Name="idUbicacion" Type="int" Nullable="false" />
+          <Property Name="idZapato" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FKEntradas_Salidas_Gestion">
+          <End Role="TipoGestion" Type="Self.TipoGestion" Multiplicity="0..1" />
+          <End Role="Entradas_Salidas" Type="Self.Entradas_Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGestion">
+              <PropertyRef Name="idGestion" />
+            </Principal>
+            <Dependent Role="Entradas_Salidas">
+              <PropertyRef Name="idGestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEntradas_Salidas_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Gestion_Entradas_Salidas" Type="Self.Gestion_Entradas_Salidas" Multiplicity="*" />
+          <End Role="Entradas_Salidas" Type="Self.Entradas_Salidas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="idUsuario" />
             </Principal>
-            <Dependent Role="Gestion_Entradas_Salidas">
+            <Dependent Role="Entradas_Salidas">
               <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKGestion_Entradas_Salidas_Zapato">
+        <Association Name="FKEntradas_Salidas_Zapato">
           <End Role="Zapato" Type="Self.Zapato" Multiplicity="1" />
-          <End Role="Gestion_Entradas_Salidas" Type="Self.Gestion_Entradas_Salidas" Multiplicity="*" />
+          <End Role="Entradas_Salidas" Type="Self.Entradas_Salidas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Zapato">
               <PropertyRef Name="idZapato" />
             </Principal>
-            <Dependent Role="Gestion_Entradas_Salidas">
+            <Dependent Role="Entradas_Salidas">
               <PropertyRef Name="idZapato" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKUbicacion_Zapato">
-          <End Role="Zapato" Type="Self.Zapato" Multiplicity="1" />
-          <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="*" />
+        <Association Name="FKProveedor_Contacto">
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Zapato">
-              <PropertyRef Name="idZapato" />
+            <Principal Role="Contacto">
+              <PropertyRef Name="idContacto" />
             </Principal>
-            <Dependent Role="Ubicacion">
-              <PropertyRef Name="idZapato" />
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="idContacto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -176,27 +213,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKZapatoUbicacion_Ubicacion">
+          <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="1" />
+          <End Role="ZapatoUbicacion" Type="Self.ZapatoUbicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ubicacion">
+              <PropertyRef Name="idUbicacion" />
+            </Principal>
+            <Dependent Role="ZapatoUbicacion">
+              <PropertyRef Name="idUbicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKZapatoUbicacion_Zapato">
+          <End Role="Zapato" Type="Self.Zapato" Multiplicity="1" />
+          <End Role="ZapatoUbicacion" Type="Self.ZapatoUbicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zapato">
+              <PropertyRef Name="idZapato" />
+            </Principal>
+            <Dependent Role="ZapatoUbicacion">
+              <PropertyRef Name="idZapato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="zapateriaDBModelStoreContainer">
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Gestion_Entradas_Salidas" EntityType="Self.Gestion_Entradas_Salidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entradas_Salidas" EntityType="Self.Entradas_Salidas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoGestion" EntityType="Self.TipoGestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zapato" EntityType="Self.Zapato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZapatoProveedor" EntityType="Self.ZapatoProveedor" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FKGestion_Entradas_Salidas_Usuario" Association="Self.FKGestion_Entradas_Salidas_Usuario">
+          <EntitySet Name="ZapatoUbicacion" EntityType="Self.ZapatoUbicacion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FKEntradas_Salidas_Gestion" Association="Self.FKEntradas_Salidas_Gestion">
+            <End Role="TipoGestion" EntitySet="TipoGestion" />
+            <End Role="Entradas_Salidas" EntitySet="Entradas_Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FKEntradas_Salidas_Usuario" Association="Self.FKEntradas_Salidas_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Gestion_Entradas_Salidas" EntitySet="Gestion_Entradas_Salidas" />
+            <End Role="Entradas_Salidas" EntitySet="Entradas_Salidas" />
           </AssociationSet>
-          <AssociationSet Name="FKGestion_Entradas_Salidas_Zapato" Association="Self.FKGestion_Entradas_Salidas_Zapato">
+          <AssociationSet Name="FKEntradas_Salidas_Zapato" Association="Self.FKEntradas_Salidas_Zapato">
             <End Role="Zapato" EntitySet="Zapato" />
-            <End Role="Gestion_Entradas_Salidas" EntitySet="Gestion_Entradas_Salidas" />
+            <End Role="Entradas_Salidas" EntitySet="Entradas_Salidas" />
           </AssociationSet>
-          <AssociationSet Name="FKUbicacion_Zapato" Association="Self.FKUbicacion_Zapato">
-            <End Role="Zapato" EntitySet="Zapato" />
-            <End Role="Ubicacion" EntitySet="Ubicacion" />
+          <AssociationSet Name="FKProveedor_Contacto" Association="Self.FKProveedor_Contacto">
+            <End Role="Contacto" EntitySet="Contacto" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           <AssociationSet Name="FKUsuario_Rol" Association="Self.FKUsuario_Rol">
             <End Role="Rol" EntitySet="Rol" />
@@ -214,8 +282,17 @@
             <End Role="Zapato" EntitySet="Zapato" />
             <End Role="ZapatoProveedor" EntitySet="ZapatoProveedor" />
           </AssociationSet>
+          <AssociationSet Name="FKZapatoUbicacion_Ubicacion" Association="Self.FKZapatoUbicacion_Ubicacion">
+            <End Role="Ubicacion" EntitySet="Ubicacion" />
+            <End Role="ZapatoUbicacion" EntitySet="ZapatoUbicacion" />
+          </AssociationSet>
+          <AssociationSet Name="FKZapatoUbicacion_Zapato" Association="Self.FKZapatoUbicacion_Zapato">
+            <End Role="Zapato" EntitySet="Zapato" />
+            <End Role="ZapatoUbicacion" EntitySet="ZapatoUbicacion" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="zapateriaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -228,28 +305,42 @@
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Zapato" Relationship="Self.FKZapato_Categoria" FromRole="Categoria" ToRole="Zapato" />
         </EntityType>
-        <EntityType Name="Gestion_Entradas_Salidas">
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="idContacto" />
+          </Key>
+          <Property Name="idContacto" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FKProveedor_Contacto" FromRole="Contacto" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="Entradas_Salidas">
           <Key>
             <PropertyRef Name="idEntradas_Salidas" />
           </Key>
           <Property Name="idEntradas_Salidas" Type="Int32" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="idGestion" Type="Int32" />
           <Property Name="idZapato" Type="Int32" Nullable="false" />
           <Property Name="cantidadTotal" Type="Int32" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FKGestion_Entradas_Salidas_Usuario" FromRole="Gestion_Entradas_Salidas" ToRole="Usuario" />
-          <NavigationProperty Name="Zapato" Relationship="Self.FKGestion_Entradas_Salidas_Zapato" FromRole="Gestion_Entradas_Salidas" ToRole="Zapato" />
+          <NavigationProperty Name="TipoGestion" Relationship="Self.FKEntradas_Salidas_Gestion" FromRole="Entradas_Salidas" ToRole="TipoGestion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FKEntradas_Salidas_Usuario" FromRole="Entradas_Salidas" ToRole="Usuario" />
+          <NavigationProperty Name="Zapato" Relationship="Self.FKEntradas_Salidas_Zapato" FromRole="Entradas_Salidas" ToRole="Zapato" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
             <PropertyRef Name="idProveedor" />
           </Key>
           <Property Name="idProveedor" Type="Int32" Nullable="false" />
+          <Property Name="idContacto" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="Int32" />
           <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contacto" Relationship="Self.FKProveedor_Contacto" FromRole="Proveedor" ToRole="Contacto" />
           <NavigationProperty Name="Zapato" Relationship="Self.ZapatoProveedor" FromRole="Proveedor" ToRole="Zapato" />
         </EntityType>
         <EntityType Name="Rol">
@@ -270,15 +361,22 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="TipoGestion">
+          <Key>
+            <PropertyRef Name="idGestion" />
+          </Key>
+          <Property Name="idGestion" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Entradas_Salidas" Relationship="Self.FKEntradas_Salidas_Gestion" FromRole="TipoGestion" ToRole="Entradas_Salidas" />
+        </EntityType>
         <EntityType Name="Ubicacion">
           <Key>
             <PropertyRef Name="idUbicacion" />
           </Key>
           <Property Name="idUbicacion" Type="Int32" Nullable="false" />
-          <Property Name="idZapato" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cantidad" Type="Int32" />
-          <NavigationProperty Name="Zapato" Relationship="Self.FKUbicacion_Zapato" FromRole="Ubicacion" ToRole="Zapato" />
+          <NavigationProperty Name="Zapato" Relationship="Self.ZapatoUbicacion" FromRole="Ubicacion" ToRole="Zapato" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -291,7 +389,7 @@
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" />
-          <NavigationProperty Name="Gestion_Entradas_Salidas" Relationship="Self.FKGestion_Entradas_Salidas_Usuario" FromRole="Usuario" ToRole="Gestion_Entradas_Salidas" />
+          <NavigationProperty Name="Entradas_Salidas" Relationship="Self.FKEntradas_Salidas_Usuario" FromRole="Usuario" ToRole="Entradas_Salidas" />
           <NavigationProperty Name="Rol" Relationship="Self.FKUsuario_Rol" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
         <EntityType Name="Zapato">
@@ -306,9 +404,9 @@
           <Property Name="cantMin" Type="Int32" />
           <Property Name="cantidadTot" Type="Int32" />
           <NavigationProperty Name="Categoria" Relationship="Self.FKZapato_Categoria" FromRole="Zapato" ToRole="Categoria" />
-          <NavigationProperty Name="Gestion_Entradas_Salidas" Relationship="Self.FKGestion_Entradas_Salidas_Zapato" FromRole="Zapato" ToRole="Gestion_Entradas_Salidas" />
-          <NavigationProperty Name="Ubicacion" Relationship="Self.FKUbicacion_Zapato" FromRole="Zapato" ToRole="Ubicacion" />
+          <NavigationProperty Name="Entradas_Salidas" Relationship="Self.FKEntradas_Salidas_Zapato" FromRole="Zapato" ToRole="Entradas_Salidas" />
           <NavigationProperty Name="Proveedor" Relationship="Self.ZapatoProveedor" FromRole="Zapato" ToRole="Proveedor" />
+          <NavigationProperty Name="Ubicacion" Relationship="Self.ZapatoUbicacion" FromRole="Zapato" ToRole="Ubicacion" />
         </EntityType>
         <Association Name="FKZapato_Categoria">
           <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
@@ -322,26 +420,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKGestion_Entradas_Salidas_Usuario">
+        <Association Name="FKProveedor_Contacto">
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacto">
+              <PropertyRef Name="idContacto" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="idContacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEntradas_Salidas_Gestion">
+          <End Role="TipoGestion" Type="Self.TipoGestion" Multiplicity="0..1" />
+          <End Role="Entradas_Salidas" Type="Self.Entradas_Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGestion">
+              <PropertyRef Name="idGestion" />
+            </Principal>
+            <Dependent Role="Entradas_Salidas">
+              <PropertyRef Name="idGestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEntradas_Salidas_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Gestion_Entradas_Salidas" Type="Self.Gestion_Entradas_Salidas" Multiplicity="*" />
+          <End Role="Entradas_Salidas" Type="Self.Entradas_Salidas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="idUsuario" />
             </Principal>
-            <Dependent Role="Gestion_Entradas_Salidas">
+            <Dependent Role="Entradas_Salidas">
               <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKGestion_Entradas_Salidas_Zapato">
+        <Association Name="FKEntradas_Salidas_Zapato">
           <End Role="Zapato" Type="Self.Zapato" Multiplicity="1" />
-          <End Role="Gestion_Entradas_Salidas" Type="Self.Gestion_Entradas_Salidas" Multiplicity="*" />
+          <End Role="Entradas_Salidas" Type="Self.Entradas_Salidas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Zapato">
               <PropertyRef Name="idZapato" />
             </Principal>
-            <Dependent Role="Gestion_Entradas_Salidas">
+            <Dependent Role="Entradas_Salidas">
               <PropertyRef Name="idZapato" />
             </Dependent>
           </ReferentialConstraint>
@@ -358,28 +480,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKUbicacion_Zapato">
-          <End Role="Zapato" Type="Self.Zapato" Multiplicity="1" />
-          <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Zapato">
-              <PropertyRef Name="idZapato" />
-            </Principal>
-            <Dependent Role="Ubicacion">
-              <PropertyRef Name="idZapato" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ZapatoProveedor">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
           <End Role="Zapato" Type="Self.Zapato" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="zapateriaDBEntities1" annotation:LazyLoadingEnabled="true">
+        <Association Name="ZapatoUbicacion">
+          <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="*" />
+          <End Role="Zapato" Type="Self.Zapato" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="zapateriaDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
-          <EntitySet Name="Gestion_Entradas_Salidas" EntityType="Self.Gestion_Entradas_Salidas" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" />
+          <EntitySet Name="Entradas_Salidas" EntityType="Self.Entradas_Salidas" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoGestion" EntityType="Self.TipoGestion" />
           <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Zapato" EntityType="Self.Zapato" />
@@ -387,24 +503,32 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Zapato" EntitySet="Zapato" />
           </AssociationSet>
-          <AssociationSet Name="FKGestion_Entradas_Salidas_Usuario" Association="Self.FKGestion_Entradas_Salidas_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Gestion_Entradas_Salidas" EntitySet="Gestion_Entradas_Salidas" />
+          <AssociationSet Name="FKProveedor_Contacto" Association="Self.FKProveedor_Contacto">
+            <End Role="Contacto" EntitySet="Contacto" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FKGestion_Entradas_Salidas_Zapato" Association="Self.FKGestion_Entradas_Salidas_Zapato">
+          <AssociationSet Name="FKEntradas_Salidas_Gestion" Association="Self.FKEntradas_Salidas_Gestion">
+            <End Role="TipoGestion" EntitySet="TipoGestion" />
+            <End Role="Entradas_Salidas" EntitySet="Entradas_Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FKEntradas_Salidas_Usuario" Association="Self.FKEntradas_Salidas_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Entradas_Salidas" EntitySet="Entradas_Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FKEntradas_Salidas_Zapato" Association="Self.FKEntradas_Salidas_Zapato">
             <End Role="Zapato" EntitySet="Zapato" />
-            <End Role="Gestion_Entradas_Salidas" EntitySet="Gestion_Entradas_Salidas" />
+            <End Role="Entradas_Salidas" EntitySet="Entradas_Salidas" />
           </AssociationSet>
           <AssociationSet Name="FKUsuario_Rol" Association="Self.FKUsuario_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <AssociationSet Name="FKUbicacion_Zapato" Association="Self.FKUbicacion_Zapato">
-            <End Role="Zapato" EntitySet="Zapato" />
-            <End Role="Ubicacion" EntitySet="Ubicacion" />
-          </AssociationSet>
           <AssociationSet Name="ZapatoProveedor" Association="Self.ZapatoProveedor">
             <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Zapato" EntitySet="Zapato" />
+          </AssociationSet>
+          <AssociationSet Name="ZapatoUbicacion" Association="Self.ZapatoUbicacion">
+            <End Role="Ubicacion" EntitySet="Ubicacion" />
             <End Role="Zapato" EntitySet="Zapato" />
           </AssociationSet>
         </EntityContainer>
@@ -413,7 +537,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="zapateriaDBModelStoreContainer" CdmEntityContainer="zapateriaDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="zapateriaDBModelStoreContainer" CdmEntityContainer="zapateriaDBEntities">
           <EntitySetMapping Name="Categoria">
             <EntityTypeMapping TypeName="zapateriaDBModel.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
@@ -423,11 +547,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Gestion_Entradas_Salidas">
-            <EntityTypeMapping TypeName="zapateriaDBModel.Gestion_Entradas_Salidas">
-              <MappingFragment StoreEntitySet="Gestion_Entradas_Salidas">
+          <EntitySetMapping Name="Contacto">
+            <EntityTypeMapping TypeName="zapateriaDBModel.Contacto">
+              <MappingFragment StoreEntitySet="Contacto">
+                <ScalarProperty Name="idContacto" ColumnName="idContacto" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entradas_Salidas">
+            <EntityTypeMapping TypeName="zapateriaDBModel.Entradas_Salidas">
+              <MappingFragment StoreEntitySet="Entradas_Salidas">
                 <ScalarProperty Name="idEntradas_Salidas" ColumnName="idEntradas_Salidas" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idGestion" ColumnName="idGestion" />
                 <ScalarProperty Name="idZapato" ColumnName="idZapato" />
                 <ScalarProperty Name="cantidadTotal" ColumnName="cantidadTotal" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
@@ -438,6 +573,7 @@
             <EntityTypeMapping TypeName="zapateriaDBModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
                 <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+                <ScalarProperty Name="idContacto" ColumnName="idContacto" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="pais" ColumnName="pais" />
@@ -465,11 +601,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TipoGestion">
+            <EntityTypeMapping TypeName="zapateriaDBModel.TipoGestion">
+              <MappingFragment StoreEntitySet="TipoGestion">
+                <ScalarProperty Name="idGestion" ColumnName="idGestion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Ubicacion">
             <EntityTypeMapping TypeName="zapateriaDBModel.Ubicacion">
               <MappingFragment StoreEntitySet="Ubicacion">
                 <ScalarProperty Name="idUbicacion" ColumnName="idUbicacion" />
-                <ScalarProperty Name="idZapato" ColumnName="idZapato" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
               </MappingFragment>
@@ -504,6 +647,14 @@
           <AssociationSetMapping Name="ZapatoProveedor" TypeName="zapateriaDBModel.ZapatoProveedor" StoreEntitySet="ZapatoProveedor">
             <EndProperty Name="Proveedor">
               <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+            </EndProperty>
+            <EndProperty Name="Zapato">
+              <ScalarProperty Name="idZapato" ColumnName="idZapato" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ZapatoUbicacion" TypeName="zapateriaDBModel.ZapatoUbicacion" StoreEntitySet="ZapatoUbicacion">
+            <EndProperty Name="Ubicacion">
+              <ScalarProperty Name="idUbicacion" ColumnName="idUbicacion" />
             </EndProperty>
             <EndProperty Name="Zapato">
               <ScalarProperty Name="idZapato" ColumnName="idZapato" />

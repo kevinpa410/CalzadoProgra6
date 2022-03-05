@@ -17,9 +17,9 @@ namespace Infrastructure.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Zapato()
         {
-            this.Gestion_Entradas_Salidas = new HashSet<Gestion_Entradas_Salidas>();
-            this.Ubicacion = new HashSet<Ubicacion>();
+            this.Entradas_Salidas = new HashSet<Entradas_Salidas>();
             this.Proveedor = new HashSet<Proveedor>();
+            this.Ubicacion = new HashSet<Ubicacion>();
         }
     
         public int idZapato { get; set; }
@@ -32,10 +32,10 @@ namespace Infrastructure.Models
     
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gestion_Entradas_Salidas> Gestion_Entradas_Salidas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ubicacion> Ubicacion { get; set; }
+        public virtual ICollection<Entradas_Salidas> Entradas_Salidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ubicacion> Ubicacion { get; set; }
     }
 }

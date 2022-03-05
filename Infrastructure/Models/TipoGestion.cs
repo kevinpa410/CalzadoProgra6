@@ -12,19 +12,18 @@ namespace Infrastructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ubicacion
+    public partial class TipoGestion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ubicacion()
+        public TipoGestion()
         {
-            this.Zapato = new HashSet<Zapato>();
+            this.Entradas_Salidas = new HashSet<Entradas_Salidas>();
         }
     
-        public int idUbicacion { get; set; }
-        public string descripcion { get; set; }
-        public Nullable<int> cantidad { get; set; }
+        public int idGestion { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Zapato> Zapato { get; set; }
+        public virtual ICollection<Entradas_Salidas> Entradas_Salidas { get; set; }
     }
 }

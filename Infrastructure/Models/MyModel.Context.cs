@@ -13,10 +13,10 @@ namespace Infrastructure.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class zapateriaDBEntities1 : DbContext
+    public partial class zapateriaDBEntities : DbContext
     {
-        public zapateriaDBEntities1()
-            : base("name=zapateriaDBEntities1")
+        public zapateriaDBEntities()
+            : base("name=zapateriaDBEntities")
         {
         }
     
@@ -26,10 +26,12 @@ namespace Infrastructure.Models
         }
     
         public virtual DbSet<Categoria> Categoria { get; set; }
-        public virtual DbSet<Gestion_Entradas_Salidas> Gestion_Entradas_Salidas { get; set; }
+        public virtual DbSet<Contacto> Contacto { get; set; }
+        public virtual DbSet<Entradas_Salidas> Entradas_Salidas { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TipoGestion> TipoGestion { get; set; }
         public virtual DbSet<Ubicacion> Ubicacion { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Zapato> Zapato { get; set; }

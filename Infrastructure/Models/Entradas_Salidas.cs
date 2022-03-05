@@ -12,14 +12,16 @@ namespace Infrastructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Gestion_Entradas_Salidas
+    public partial class Entradas_Salidas
     {
         public int idEntradas_Salidas { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<int> idGestion { get; set; }
         public int idZapato { get; set; }
         public Nullable<int> cantidadTotal { get; set; }
         public int idUsuario { get; set; }
     
+        public virtual TipoGestion TipoGestion { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Zapato Zapato { get; set; }
     }

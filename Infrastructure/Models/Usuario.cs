@@ -17,7 +17,7 @@ namespace Infrastructure.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.Gestion_Entradas_Salidas = new HashSet<Gestion_Entradas_Salidas>();
+            this.Entradas_Salidas = new HashSet<Entradas_Salidas>();
         }
     
         public int idUsuario { get; set; }
@@ -29,7 +29,7 @@ namespace Infrastructure.Models
         public Nullable<bool> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gestion_Entradas_Salidas> Gestion_Entradas_Salidas { get; set; }
+        public virtual ICollection<Entradas_Salidas> Entradas_Salidas { get; set; }
         public virtual Rol Rol { get; set; }
     }
 }
