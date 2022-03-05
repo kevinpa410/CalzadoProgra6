@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Infrastructure.Models.Zapato>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idZapato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idCategoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantMin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantMax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidadTot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.idZapato)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.idCategoria)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cantMin)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cantMax)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cantidadTot)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.color)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.descripcion)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>
+</tr>
+}
+
+</table>

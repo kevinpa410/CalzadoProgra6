@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="zapateriaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="idCategoria" />
+    </Key>
+    <Property Name="idCategoria" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Gestion_Entradas_Salidas">
+    <Key>
+      <PropertyRef Name="idEntradas_Salidas" />
+    </Key>
+    <Property Name="idEntradas_Salidas" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="date" />
+    <Property Name="idZapato" Type="int" Nullable="false" />
+    <Property Name="cantidadTotal" Type="int" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="idProveedor" />
+    </Key>
+    <Property Name="idProveedor" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="telefono" Type="int" />
+    <Property Name="pais" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="int" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Ubicacion">
+    <Key>
+      <PropertyRef Name="idUbicacion" />
+    </Key>
+    <Property Name="idUbicacion" Type="int" Nullable="false" />
+    <Property Name="idZapato" Type="int" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="cantidad" Type="int" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="idRol" Type="int" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="apellidos" Type="varchar" MaxLength="50" />
+    <Property Name="estado" Type="bit" />
+  </EntityType>
+  <EntityType Name="Zapato">
+    <Key>
+      <PropertyRef Name="idZapato" />
+    </Key>
+    <Property Name="idZapato" Type="int" Nullable="false" />
+    <Property Name="idCategoria" Type="int" Nullable="false" />
+    <Property Name="color" Type="varchar" MaxLength="50" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="cantMax" Type="int" />
+    <Property Name="cantMin" Type="int" />
+    <Property Name="cantidadTot" Type="int" />
+  </EntityType>
+  <EntityType Name="ZapatoProveedor">
+    <Key>
+      <PropertyRef Name="idZapato" />
+      <PropertyRef Name="idProveedor" />
+    </Key>
+    <Property Name="idZapato" Type="int" Nullable="false" />
+    <Property Name="idProveedor" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FKGestion_Entradas_Salidas_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Gestion_Entradas_Salidas" Type="Self.Gestion_Entradas_Salidas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Gestion_Entradas_Salidas">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKGestion_Entradas_Salidas_Zapato">
+    <End Role="Zapato" Type="Self.Zapato" Multiplicity="1" />
+    <End Role="Gestion_Entradas_Salidas" Type="Self.Gestion_Entradas_Salidas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zapato">
+        <PropertyRef Name="idZapato" />
+      </Principal>
+      <Dependent Role="Gestion_Entradas_Salidas">
+        <PropertyRef Name="idZapato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKUbicacion_Zapato">
+    <End Role="Zapato" Type="Self.Zapato" Multiplicity="1" />
+    <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zapato">
+        <PropertyRef Name="idZapato" />
+      </Principal>
+      <Dependent Role="Ubicacion">
+        <PropertyRef Name="idZapato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKUsuario_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="idRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKZapato_Categoria">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+    <End Role="Zapato" Type="Self.Zapato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="idCategoria" />
+      </Principal>
+      <Dependent Role="Zapato">
+        <PropertyRef Name="idCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKZapatoProveedor_Proveedor">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+    <End Role="ZapatoProveedor" Type="Self.ZapatoProveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="idProveedor" />
+      </Principal>
+      <Dependent Role="ZapatoProveedor">
+        <PropertyRef Name="idProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKZapatoProveedor_Zapato">
+    <End Role="Zapato" Type="Self.Zapato" Multiplicity="1" />
+    <End Role="ZapatoProveedor" Type="Self.ZapatoProveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zapato">
+        <PropertyRef Name="idZapato" />
+      </Principal>
+      <Dependent Role="ZapatoProveedor">
+        <PropertyRef Name="idZapato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="zapateriaDBModelStoreContainer">
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gestion_Entradas_Salidas" EntityType="Self.Gestion_Entradas_Salidas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Zapato" EntityType="Self.Zapato" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ZapatoProveedor" EntityType="Self.ZapatoProveedor" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FKGestion_Entradas_Salidas_Usuario" Association="Self.FKGestion_Entradas_Salidas_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Gestion_Entradas_Salidas" EntitySet="Gestion_Entradas_Salidas" />
+    </AssociationSet>
+    <AssociationSet Name="FKGestion_Entradas_Salidas_Zapato" Association="Self.FKGestion_Entradas_Salidas_Zapato">
+      <End Role="Zapato" EntitySet="Zapato" />
+      <End Role="Gestion_Entradas_Salidas" EntitySet="Gestion_Entradas_Salidas" />
+    </AssociationSet>
+    <AssociationSet Name="FKUbicacion_Zapato" Association="Self.FKUbicacion_Zapato">
+      <End Role="Zapato" EntitySet="Zapato" />
+      <End Role="Ubicacion" EntitySet="Ubicacion" />
+    </AssociationSet>
+    <AssociationSet Name="FKUsuario_Rol" Association="Self.FKUsuario_Rol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FKZapato_Categoria" Association="Self.FKZapato_Categoria">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Zapato" EntitySet="Zapato" />
+    </AssociationSet>
+    <AssociationSet Name="FKZapatoProveedor_Proveedor" Association="Self.FKZapatoProveedor_Proveedor">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="ZapatoProveedor" EntitySet="ZapatoProveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FKZapatoProveedor_Zapato" Association="Self.FKZapatoProveedor_Zapato">
+      <End Role="Zapato" EntitySet="Zapato" />
+      <End Role="ZapatoProveedor" EntitySet="ZapatoProveedor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
