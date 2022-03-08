@@ -15,7 +15,7 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
-            IEnumerable<Gestion_Entradas_Salidas> lista = null;
+            IEnumerable<Entradas_Salidas> lista = null;
             try
             {
                 IServiceEntradas_Salidas _SeviceEntradas_Salidas = new ServiceEntradas_Salidas();
