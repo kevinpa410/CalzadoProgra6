@@ -32,6 +32,41 @@ namespace Infrastructure.Models
 
     }
 
+    internal partial class ZapatoMetada
+    {
+
+        [Display(Name = "Id Zapatdo")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public int idZapato { get; set; }
+
+
+        public string color { get; set; }
+
+
+        public string descripcion { get; set; }
+
+        [Display(Name = "Cantidad")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} deber númerico y con dos decimales")]
+        public int cantidadTot { get; set; }
+
+        [Display(Name = "Cantidad Maxima")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} deber númerico y con dos decimales")]
+        public int cantMax { get; set; }
+
+        [Display(Name = "Cantidad Minima")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} deber númerico y con dos decimales")]
+        public int cantMin { get; set; }
+
+        [Display(Name = "Categoría")]
+        public virtual ICollection<Categoria> Categoria { get; set; }
+
+    }
+
+
+
 
 
 }
