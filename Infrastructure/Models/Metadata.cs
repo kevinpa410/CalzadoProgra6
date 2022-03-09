@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Models
 {
-    internal partial class ZapatoMetadata
-    {
-    }
 
     internal partial class UsuarioMetadata
     {
@@ -28,16 +25,14 @@ namespace Infrastructure.Models
         public virtual Rol Rol { get; set; }
     }
 
-    internal partial class ZapatoMetada
+    internal partial class ZapatoMetadata
     {
 
         [Display(Name = "Id Zapatdo")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int idZapato { get; set; }
 
-
         public string color { get; set; }
-
 
         public string descripcion { get; set; }
 
@@ -59,6 +54,42 @@ namespace Infrastructure.Models
         [Display(Name = "Categoría")]
         public virtual ICollection<Categoria> Categoria { get; set; }
 
+    }
+
+    internal partial class Entrada_SalidaMetadata
+    {
+        [Display(Name = "ID Entradas Salidas")]
+        public int idEntradas_Salidas { get; set; }
+
+        [Display(Name = "Fecha")]
+        public Nullable<System.DateTime> fecha { get; set; }
+
+        [Display(Name = "ID Zapato")]
+        public int idZapato { get; set; }
+
+        [Display(Name = "Cantidad Total")]
+        public Nullable<int> cantidadTotal { get; set; }
+
+        [Display(Name = "ID Usuario")]
+        public int idUsuario { get; set; }     
+    }
+
+    internal partial class Proveedor
+    {
+        [Display(Name = "ID Entradas Salidas")]
+        public int idEntradas_Salidas { get; set; }
+
+        [Display(Name = "Fecha")]
+        public Nullable<System.DateTime> fecha { get; set; }
+
+        [Display(Name = "ID Zapato")]
+        public int idZapato { get; set; }
+
+        [Display(Name = "Cantidad Total")]
+        public Nullable<int> cantidadTotal { get; set; }
+
+        [Display(Name = "ID Usuario")]
+        public int idUsuario { get; set; }
     }
 
 
