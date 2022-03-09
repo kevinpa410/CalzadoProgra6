@@ -26,6 +26,10 @@ namespace Infrastructure.Models
         public string Apellidos { get; set; }
         public bool Estado { get; set; }
         public virtual Rol Rol { get; set; }
+
+        [Display(Name = "Categoría")]
+        public virtual ICollection<Categoria> Categoria { get; set; }
+
     }
 
 

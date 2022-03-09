@@ -46,3 +46,7 @@ C:\Users\Kevin PC\Desktop\Proyect\Bodega_Calzado\Infrastructure\obj\Debug\Infras
 C:\Users\Kevin PC\Desktop\Proyect\Bodega_Calzado\Infrastructure\obj\Debug\Infrastructure.dll
 C:\Users\Kevin PC\Desktop\Proyect\Bodega_Calzado\Infrastructure\obj\Debug\Infrastructure.pdb
 C:\Users\Kevin PC\Desktop\Proyect\Bodega_Calzado\Infrastructure\obj\Debug\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.dll
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.pdb

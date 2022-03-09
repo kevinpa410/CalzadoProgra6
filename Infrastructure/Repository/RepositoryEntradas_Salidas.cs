@@ -17,15 +17,15 @@ namespace Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Gestion_Entradas_Salidas> GetEntradas_Salidas()
+        public IEnumerable<Entradas_Salidas> GetEntradas_Salidas()
         {
             try
             {
-                IEnumerable<Gestion_Entradas_Salidas> lista = null;
+                IEnumerable<Entradas_Salidas> lista = null;
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Gestion_Entradas_Salidas.ToList<Gestion_Entradas_Salidas>();
+                    lista = ctx.Entradas_Salidas.ToList<Entradas_Salidas>();
                 }
                 return lista;
             }
@@ -44,12 +44,12 @@ namespace Infrastructure.Repository
             }
         }
 
-        public Gestion_Entradas_Salidas GetEntradas_SalidasByID(int id)
+        public Entradas_Salidas GetEntradas_SalidasByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Gestion_Entradas_Salidas Save(Gestion_Entradas_Salidas Entradas_Salidas)
+        public Entradas_Salidas Save(Entradas_Salidas Entradas_Salidas)
         {
             throw new NotImplementedException();
         }
