@@ -15,18 +15,18 @@ namespace ApplicationCore.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Gestion_Entradas_Salidas> GetEntradas_Salidas()
+        public IEnumerable<Entradas_Salidas> GetEntradas_Salidas()
         {
             IRepositoryEntradas_Salidas repository = new RepositoryEntradas_Salidas();
             return repository.GetEntradas_Salidas();
         }
 
-        public Gestion_Entradas_Salidas GetEntradas_SalidasByID(int id)
+        public Entradas_Salidas GetEntradas_SalidasByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Gestion_Entradas_Salidas Save(Gestion_Entradas_Salidas Entradas_Salidas)
+        public Entradas_Salidas Save(Entradas_Salidas Entradas_Salidas)
         {
             throw new NotImplementedException();
         }
