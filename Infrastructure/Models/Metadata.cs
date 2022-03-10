@@ -78,22 +78,36 @@ namespace Infrastructure.Models
         public int idUsuario { get; set; }     
     }
 
-    internal partial class Proveedor
+    internal partial class ProveedorMetaData
     {
-        [Display(Name = "ID Entradas Salidas")]
-        public int idEntradas_Salidas { get; set; }
+        [Display(Name = "ID Proveedor")]
+        public int idProveedor { get; set; }
 
-        [Display(Name = "Fecha")]
-        public Nullable<System.DateTime> fecha { get; set; }
+        [Display(Name = "ID Contacto")]
+        public int idContacto { get; set; }
 
-        [Display(Name = "ID Zapato")]
-        public int idZapato { get; set; }
+        [Display(Name = "Nombre")]
+        public string nombre { get; set; }
 
-        [Display(Name = "Cantidad Total")]
-        public Nullable<int> cantidadTotal { get; set; }
+        [Display(Name = "Telefono")]
+        public Nullable<int> telefono { get; set; }
 
-        [Display(Name = "ID Usuario")]
-        public int idUsuario { get; set; }
+        [Display(Name = "Pais")]
+        public string pais { get; set; }
+
+        [Display(Name = "Direccion")]
+        public string direccion { get; set; }
+
+        [Display(Name = "Email")]
+        public string email { get; set; }
+
+        [Display(Name = "Contacto")]
+        public virtual Contacto Contacto { get; set; }
+
+        [Display(Name = "Zapato")]
+        public virtual ICollection<Categoria> Zapato { get; set; }
+
+
     }
 
 
