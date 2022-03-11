@@ -245,6 +245,9 @@
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\Entradas_Salidas\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Zapato\Details.cshtml" />
+    <Content Include="Views\Proveedor\Details.cshtml" />
+    <Content Include="Views\Proveedor\IndexAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

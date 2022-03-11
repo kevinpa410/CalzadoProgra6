@@ -11,5 +11,7 @@ namespace Infrastructure.Repository
     {
         IEnumerable<Zapato> GetZapato();
         Zapato GetZapatoByID(int id);
+        IEnumerable<Zapato> GetZapatoByProveedor(int idProveedor);
+        IEnumerable<Zapato> GetZapatoByCategoria(int idCategoria);
     }
 }

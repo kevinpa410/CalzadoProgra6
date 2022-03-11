@@ -19,10 +19,18 @@ namespace ApplicationCore.Services
         }
         public Zapato GetZapatoByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryZapato repository = new RepositoryZapato();
+            return repository.GetZapatoByID(id);
         }
            
-
+        public IEnumerable<Zapato> GetZapatoByProveedor(int idProveedor)
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<Zapato> GetZapatoByCategoria(int idCategoria)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
