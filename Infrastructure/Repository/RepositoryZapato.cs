@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -49,19 +50,24 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //*** Sintaxis LINQ Query *** https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations
-                    //var infoZapato = from a in ctxZapato
-                    //                where a.IdZapato == id
-                    //                select a;
-                    //oAutor = infoZapato.First();
-                    //*** Sintaxis LINQ Method *** https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/queries-in-linq-to-entities
-                    //* Método Find sin ningún otro método, formato automático
+                    oZapato = ctx.Zapato.
+                          Where(l => l.idZapato == id).
+                          Include(a => a.Proveedor).
+                          Include(c => c.Categoria).
+                          FirstOrDefault();
+               
                     oZapato = ctx.Zapato.Find(id);
-                    //* Con las demás partes de una consulta y se debe dar formato
-                    //oAutor = ctx.Zapato.Where(x => x.IdZapato == id).First<Zapato>();
-                    //La expresión lambda es una forma más corta de representar un método anónimo utilizando una sintaxis especial.
+                  
                 }
                 return oZapato;
+            }
+            public IEnumerable<Zapato> GetZapatoByProveedor(int idProveedor)
+            {
+                throw new NotImplementedException();
+            }
+            public IEnumerable<Zapato> GetZapatoByCategoria(int idCategoria)
+            {
+                throw new NotImplementedException();
             }
         }
     }

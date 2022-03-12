@@ -75,30 +75,20 @@ namespace Infrastructure.Repository
 
         public Proveedor GetProveedorByID(int id)
         {
-            Proveedor proveedor = null;
-            try
+            Proveedor oProveedor = null;
+            using (MyContext ctx = new MyContext())
             {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oProveedor = ctx.Proveedor.
+                      Where(l => l.idProveedor == id).
+                      Include(a => a.nombre).
+                      Include(c => c.Contacto).
+                      FirstOrDefault();
 
-                using (MyContext ctx = new MyContext())
-                {
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    proveedor = ctx.Proveedor.Find(id);
-                }
+                oProveedor = ctx.Proveedor.Find(id);
 
-                return proveedor;
             }
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "";
-                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw;
-            }
+            return oProveedor;
         }
 
         public Proveedor Save(Proveedor autor)

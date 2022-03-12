@@ -1,0 +1,74 @@
+﻿@model Infrastructure.Models.Zapato
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Zapato</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idZapato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idZapato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idCategoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idCategoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantMax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantMax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidadTot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidadTot)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

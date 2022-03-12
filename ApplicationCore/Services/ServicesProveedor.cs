@@ -24,12 +24,15 @@ namespace ApplicationCore.Services
 
         public Proveedor GetProveedorByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repository = new RepositoryProveedor();
+            return repository.GetProveedorByID(id);
         }
 
         public Proveedor Save(Proveedor autor)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }
