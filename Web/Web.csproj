@@ -148,6 +148,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\ZapatoController.cs" />
+    <Compile Include="Enum\Enum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -252,6 +253,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Enum\" />
     <Folder Include="Views\Log\" />
     <Folder Include="Views\SweetAlertHelper\" />
     <Folder Include="Views\Util\" />

@@ -2,11 +2,13 @@
 using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using Web.Util;
+using Web.Utils;
+//using Web.Security;
 
 namespace Web.Controllers
 {
@@ -29,50 +31,59 @@ namespace Web.Controllers
             return View(lista);
         }
 
-
-        // GET: Autor/Create
         public ActionResult Create()
         {
+            //Lista de autores
+            ViewBag.idProveedor = listaProveedores();
             return View();
         }
-
-        // POST: Autor/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        private SelectList listaProveedores(int idProveedor = 0)
         {
+            //Lista de autores
+            IServicesProveedor _ServiceProveedor = new ServicesProveedor();
+            IEnumerable<Proveedor> listaProveedores = _ServiceProveedor.GetProveedor();
+            //Autor SelectAutor = listaAutores.Where(c => c.IdAutor == idAutor).FirstOrDefault();
+            return new SelectList(listaProveedores, "IdAutor", "Nombre", idProveedor);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            ServicesProveedor _ServicesProveedor = new ServicesProveedor();
+            Proveedor proveedor = null;
+
             try
             {
-                // TODO: Add insert logic here
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("IndexAdmin");
+                }
 
-                return RedirectToAction("Index");
+                proveedor = _ServicesProveedor.GetProveedorByID(id.Value);
+                if (proveedor == null)
+                {
+                    TempData["Message"] = "No existe el libro solicitado";
+                    TempData["Redirect"] = "Libro";
+                    TempData["Redirect-Action"] = "IndexAdmin";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                //Lista de autores
+                ViewBag.idProveedor = listaProveedores(proveedor.idProveedor);
+                return View(proveedor);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
 
-        // GET: Autor/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Autor/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
         public ActionResult IndexAdmin()
         {
             IEnumerable<Proveedor> lista = null;
@@ -146,6 +157,10 @@ namespace Web.Controllers
                 return View();
             }
         }
-
         }
+
+
+
+
+
     }

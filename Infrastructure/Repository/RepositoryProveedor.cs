@@ -91,7 +91,7 @@ namespace Infrastructure.Repository
             return oProveedor;
         }
 
-        public Proveedor Save(Proveedor autor)
+        public Proveedor Save(Proveedor proveedor)
         {
             int retorno = 0;
             Proveedor oProveedor = null;
@@ -102,20 +102,20 @@ namespace Infrastructure.Repository
                 {
 
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    oProveedor = GetProveedorByID(autor.idProveedor);
+                    oProveedor = GetProveedorByID(proveedor.idProveedor);
                     if (oProveedor == null)
                     {
-                        ctx.Proveedor.Add(autor);
+                        ctx.Proveedor.Add(proveedor);
                     }
                     else
                     {
-                        ctx.Entry(autor).State = EntityState.Modified;
+                        ctx.Entry(proveedor).State = EntityState.Modified;
                     }
                     retorno = ctx.SaveChanges();
                 }
 
                 if (retorno >= 0)
-                    oProveedor = GetProveedorByID(autor.idProveedor);
+                    oProveedor = GetProveedorByID(proveedor.idProveedor);
 
                 return oProveedor;
             }

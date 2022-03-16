@@ -20,6 +20,7 @@ namespace Infrastructure.Models
         public Proveedor()
         {
             this.Zapato = new HashSet<Zapato>();
+
         }
     
         public int idProveedor { get; set; }
@@ -33,5 +34,6 @@ namespace Infrastructure.Models
         public virtual Contacto Contacto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zapato> Zapato { get; set; }
+
     }
 }
