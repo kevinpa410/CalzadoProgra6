@@ -33,46 +33,57 @@ namespace Web.Controllers
         // GET: Autor/Create
         public ActionResult Create()
         {
+            ViewBag.idZapato= listaZapato();
             return View();
         }
 
-        // POST: Autor/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+     
+        private SelectList listaZapato(int idZapato = 0)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            IServiceZapato _ServiceZapato = new ServiceZapato();
+            IEnumerable<Zapato> listaZapato = _ServiceZapato.GetZapato();
+            //Proveedor SelectProveedor = listaProveedor.Where(c => c.idProveedor == idProveedor).FirstOrDefault();
+            return new SelectList(listaZapato, "idZapato", "nombre", idZapato);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: Autor/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
-        }
 
-        // POST: Autor/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
+            ServicesProveedor _ServicesProveedor = new ServicesProveedor();
+            Proveedor proveedor = null;
             try
             {
-                // TODO: Add update logic here
+                if (id == null)
+                {
+                    return RedirectToAction("IndexAdmin");
 
-                return RedirectToAction("Index");
+                }
+                proveedor = _ServicesProveedor.GetProveedorByID(id.Value);
+                if (proveedor == null)
+                {
+                    TempData["Message"] = "NO EXISTE EL PROVEEDOR SOLICITADO";
+                    TempData["Redirect"] = "Proveedor";
+                    TempData["Redirect"] = "IndexAdmin";
+                    return RedirectToAction("Default", "Error");
+                }
+                ViewBag.idZapato = listaZapato(proveedor.idContacto);
+                //ViewBag.idCategoria = listaCategorias(zapato.Categoria);
+                return View(proveedor);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Zapato";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
+
+    
         public ActionResult IndexAdmin()
         {
             IEnumerable<Proveedor> lista = null;
@@ -130,22 +141,22 @@ namespace Web.Controllers
         {
             return View();
         }
-
-        // POST: Autor/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Save(Proveedor proveedor)
         {
-            try
+            IServicesProveedor _ServicesProveedor = new ServicesProveedor();
+            if (ModelState.IsValid)
             {
-                // TODO: Add delete logic here
+                Proveedor oProvedorI = _ServicesProveedor.Save(proveedor);
 
-                return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                ViewBag.idZapato = listaZapato();
+                return View("Create", proveedor);
             }
+            return RedirectToAction("IndexAdmin");
         }
+
 
         }
     }

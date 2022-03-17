@@ -11,7 +11,9 @@ namespace ApplicationCore.Services
     {
         IEnumerable<Zapato> GetZapato();
         Zapato GetZapatoByID(int id);
+        IEnumerable<Zapato> GetZapatoByUbicacion(String ubicacion);
         IEnumerable<Zapato> GetZapatoByProveedor(int idProveedor);
         IEnumerable<Zapato> GetZapatoByCategoria(int idCategoria);
+        Zapato Save(Zapato zapato);
     }
 }

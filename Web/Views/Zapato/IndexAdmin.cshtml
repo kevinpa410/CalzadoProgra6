@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Infrastructure.Models.Zapato>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "IndexAdmin";
 }
 
-<h2></h2>
+<h2>Lista Zapatos</h2>
 
 <p>
-    @Html.ActionLink("Crear Nuevo", "Create")
+    @Html.ActionLink("Nuevo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -18,19 +18,22 @@
             @Html.DisplayNameFor(model => model.idCategoria)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cantMin)
+            @Html.DisplayNameFor(model => model.color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.cantMax)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.cantMin)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.cantidadTot)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
+            @Html.DisplayNameFor(model => model.Ubicacion)
         </th>
         <th></th>
     </tr>
@@ -41,16 +44,7 @@
         @Html.DisplayFor(modelItem => item.idZapato)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Categoria.nombre)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.cantMin)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.cantMax)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.cantidadTot)
+        @Html.DisplayFor(modelItem => item.idCategoria)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.color)
@@ -58,6 +52,18 @@
     <td>
         @Html.DisplayFor(modelItem => item.descripcion)
     </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cantMax)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cantMin)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cantidadTot)
+    </td>
+    <th>
+        @Html.DisplayNameFor(model => model.Ubicacion)
+    </th>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.idZapato }) |
         @Html.ActionLink("Details", "Details", new { id = item.idZapato }) |

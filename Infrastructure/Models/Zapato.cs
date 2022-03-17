@@ -39,5 +39,6 @@ namespace Infrastructure.Models
         public virtual ICollection<Proveedor> Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ubicacion> Ubicacion { get; set; }
+        public int idProveedor { get; set; }
     }
 }

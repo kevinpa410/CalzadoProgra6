@@ -12,7 +12,7 @@ namespace ApplicationCore.Services
         IEnumerable<Proveedor> GetProveedor();
         Proveedor GetProveedorByID(int id);
         void DeleteProveedor(int id);
-        Proveedor Save(Proveedor autor);
+        Proveedor Save(Proveedor proveedor);
 
     }
 }

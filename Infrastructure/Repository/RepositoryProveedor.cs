@@ -14,35 +14,7 @@ namespace Infrastructure.Repository
     {
         public void DeleteProveedor(int id)
         {
-            int returno;
-            try
-            {
-
-                using (MyContext ctx = new MyContext())
-                {
-                    /* La carga diferida retrasa la carga de datos relacionados,
-                     * hasta que lo solicite específicamente.*/
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    Proveedor proveedor = new Proveedor()
-                    {
-                        idProveedor = id
-                    };
-                    ctx.Entry(proveedor).State = EntityState.Deleted;
-                    returno = ctx.SaveChanges();
-                }
-            }
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "";
-                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Proveedor> GetProveedor()
@@ -81,7 +53,7 @@ namespace Infrastructure.Repository
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oProveedor = ctx.Proveedor.
                       Where(l => l.idProveedor == id).
-                      Include(a => a.nombre).
+                      Include(a => a.Zapato).
                       Include(c => c.Contacto).
                       FirstOrDefault();
 
@@ -91,46 +63,41 @@ namespace Infrastructure.Repository
             return oProveedor;
         }
 
-        public Proveedor Save(Proveedor autor)
+        public Proveedor Save(Proveedor proveedor)
         {
             int retorno = 0;
             Proveedor oProveedor = null;
-            try
+
+            using (MyContext ctx = new MyContext())
             {
 
-                using (MyContext ctx = new MyContext())
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oProveedor = GetProveedorByID((int)proveedor.idProveedor);
+                if (oProveedor == null)
                 {
-
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    oProveedor = GetProveedorByID(autor.idProveedor);
-                    if (oProveedor == null)
-                    {
-                        ctx.Proveedor.Add(autor);
-                    }
-                    else
-                    {
-                        ctx.Entry(autor).State = EntityState.Modified;
-                    }
+                    ctx.Proveedor.Add(proveedor);
                     retorno = ctx.SaveChanges();
                 }
+                else
+                {
+                    ctx.Proveedor.Add(proveedor);
+                    ctx.Entry(proveedor).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                }
+            }
+            if (retorno >= 0)
+                oProveedor = GetProveedorByID(proveedor.idProveedor);
 
-                if (retorno >= 0)
-                    oProveedor = GetProveedorByID(autor.idProveedor);
-
-                return oProveedor;
-            }
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "";
-                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw;
-            }
+            return oProveedor;
         }
+           
     }
+
 }
+    
+
+
+       
+        
+        
+    

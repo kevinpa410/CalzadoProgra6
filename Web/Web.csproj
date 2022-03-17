@@ -248,6 +248,11 @@
     <Content Include="Views\Zapato\Details.cshtml" />
     <Content Include="Views\Proveedor\Details.cshtml" />
     <Content Include="Views\Proveedor\IndexAdmin.cshtml" />
+    <Content Include="Views\Zapato\IndexAdmin.cshtml" />
+    <Content Include="Views\Zapato\Create.cshtml" />
+    <Content Include="Views\Zapato\Edit.cshtml" />
+    <Content Include="Views\Proveedor\Edit.cshtml" />
+    <Content Include="Views\Proveedor\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

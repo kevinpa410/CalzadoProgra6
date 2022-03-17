@@ -32,7 +32,7 @@ namespace Infrastructure.Models
     internal partial class ZapatoMetadata
     {
 
-        [Display(Name = "Id Zapatdo")]
+        [Display(Name = "Id Zapato")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int idZapato { get; set; }
 
