@@ -7,7 +7,7 @@
 <h2>Lista Proveedores</h2>
 
 <p>
-    @Html.ActionLink("Nuevo", "Create")
+    @Html.ActionLink("Crear Nuevo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -59,9 +59,9 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Editar", "Edit", new { id = item.idProveedor }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.idProveedor }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.idProveedor })
         </td>
     </tr>
 }

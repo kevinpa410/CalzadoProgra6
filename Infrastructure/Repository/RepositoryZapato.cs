@@ -13,10 +13,11 @@ namespace Infrastructure.Repository
 
     public class RepositoryZapato : IRepositoryZapato
     {
-        public void DeleteZapato(int id)
+        public void DeleteZapato(int idZapato)
         {
             throw new NotImplementedException();
         }
+    
         public IEnumerable<Zapato> GetZapato()
         {
             try
