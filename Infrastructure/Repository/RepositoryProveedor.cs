@@ -54,6 +54,7 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
+                    //Select * from Zapato
                     lista = ctx.Proveedor.ToList<Proveedor>();
                 }
                 return lista;
@@ -100,24 +101,27 @@ namespace Infrastructure.Repository
 
                 using (MyContext ctx = new MyContext())
                 {
-
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    oProveedor = GetProveedorByID(proveedor.idProveedor);
+                    oProveedor = GetProveedorByID((int)proveedor.idProveedor);
                     if (oProveedor == null)
                     {
                         ctx.Proveedor.Add(proveedor);
+                        retorno = ctx.SaveChanges();
+
+
                     }
                     else
                     {
+                        ctx.Proveedor.Add(proveedor);
                         ctx.Entry(proveedor).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
+
                     }
-                    retorno = ctx.SaveChanges();
                 }
-
                 if (retorno >= 0)
-                    oProveedor = GetProveedorByID(proveedor.idProveedor);
-
+                    oProveedor = GetProveedorByID((int)proveedor.idProveedor);
                 return oProveedor;
+
             }
             catch (DbUpdateException dbEx)
             {

@@ -61,10 +61,12 @@ namespace Infrastructure.Repository
                 }
                 return oZapato;
             }
+
             public IEnumerable<Zapato> GetZapatoByProveedor(int idProveedor)
             {
                 throw new NotImplementedException();
             }
+
             public IEnumerable<Zapato> GetZapatoByCategoria(int idCategoria)
             {
                 throw new NotImplementedException();

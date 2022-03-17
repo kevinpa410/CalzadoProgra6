@@ -62,3 +62,19 @@ C:\Users\marlon\Desktop\Karla\ISW-711\Proyecto\CalzadoProgra6\Infrastructure\obj
 C:\Users\marlon\Desktop\Karla\ISW-711\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.CopyComplete
 C:\Users\marlon\Desktop\Karla\ISW-711\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.dll
 C:\Users\marlon\Desktop\Karla\ISW-711\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.pdb
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\MARLONPC.mdf
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\MARLONPC_log.ldf
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\Infrastructure.dll.config
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\Infrastructure.dll
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\Infrastructure.pdb
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\log4net.dll
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\bin\Debug\log4net.xml
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.CopyComplete
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.dll
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.pdb
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.AssemblyReference.cache

@@ -30,7 +30,8 @@ namespace ApplicationCore.Services
 
         public Proveedor Save(Proveedor autor)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repository = new RepositoryProveedor();
+            return repository.Save(autor);
         }
 
         

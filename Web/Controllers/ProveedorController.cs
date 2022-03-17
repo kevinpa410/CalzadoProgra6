@@ -7,8 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using Web.Utils;
-//using Web.Security;
+using Web.Util;
 
 namespace Web.Controllers
 {
@@ -34,16 +33,51 @@ namespace Web.Controllers
         public ActionResult Create()
         {
             //Lista de autores
-            ViewBag.idProveedor = listaProveedores();
+            ViewBag.IdProveedor = listaProveedores();
             return View();
         }
-        private SelectList listaProveedores(int idProveedor = 0)
+
+        public ActionResult Save(Proveedor proveedor, HttpPostedFileBase ImageFile)
         {
-            //Lista de autores
-            IServicesProveedor _ServiceProveedor = new ServicesProveedor();
-            IEnumerable<Proveedor> listaProveedores = _ServiceProveedor.GetProveedor();
-            //Autor SelectAutor = listaAutores.Where(c => c.IdAutor == idAutor).FirstOrDefault();
-            return new SelectList(listaProveedores, "IdAutor", "Nombre", idProveedor);
+            MemoryStream target = new MemoryStream();
+            IServicesProveedor _ServicesProveedor = new ServicesProveedor();
+            try
+            {
+                // Cuando es Insert Image viene en null porque se pasa diferente
+                //if (proveedor.Imagen == null)
+                //{
+                //    if (ImageFile != null)
+                //    {
+                //        ImageFile.InputStream.CopyTo(target);
+                //        proveedor.Imagen = target.ToArray();
+                //        ModelState.Remove("Imagen");
+                //    }
+
+                //}
+                if (ModelState.IsValid)
+                {
+                    Proveedor oProveedor = _ServicesProveedor.Save(proveedor);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    ViewBag.IdAutor = listaProveedores(proveedor.idProveedor);
+                    return View("Create", proveedor);
+                }
+
+                return RedirectToAction("IndexAdmin");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Proveedor";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
         public ActionResult Edit(int? id)
@@ -63,7 +97,7 @@ namespace Web.Controllers
                 if (proveedor == null)
                 {
                     TempData["Message"] = "No existe el libro solicitado";
-                    TempData["Redirect"] = "Libro";
+                    TempData["Redirect"] = "Proveedor";
                     TempData["Redirect-Action"] = "IndexAdmin";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
@@ -77,11 +111,20 @@ namespace Web.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
+                TempData["Redirect"] = "Proveedor";
                 TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+        }
+
+        private SelectList listaProveedores(int idProveedor = 0)
+        {
+            //Lista de autores
+            IServicesProveedor _ServiceProveedor = new ServicesProveedor();
+            IEnumerable<Proveedor> listaProveedores = _ServiceProveedor.GetProveedor();
+            //Proveedor SelectProveedor = listaProveedor.Where(c => c.idProveedor == idProveedor).FirstOrDefault();
+            return new SelectList(listaProveedores, "idProveedor", "nombre", idProveedor);
         }
 
         public ActionResult IndexAdmin()
@@ -103,7 +146,6 @@ namespace Web.Controllers
             return View(lista);
         }
 
-        // GET: Autor/Details/5
         public ActionResult Details(int? id)
         {
             ServicesProveedor _ServicesProveedor = new ServicesProveedor();
@@ -129,38 +171,12 @@ namespace Web.Controllers
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Zapato";
+                TempData["Redirect"] = "Proveedor";
                 TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }
 
-        // GET: Autor/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
-
-        // POST: Autor/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        }
-
-
-
-
-
     }
