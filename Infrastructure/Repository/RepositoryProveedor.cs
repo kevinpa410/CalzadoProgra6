@@ -84,6 +84,9 @@ namespace Infrastructure.Repository
                     ctx.Entry(proveedor).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
                 }
+
+
+
             }
             if (retorno >= 0)
                 oProveedor = GetProveedorByID(proveedor.idProveedor);
