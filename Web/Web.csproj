@@ -176,12 +176,14 @@
     <Content Include="Content\bootstrap_lux.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Image\83c44714-3410-42a3-91da-64313993d1ec %281%29.jpg" />
     <Content Include="Image\calzado-air-force-1-mid-07-lv8-f6tpXL.jpg" />
     <Content Include="Image\calzado-de-básquetbol-kd-trey-5-8-fVJsxl.jpg" />
     <Content Include="Image\calzado-de-carreras-de-sendero-pegasus-trail-3-kXQ1np.jpg" />
     <Content Include="Image\calzado-de-running-de-carretera-air-zoom-pegasus-38-premium-WmLcqH.jpg" />
     <Content Include="Image\calzado-de-tenis-para-cancha-dura-court-air-zoom-gp-turbo-naomi-osaka-t9Fkjp.jpg" />
     <Content Include="Image\calzado-de-tenis-para-cancha-dura-court-vapor-lite-nJJ04B.jpg" />
+    <Content Include="Image\Capture.PNG" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
