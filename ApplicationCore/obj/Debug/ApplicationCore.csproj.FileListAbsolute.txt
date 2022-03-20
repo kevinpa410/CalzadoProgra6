@@ -65,8 +65,9 @@ C:\Users\marlon\Desktop\Karla\ISW-711\Proyecto\CalzadoProgra6\ApplicationCore\ob
 C:\Users\marlon\Desktop\Karla\ISW-711\Proyecto\CalzadoProgra6\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
 C:\Users\marlon\Desktop\Karla\ISW-711\Proyecto\CalzadoProgra6\ApplicationCore\obj\Debug\ApplicationCore.dll
 C:\Users\marlon\Desktop\Karla\ISW-711\Proyecto\CalzadoProgra6\ApplicationCore\obj\Debug\ApplicationCore.pdb
-C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\MARLONPC.mdf
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\MARLONPC_log.ldf
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\log4net.xml
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\MARLONPC.mdf
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\ApplicationCore.dll
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\ApplicationCore.pdb
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\ICSharpCode.SharpZipLib.dll
@@ -75,7 +76,6 @@ C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\log4
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\EntityFramework.dll
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\Infrastructure.pdb
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\Infrastructure.dll.config
-C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\log4net.xml
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\bin\Debug\EntityFramework.xml
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\obj\Debug\ApplicationCore.csproj.AssemblyReference.cache
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache

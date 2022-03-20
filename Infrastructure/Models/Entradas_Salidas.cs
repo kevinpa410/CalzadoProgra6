@@ -11,7 +11,9 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(Entrada_SalidaMetadata))]
     public partial class Entradas_Salidas
     {
         public int idEntradas_Salidas { get; set; }
