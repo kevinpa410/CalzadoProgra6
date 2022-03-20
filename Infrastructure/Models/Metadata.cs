@@ -80,7 +80,7 @@ namespace Infrastructure.Models
         public int idUsuario { get; set; }     
     }
 
-    internal partial class ProveedorMetaData
+    internal partial class ProveedorMetadata
     {
         [Display(Name = "ID Proveedor")]
         public int idProveedor { get; set; }

@@ -106,10 +106,8 @@ namespace Web.Controllers
             ViewBag.idCategoria = listaCategoria(null);
             return View();
 
-        }
-        
-
-            public ActionResult Edit(int? id)
+        }       
+        public ActionResult Edit(int? id)
         {
             ServiceZapato _ServiceZapato = new ServiceZapato();
             Zapato zapato = null;
@@ -142,12 +140,10 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
         private dynamic listaCategorias(Categoria categoria)
         {
             throw new NotImplementedException();
         }
-
         public ActionResult Save(Zapato zapato, string[] selectedCategorias)
         {
 

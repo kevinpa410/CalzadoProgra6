@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace ApplicationCore.Services
 {
     public class ServiceUsuario : IServiceUsuario
@@ -24,12 +23,17 @@ namespace ApplicationCore.Services
 
         public Usuario Get_UsuarioByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            Usuario oUsuario = repository.GetUsuarioByID(id);
+            oUsuario.password = Cryptography.DecrypthAES(oUsuario.password);
+            return oUsuario;
         }
 
         public Usuario Save(Usuario usuario)
         {
-            throw new NotImplementedException();
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            usuario.password = Cryptography.EncrypthAES(usuario.password);
+            return repository.Save(usuario);
         }
     }
 }

@@ -10,7 +10,6 @@ namespace ApplicationCore.Utils
 {
     class Cryptography
     {
-
         const string KEY = "~!@#$%^&*()_+{}:>?<`1234567890-=[]\'.,/|";
 
         /// <summary>
@@ -61,6 +60,7 @@ namespace ApplicationCore.Utils
             }
             return pCadena;
         }
+
 
     }
 }
