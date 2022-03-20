@@ -17,7 +17,7 @@
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="telefono" Type="Int32" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Proveedor" Relationship="Self.FKProveedor_Contacto" FromRole="Contacto" ToRole="Proveedor" />
+    <NavigationProperty Name="Proveedor" Relationship="Self.ProveedorContacto" FromRole="Contacto" ToRole="Proveedor" />
   </EntityType>
   <EntityType Name="Entradas_Salidas">
     <Key>
@@ -38,13 +38,12 @@
       <PropertyRef Name="idProveedor" />
     </Key>
     <Property Name="idProveedor" Type="Int32" Nullable="false" />
-    <Property Name="idContacto" Type="Int32" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="telefono" Type="Int32" />
     <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Contacto" Relationship="Self.FKProveedor_Contacto" FromRole="Proveedor" ToRole="Contacto" />
+    <NavigationProperty Name="Contacto" Relationship="Self.ProveedorContacto" FromRole="Proveedor" ToRole="Contacto" />
     <NavigationProperty Name="Zapato" Relationship="Self.ZapatoProveedor" FromRole="Proveedor" ToRole="Zapato" />
   </EntityType>
   <EntityType Name="Rol">
@@ -124,18 +123,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FKProveedor_Contacto">
-    <End Role="Contacto" Type="Self.Contacto" Multiplicity="1" />
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Contacto">
-        <PropertyRef Name="idContacto" />
-      </Principal>
-      <Dependent Role="Proveedor">
-        <PropertyRef Name="idContacto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FKEntradas_Salidas_Gestion">
     <End Role="TipoGestion" Type="Self.TipoGestion" Multiplicity="0..1" />
     <End Role="Entradas_Salidas" Type="Self.Entradas_Salidas" Multiplicity="*" />
@@ -184,6 +171,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ProveedorContacto">
+    <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+  </Association>
   <Association Name="ZapatoProveedor">
     <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
     <End Role="Zapato" Type="Self.Zapato" Multiplicity="*" />
@@ -207,10 +198,6 @@
       <End Role="Categoria" EntitySet="Categoria" />
       <End Role="Zapato" EntitySet="Zapato" />
     </AssociationSet>
-    <AssociationSet Name="FKProveedor_Contacto" Association="Self.FKProveedor_Contacto">
-      <End Role="Contacto" EntitySet="Contacto" />
-      <End Role="Proveedor" EntitySet="Proveedor" />
-    </AssociationSet>
     <AssociationSet Name="FKEntradas_Salidas_Gestion" Association="Self.FKEntradas_Salidas_Gestion">
       <End Role="TipoGestion" EntitySet="TipoGestion" />
       <End Role="Entradas_Salidas" EntitySet="Entradas_Salidas" />
@@ -226,6 +213,10 @@
     <AssociationSet Name="FKUsuario_Rol" Association="Self.FKUsuario_Rol">
       <End Role="Rol" EntitySet="Rol" />
       <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="ProveedorContacto" Association="Self.ProveedorContacto">
+      <End Role="Contacto" EntitySet="Contacto" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
     </AssociationSet>
     <AssociationSet Name="ZapatoProveedor" Association="Self.ZapatoProveedor">
       <End Role="Proveedor" EntitySet="Proveedor" />

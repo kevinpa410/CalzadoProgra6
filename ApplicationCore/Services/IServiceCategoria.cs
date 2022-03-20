@@ -9,7 +9,9 @@ namespace ApplicationCore.Services
 {
     public interface IServiceCategoria
     {
+
         IEnumerable<Categoria> GetCategoria();
         Categoria GetCategoriaByID(int id);
+
     }
 }

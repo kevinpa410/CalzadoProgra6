@@ -128,7 +128,7 @@ namespace Web.Controllers
                     TempData["Redirect"] = "IndexAdmin";
                     return RedirectToAction("Default", "Error");
                 }
-                ViewBag.idProveedor = listaProveedor(zapato.idProveedor);
+                //ViewBag.idProveedor = listaProveedor(zapato.idProveedor);
                 //ViewBag.idCategoria = listaCategorias(zapato.Categoria);
                 return View(zapato);
             }

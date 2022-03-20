@@ -36,7 +36,6 @@
       <EntityTypeMapping TypeName="zapateriaDBModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedor">
           <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
-          <ScalarProperty Name="idContacto" ColumnName="idContacto" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="pais" ColumnName="pais" />
@@ -107,6 +106,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="ProveedorContacto" TypeName="zapateriaDBModel.ProveedorContacto" StoreEntitySet="ProveedorContacto">
+      <EndProperty Name="Contacto">
+        <ScalarProperty Name="idContacto" ColumnName="idContacto" />
+      </EndProperty>
+      <EndProperty Name="Proveedor">
+        <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+      </EndProperty>
+    </AssociationSetMapping>
     <AssociationSetMapping Name="ZapatoProveedor" TypeName="zapateriaDBModel.ZapatoProveedor" StoreEntitySet="ZapatoProveedor">
       <EndProperty Name="Proveedor">
         <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
