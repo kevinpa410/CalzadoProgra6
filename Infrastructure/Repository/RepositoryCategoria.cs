@@ -42,17 +42,17 @@ namespace Infrastructure.Repository
 
         public Categoria GetCategoriaByID(int id)
         {
-            Categoria proveedor = null;
+            Categoria categoria = null;
             try
             {
 
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    proveedor = ctx.Categoria.Find(id);
+                    categoria = ctx.Categoria.Find(id);
                 }
 
-                return proveedor;
+                return categoria;
             }
             catch (DbUpdateException dbEx)
             {

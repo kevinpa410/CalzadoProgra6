@@ -12,7 +12,7 @@ namespace Infrastructure.Repository
 {
     public class RepositoryProveedor : IRepositoryProveedor
     {
-        public void DeleteProveedor(int id)
+        public void DeleteProveedor(int id) //Pending Code
         {
             throw new NotImplementedException();
         }
