@@ -263,11 +263,15 @@
     <Content Include="Views\Contactos\Edit.cshtml" />
     <Content Include="Views\Contactos\Details.cshtml" />
     <Content Include="Views\Contactos\Create.cshtml" />
+    <Content Include="Views\Contacto\Index.cshtml" />
+    <Content Include="Views\Contacto\Create.cshtml" />
+    <Content Include="Views\Contacto\IndexAdmin.cshtml" />
+    <Content Include="Views\Contacto\Details.cshtml" />
+    <Content Include="Views\Contacto\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Contacto\" />
     <Folder Include="Views\Log\" />
     <Folder Include="Views\SweetAlertHelper\" />
     <Folder Include="Views\Util\" />
