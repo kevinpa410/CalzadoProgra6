@@ -19,6 +19,14 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap_lux")
     @RenderSection("scripts", required: false)
+
+    @if (ViewBag.NotificationMessage != null)
+    {
+        <script>
+            @Html.Raw(@ViewBag.NotificationMessage);
+        </script>
+    }
+
 </body>
 </html>
 

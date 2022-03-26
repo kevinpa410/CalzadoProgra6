@@ -25,7 +25,7 @@ namespace Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    oUsuario = _ServiceUsuario.Get_Usuario(usuario.email, usuario.password);
+                    oUsuario = _ServiceUsuario.GetUsuario(usuario.email, usuario.password);
 
                     if (oUsuario != null)
                     {
@@ -36,7 +36,7 @@ namespace Web.Controllers
                     }
                     else
                     {
-                        Log.Warn($"{usuario.email} se intentó conectar  y falló");
+                        Log.Warn($"{usuario.email} se intentó conectar y falló");
                         ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Login", "Error al autenticarse", SweetAlertMessageType.warning);
 
                     }
