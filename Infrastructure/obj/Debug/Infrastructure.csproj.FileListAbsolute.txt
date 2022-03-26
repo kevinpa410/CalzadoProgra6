@@ -77,3 +77,4 @@ C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infra
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.CopyComplete
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.dll
 C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.pdb
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.AssemblyReference.cache
