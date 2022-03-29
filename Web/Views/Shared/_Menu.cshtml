@@ -30,7 +30,7 @@
 
                 @{
                     string nombre = "";
-                    string email = "Perfil";
+                    string email = "Sin Registro";
                     Infrastructure.Models.Usuario oUsuario;
                     //Validar si existe en la sesión
                     if (Session["User"] != null)
@@ -44,27 +44,16 @@
                     }
                 }
 
-                <li class="nav-item dropdown ">
-                    <a class=" btn btn-primary nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
+                <li class="nav-item">
+                    <a class=" btn btn-primary nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
 
-                    <div class="dropdown-menu">
+                    <div >
                         @if (Session["User"] != null)
                         {
-                            <div class="dropdown-item">
+                            <div >
                                 @* Nombre Usuario *@
                                 Usuario: @nombre
                             </div>
-                        }
-
-                        <div class="dropdown-divider"></div>
-                        @if (Session["User"] == null)
-                        {
-                            @Html.ActionLink("Login", "Index", "Login", null, new { @class = "dropdown-item" })
-                        }
-                        else
-                        {
-
-                            @Html.ActionLink("Logout", "Logout", "Login", null, new { @class = "dropdown-item " })
                         }
 
                     </div>
@@ -73,14 +62,24 @@
 
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <ul><li class="nav-item">
-                    @Html.ActionLink("Login", "Index", "Login", null, new { @class = "nav-link" })
-                </li></ul>
+                <ul>
+                    <li class="nav-link"    >
 
-                
+                        @if (Session["User"] == null)
+                        {
+                            @Html.ActionLink("Login", "Index", "Login", null, new { @class = "nav-link", @style = "color:white" })
+
+                        }
+                        else
+                        {
+
+                            @Html.ActionLink("Logout", "Logout", "Login", null, new { @class = "nav-link", @style = "color:white" })
+                        }
+                    </li>
+                </ul>
             </form>
 
-            
+
 
         </div>
     </div>
@@ -88,5 +87,6 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap_lux")
+@Scripts.Render("~/bundles/sweetalert")
 
 
