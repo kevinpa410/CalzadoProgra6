@@ -32,14 +32,14 @@ namespace Web.Controllers
                   {
                         Session["User"] = oUsuario;
                         Log.Info($"Accede {oUsuario.nombre} {oUsuario.apellidos} con el rol {oUsuario.Rol.idRol}-{oUsuario.Rol.descripcion}");
-                        TempData["mensaje"] = SweetAlertHelper.Mensaje("Login", "Usario autenticado satisfactoriamente", SweetAlertMessageType.success);
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Login", "Usario autenticado satisfactoriamente", SweetAlertMessageType.success);
                         //return View("~/Views/Home/Index.cshtml", oUsuario);
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
                         Log.Warn($"{usuario.email} se intentó conectar y falló");
-                        ViewBag.NotificationMessage = SweetAlertHelper.Mensaje("Login", "Error al autenticarse", SweetAlertMessageType.warning);
+                        ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Login", "Error al autenticarse", SweetAlertMessageType.warning);
                     }
                }
 
