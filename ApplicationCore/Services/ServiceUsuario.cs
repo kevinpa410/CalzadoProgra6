@@ -17,9 +17,9 @@ namespace ApplicationCore.Services
             IRepositoryUsuario repository = new RepositoryUsuario();
 
             // Encriptar el password para poder compararlo
-            string crytpPasswd = Cryptography.EncrypthAES(password);
+            //string crytpPasswd = Cryptography.EncrypthAES(password);
 
-            return repository.GetUsuario(email, crytpPasswd);
+            return repository.GetUsuario(email, password);
         }
 
         public Usuario GetUsuarioByID(int id)
