@@ -10,60 +10,24 @@ using Web.Utils;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryEntradas_Salidas : IRepositoryEntradas_Salidas
+
+    public class RepositoryTipoGestion : IRepositoryTipoGestion
     {
-        public void DeleteEntradas_Salidas(int id)
+        public IEnumerable<TipoGestion> GetTipoGestion()
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Entradas_Salidas> GetEntradas_Salidas()
-        {
-            List<Entradas_Salidas> entradas_salidas = null;
+            List<TipoGestion> ordenes = null;
             try
             {
-
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    entradas_salidas = ctx.Entradas_Salidas.
-                        Include("Usuario").
-                        ToList<Entradas_Salidas>();
+                    ordenes = ctx.TipoGestion.
+                               Include("Cliente").
+                               ToList<TipoGestion>();
+
                 }
-                return entradas_salidas;
-            }
+                return ordenes;
 
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "";
-                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw;
-            }
-        }
-
-        public Entradas_Salidas GetEntradas_SalidasByID(int id)
-        {
-            Entradas_Salidas entradas_salidas = null;
-            try
-            {
-
-                using (MyContext ctx = new MyContext())
-                {
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    entradas_salidas = ctx.Entradas_Salidas.
-                        Include("Usuario").
-                        Include("Entradas_Salidas").
-                        Include("Entradas_Salidas.Zapato").
-                        Where(p => p.idGestion == id).
-                        FirstOrDefault<Entradas_Salidas>();
-                }
-                return entradas_salidas;
             }
             catch (DbUpdateException dbEx)
             {
@@ -79,40 +43,80 @@ namespace Infrastructure.Repository
             }
         }
 
+        public TipoGestion GetTipoGestionByID(int id)
+        {
+            TipoGestion tipoGestion = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    tipoGestion = ctx.TipoGestion.
+                               Include("Cliente").
+                               Include("Entradas_Salidas").
+                               Include("Entradas_Salidas.Zapato").
+                               Where(p => p.IdTipoGestion == id).
+                               FirstOrDefault<TipoGestion>();
 
+                }
+                return tipoGestion;
 
-        public Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas)
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+        }
+
+        public TipoGestion Save(TipoGestion pTipoGestion)
         {
             int resultado = 0;
-            Entradas_Salidas entradas_salidas = null;
+            TipoGestion tipoGestion = null;
             try
             {
+                // Salvar pero con transacción porque son 2 tablas
+                // 1- Orden
+                // 2- OrdenDetalle 
                 using (MyContext ctx = new MyContext())
                 {
                     using (var transaccion = ctx.Database.BeginTransaction())
                     {
-                        ctx.Entradas_Salidas.Add(pEntradas_Salidas);
+                        ctx.TipoGestion.Add(pTipoGestion);
                         resultado = ctx.SaveChanges();
-                        foreach (var detalle in  GetEntradas_Salidas())
+                        foreach (var detalle in pTipoGestion.Entradas_Salidas)
                         {
-                            detalle.idEntradas_Salidas = pEntradas_Salidas.idEntradas_Salidas;
-
+                            detalle.IdTipoGestion = pTipoGestion.IdTipoGestion;
                         }
-                        foreach (var item in GetEntradas_Salidas())
+                        foreach (var item in pTipoGestion.TipoGestion)
                         {
-                            Zapato oZapato = ctx.Zapato.Find(item.idZapato);
+                            // Busco el producto que está en el detalle por IdLibro
+                            Zapato oZapato = ctx.Zapato.Find(item.IdZapato);
+
+                            // Se indica que se alteró
                             ctx.Entry(oZapato).State = EntityState.Modified;
+                            // Guardar                         
                             resultado = ctx.SaveChanges();
-
                         }
+
+                        // Commit 
                         transaccion.Commit();
                     }
-
                 }
-                if (resultado >= 0)
-                    entradas_salidas = GetEntradas_SalidasByID(pEntradas_Salidas.idEntradas_Salidas);
 
-                return entradas_salidas;
+                // Buscar la orden que se salvó y reenviarla
+                if (resultado >= 0)
+                    tipoGestion = GetTipoGestionByID(pTipoGestion.IdTipoGestion);
+
+
+                return tipoGestion;
             }
             catch (DbUpdateException dbEx)
             {
@@ -126,10 +130,8 @@ namespace Infrastructure.Repository
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw new Exception(mensaje);
             }
-
         }
+
     }
 }
-
-    
-
+}

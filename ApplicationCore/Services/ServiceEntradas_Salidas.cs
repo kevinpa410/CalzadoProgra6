@@ -23,12 +23,14 @@ namespace ApplicationCore.Services
 
         public Entradas_Salidas GetEntradas_SalidasByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryEntradas_Salidas repository = new RepositoryEntradas_Salidas();
+            return repository.GetEntradas_SalidasByID(id);
         }
 
-        public Entradas_Salidas Save(Entradas_Salidas Entradas_Salidas)
+        public Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas)
         {
-            throw new NotImplementedException();
+            IRepositoryEntradas_Salidas repository = new RepositoryEntradas_Salidas();
+            return repository.Save(pEntradas_Salidas);
         }
     }
 }

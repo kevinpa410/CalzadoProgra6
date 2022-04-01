@@ -1,6 +1,5 @@
 ﻿using ApplicationCore.Services;
 using Infrastructure.Models;
-using Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,21 +11,33 @@ using Web.ViewModel;
 
 namespace Web.Controllers
 {
-    public class Entradas_SalidasController : Controller
+    public class TipoGestionController : Controller
     {
-        public List<ViewModelOrdenDetalle> Items { get; private set; }
+        // GET: TipoGestion
         public ActionResult Index()
         {
             if (TempData.ContainsKey("NotificationMessage"))
             {
                 ViewBag.NotificationMessage = TempData["NotificationMessage"];
             }
-   
+           // ViewBag.idCliente = listaClientes();
 
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
             return View();
         }
+        private ActionResult DetalleCarrito()
+        {
 
+            return PartialView("_DetalleOrden", Carrito.Instancia.Items);
+        }
+        public ActionResult actualizarCantidad(int idZapato, int cantidadTotal)
+        {
+            ViewBag.DetalleOrden = Carrito.Instancia.Items;
+            TempData["NotiCarrito"] = Carrito.Instancia.SetItemCantidad(idZapato, cantidadTotal);
+            TempData.Keep();
+            return PartialView("_DetalleOrden", Carrito.Instancia.Items);
+
+        }
         public ActionResult ordenarZapato(int? idZapato)
         {
             int cantidadZapatos = Carrito.Instancia.Items.Count();
@@ -34,46 +45,34 @@ namespace Web.Controllers
             return PartialView("_OrdenCantidad");
 
         }
-        private ActionResult DetalleCarrito()
-        {
-
-            return PartialView("_DetalleOrden", Carrito.Instancia.Items);
-        }
-
-        // GET: Autor/Create
-        public ActionResult eliminarZapato(int? idZapato)
-        {
-            ViewBag.NotificationMessage = Carrito.Instancia.EliminarItem((int)idZapato);
-            return PartialView("_DetalleOrden", Carrito.Instancia.Items);
-        }
         public ActionResult actualizarOrdenCantidad()
         {
             if (TempData.ContainsKey("NotiCarrito"))
             {
                 ViewBag.NotiCarrito = TempData["NotiCarrito"];
             }
-            int cantidadLibros = Carrito.Instancia.Items.Count();
+            int cantidadZapatos = Carrito.Instancia.Items.Count();
             return PartialView("_OrdenCantidad");
 
         }
-        public ActionResult actualizarCantidad(int idZapato, int cantidad)
+        public ActionResult eliminarZapato(int? idZapato)
         {
-            ViewBag.DetalleOrden = Carrito.Instancia.Items;
-            TempData["NotiCarrito"] = Carrito.Instancia.SetItemCantidad(idZapato, cantidad);
-            TempData.Keep();
+            ViewBag.NotificationMessage = Carrito.Instancia.EliminarItem((int)idZapato);
             return PartialView("_DetalleOrden", Carrito.Instancia.Items);
-
         }
-
-
+        // GET: TipoGestion/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
         public ActionResult IndexAdmin()
         {
-            IEnumerable<Entradas_Salidas> lista = null;
+            IEnumerable<TipoGestion> lista = null;
 
             try
             {
-                IServiceEntradas_Salidas _ServiceEntradas_Salidas = new ServiceEntradas_Salidas();
-                lista = _ServiceEntradas_Salidas.GetEntradas_Salidas();
+                IServiceTipoGestion _ServiceTipoGestion = new ServiceTipoGestion();
+                lista = _ServiceTipoGestion.GetTipoGestion();
                 return View(lista);
             }
             catch (Exception ex)
@@ -81,7 +80,7 @@ namespace Web.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Orden";
+                TempData["Redirect"] = "TipoGestion";
                 TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
@@ -89,8 +88,8 @@ namespace Web.Controllers
         }
         public ActionResult Details(int? id)
         {
-            ServiceEntradas_Salidas _ServiceEntradas_Salidas = new ServiceEntradas_Salidas();
-            Entradas_Salidas entradas_salidas = null;
+            ServiceTipoGestion _ServiceTipoGestion = new ServiceTipoGestion();
+            TipoGestion tipoGestion = null;
 
             try
             {
@@ -100,29 +99,29 @@ namespace Web.Controllers
                     return RedirectToAction("IndexAdmin");
                 }
 
-                entradas_salidas = _ServiceEntradas_Salidas.GetEntradas_SalidasByID(id.Value);
-                if (entradas_salidas == null)
+                tipoGestion = _ServiceTipoGestion.GetTipoGestionByID(id.Value);
+                if (tipoGestion == null)
                 {
                     TempData["Message"] = "No existe la orden solicitado";
-                    TempData["Redirect"] = "Orden";
+                    TempData["Redirect"] = "TipoGestion";
                     TempData["Redirect-Action"] = "IndexAdmin";
                     //TempData.Keep();
                     return RedirectToAction("Default", "Error");
                 }
-                return View(entradas_salidas);
+                return View(tipoGestion);
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Orden";
+                TempData["Redirect"] = "TipoGestion";
                 TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }
-        public ActionResult Save(Entradas_Salidas entradas_salidas)
+        public ActionResult Save(TipoGestion tipoGestion)
         {
 
             try
@@ -132,7 +131,7 @@ namespace Web.Controllers
                 if (Carrito.Instancia.Items.Count() <= 0)
                 {
                     // Validaciones de datos requeridos.
-                    TempData["NotificationMessage"] = Util.SweetAlertHelper.Mensaje("Orden", "Seleccione los libros a ordenar", SweetAlertMessageType.warning);
+                    TempData["NotificationMessage"] = Util.SweetAlertHelper.Mensaje("Orden", "Seleccione los zapatos a ordenar", SweetAlertMessageType.warning);
                     return RedirectToAction("Index");
                 }
                 else
@@ -142,16 +141,16 @@ namespace Web.Controllers
 
                     foreach (var item in listaDetalle)
                     {
-                        Entradas_Salidas entradas_Salidas = new Entradas_Salidas();
-                        entradas_Salidas.idZapato = item.idZapato;
-                        entradas_Salidas.idUsuario = item.idUsuario;
-                        entradas_Salidas.cantidadTotal = item.cantidadTotal;
-                       // entradas_Salidas.Entradas_Salidas.Add(entradas_Salidas);
+                        Entradas_Salidas entradas_salidas = new Entradas_Salidas();
+                        entradas_salidas.idZapato = item.idZapato;
+                        entradas_salidas.fecha = item.fecha;
+                        entradas_salidas.cantidadTotal = item.cantidadTotal;
+                        tipoGestion.Entradas_Salidas.Add(entradas_salidas);
                     }
                 }
 
-                IServiceEntradas_Salidas _ServiceEntradas_Salidas = new ServiceEntradas_Salidas();
-                Entradas_Salidas entradas_salidasSave = _ServiceEntradas_Salidas.Save(entradas_salidas);
+                IServiceTipoGestion _ServiceTipoGestion = new ServiceTipoGestion();
+                TipoGestion tipoGestionSave = _ServiceTipoGestion.Save(tipoGestion);
 
                 // Limpia el Carrito de compras
                 Carrito.Instancia.eliminarCarrito();
@@ -164,13 +163,13 @@ namespace Web.Controllers
                 // Salvar el error  
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Orden";
+                TempData["Redirect"] = "TipoGestion";
                 TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }
 
-
+       
     }
 }

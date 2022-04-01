@@ -1,49 +1,38 @@
-﻿@model IEnumerable<Infrastructure.Models.Entradas_Salidas>
+﻿@model IEnumerable<Infrastructure.Models.TipoGestion>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Orden de Libro</h2>
-@using (Html.BeginForm("Save", "Entradas_Salidas", FormMethod.Post))
+<h2>Orden de Zapatos</h2>
+@using (Html.BeginForm("Save", "Orden", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.idEntradas_Salidas, htmlAttributes: new { @class = "col-form-label " })
-                    <div class="col-md-12">
-                        @Html.DropDownListFor(model => model.idEntradas_Salidas, (SelectList)ViewBag.idEntradas_Salidas, " Seleccione un cliente ", htmlAttributes: new { @class = "mw-100 form-control " })
-                        @Html.ValidationMessageFor(model => model.idEntradas_Salidas, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idGestion)
+        </dt>
 
-            <div class="col-lg-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "col-form-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.fecha, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
-                        @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+       
 
-            </div>
-        </div>
-    </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
 
+       
+
+    </dl>
     <hr />
     <span class="glyphicons glyphicons-hand-left"></span>
     <div id="resultadoDetalle">
         @if (Web.ViewModel.Carrito.Instancia.Items.Count() > 0)
         {
-            @Html.Partial("~/Views/Entradas_Salidas/_DetalleOrden.cshtml", (List<Web.ViewModel.ViewModelOrdenDetalle>)ViewBag.DetalleOrden)
+            @Html.Partial("~/Views/TipoGestion/_DetalleOrden.cshtml", (List<Web.ViewModel.ViewModelOrdenDetalle>)ViewBag.DetalleOrden)
         }
         else
         {
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                La orden no tiene libros asignados
+                La orden no tiene zapatos asignados
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -65,17 +54,17 @@
 
     <script type="text/javascript">
 
-        //Actualizar cantidad de libros en el carrito
+        //Actualizar cantidad de zapatos en el carrito
         //Cambio de cantidad en caja de texto
         function updateCantidad(ctr) {
             var txtCantidad = $(ctr);
             var cantidad = txtCantidad.val();
-            var id = txtCantidad.data("libroid");
+            var id = txtCantidad.data("Zapatoid");
             $.ajax({
                 type: "GET",
                 dataType: 'text',
                 url: "/Orden/actualizarCantidad",
-                data: { "idLibro": id, "cantidad": cantidad },
+                data: { "idZapato": id, "cantidadTotal": cantidadTotal },
                 success: function (data) {
                     $("#resultadoDetalle").html('');
                     $("#resultadoDetalle").html(data);
@@ -86,11 +75,11 @@
             });
         }
         //Actualizar cantidad de libros en el menú
-        function updateCantLibros() {
+        function updateCantZapatos() {
             $.ajax({
                 type: "GET",
                 dataType: 'text',
-                url: "/Orden/actualizarOrdenCantidad",
+                url: "/TipoGestion/actualizarOrdenCantidad",
                 success: function (data) {
                     $("#cantidadLibros").html('');
                     $("#cantidadLibros").html(data);
@@ -103,3 +92,4 @@
 
     </script>
 }
+

@@ -12,6 +12,6 @@ namespace Infrastructure.Repository
         IEnumerable<Entradas_Salidas> GetEntradas_Salidas();
         Entradas_Salidas GetEntradas_SalidasByID(int id);
         void DeleteEntradas_Salidas(int id);
-        Entradas_Salidas Save(Entradas_Salidas Entradas_Salidas);
+        Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas);
     }
 }

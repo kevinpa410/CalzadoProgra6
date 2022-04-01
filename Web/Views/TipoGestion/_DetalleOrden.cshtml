@@ -1,0 +1,67 @@
+﻿@model List<Web.ViewModel.ViewModelOrdenDetalle>
+
+<div class="table-responsive-sm">
+    @*Accion, nombre de controlador*@
+
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Zapato
+            </th>
+            <th class="center">
+                Cantidad
+        </tr>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(modelItem => item.Zapato.idZapato)
+                    @Html.DisplayFor(modelItem => item.Zapato.descripcion)
+                </td>
+                <td class="center" style="width:1.5em">
+                    @Html.EditorFor(modelItem => item.cantidadTotal, new { htmlAttributes = new { @class = "form-control changeCantidad", data_zapatoId = item.Zapato.idZapato, onchange = "updateCantidad(this)" } })
+                </td>
+
+                <td>
+                    @Ajax.ActionLink("Eliminar",//Texto para el usuario
+                        "eliminarZapato",//Acción a llamar
+                        "TipoGestion",
+                        new
+                        {
+                            idZapato = item.idZapato
+                        },//Parámetros a enviar
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "resultadoDetalle",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            OnComplete = "updateCantLibros()"
+                        }, new { @class = "btn btn-primary" }
+                        )
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="row">
+    <div class="col-lg-5 col-sm-5"></div>
+    <div class="col-lg-7 col-sm-5 ml-auto">
+        <table class="table table-clear">
+            <tbody>
+                <tr>
+                    <td class="left">
+                        <strong>Total</strong>
+                    </td>
+                    <td class="right">
+                        <strong>@(((decimal)Web.ViewModel.Carrito.Instancia.GetCountItems()).ToString("C2"))</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

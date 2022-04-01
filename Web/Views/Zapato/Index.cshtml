@@ -1,73 +1,51 @@
 ﻿@model IEnumerable<Infrastructure.Models.Zapato>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Bodega";
 }
 
 <h2></h2>
 
-<p>
-    @Html.ActionLink("Crear Nuevo", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idZapato)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCategoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantMax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantMin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantidadTot)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ubicacion)
-        </th>
-        <th></th>
-    </tr>
+<div id="ajaxLoader" class="center-block" alt="Cargando ..." style="height:100px;width:100px; display:none">
+    <img src="~/Images/loading.gif" />
+</div>
+<div class="col-lg-9">
+    <div id="resultado" class="row">
+        @foreach (var item in Model)
+        {
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.idZapato)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cantMin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cantMax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cantidadTot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descripcion)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idZapato }) |
-                @Html.ActionLink("Details", "Details", new { id = item.idZapato }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.idZapato })
-            </td>
-        </tr>
-    }
+            <div class="col-sm-3">
+                <div class="card">
 
-</table>
+                    <div class="card-body">
+                        <img src="~/Image/calzado-air-force-1-mid-07-lv8-f6tpXL.jpg" class="card-img-top" alt="...">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.descripcion)</h5>
+                        <p class="card-text">   @Html.DisplayNameFor(model => model.color):  @Html.DisplayFor(modelItem => item.color)</p>
+
+                        <p class="card-text">   @Html.DisplayNameFor(model => model.cantidadTot):  @Html.DisplayFor(modelItem => item.cantidadTot)</p>
+                        <div class="card-body">
+                            @Ajax.ActionLink("Ordenar",//Texto para el usuario
+                                   "ordenarZapato",//Acción a llamar
+                                   "Entradas_Salidas",
+                                   new
+                                   {
+                                       idZapato = item.idZapato
+                                   },//Parámetros a enviar
+                                   new AjaxOptions
+                                   {
+                                       UpdateTargetId = "cantidadZapatos",
+                                       InsertionMode = InsertionMode.Replace,
+                                       HttpMethod = "GET",
+                                   }, new { @class = "btn btn-primary" }
+                                   )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}

@@ -26,5 +26,6 @@ namespace Infrastructure.Models
         public virtual TipoGestion TipoGestion { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Zapato Zapato { get; set; }
+      
     }
 }

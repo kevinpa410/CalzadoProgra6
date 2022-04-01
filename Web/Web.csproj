@@ -148,6 +148,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\TipoGestionController.cs" />
     <Compile Include="Controllers\ZapatoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -158,6 +159,8 @@
     <Compile Include="Util\Log.cs" />
     <Compile Include="Util\SweetAlertHelper.cs" />
     <Compile Include="Util\Util.cs" />
+    <Compile Include="ViewModel\Carrito.cs" />
+    <Compile Include="ViewModel\ViewModelOrdenDetalle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -263,6 +266,14 @@
     <Content Include="Views\Contactos\Edit.cshtml" />
     <Content Include="Views\Contactos\Details.cshtml" />
     <Content Include="Views\Contactos\Create.cshtml" />
+    <Content Include="Views\Entradas_Salidas\IndexAdmin.cshtml" />
+    <Content Include="Views\Entradas_Salidas\Details.cshtml" />
+    <Content Include="Views\Entradas_Salidas\_DetalleOrden.cshtml" />
+    <Content Include="Views\Shared\_OrdenCantidad.cshtml" />
+    <Content Include="Views\TipoGestion\Index.cshtml" />
+    <Content Include="Views\TipoGestion\_DetalleOrden.cshtml" />
+    <Content Include="Views\TipoGestion\IndexAdmin.cshtml" />
+    <Content Include="Views\TipoGestion\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
