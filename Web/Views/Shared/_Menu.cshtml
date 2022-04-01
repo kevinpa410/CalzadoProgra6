@@ -23,6 +23,7 @@
             <li class="nav-item">
                 @Html.ActionLink("Contacto", "contact", "home", null, new { @class = "nav-link" });
 
+<<<<<<< HEAD
             </li>
             
 
@@ -37,11 +38,70 @@
         <form class="form-inline my-2 my-lg-0">
             <button class="btn btn-outline-success my-1 my-sm-0 justify-content-lg-end" type="submit">LOGIN</button>
         </form>
+=======
+                @* Información usuario *@
+
+                @{
+                    string nombre = "";
+                    string email = "Sin Registro";
+                    Infrastructure.Models.Usuario oUsuario;
+                    //Validar si existe en la sesión
+                    if (Session["User"] != null)
+                    {
+                        oUsuario = (Infrastructure.Models.Usuario)Session["User"];
+                        if (oUsuario != null)
+                        {
+                            nombre = $"{oUsuario.nombre} {oUsuario.apellidos}";
+                            email = oUsuario.email;
+                        }
+                    }
+                }
+
+                <li class="nav-item">
+                    <a class=" btn btn-primary nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
+
+                    <div >
+                        @if (Session["User"] != null)
+                        {
+                            <div >
+                                @* Nombre Usuario *@
+                                Usuario: @nombre
+                            </div>
+                        }
+
+                    </div>
+                </li>
+
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <ul>
+                    <li class="nav-link"    >
+
+                        @if (Session["User"] == null)
+                        {
+                            @Html.ActionLink("Login", "Index", "Login", null, new { @class = "nav-link", @style = "color:white" })
+
+                        }
+                        else
+                        {
+
+                            @Html.ActionLink("Logout", "Logout", "Login", null, new { @class = "nav-link", @style = "color:white" })
+                        }
+                    </li>
+                </ul>
+            </form>
+
+
+
+        </div>
+>>>>>>> 44aea95909f7a482f2b128d8d88c6a9e101e24fc
     </div>
    
 </nav>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap_lux")
+@Scripts.Render("~/bundles/sweetalert")
 
 

@@ -11,17 +11,18 @@ namespace ApplicationCore.Services
 {
     public class ServiceUsuario : IServiceUsuario
     {
-        public Usuario Get_Usuario(string email, string password)
+        public Usuario GetUsuario(string email, string password)
         {
 
             IRepositoryUsuario repository = new RepositoryUsuario();
 
-            string crytpPasswd = Cryptography.EncrypthAES(password);
+            // Encriptar el password para poder compararlo
+            //string crytpPasswd = Cryptography.EncrypthAES(password);
 
-            return repository.GetUsuario(email, crytpPasswd);
+            return repository.GetUsuario(email, password);
         }
 
-        public Usuario Get_UsuarioByID(int id)
+        public Usuario GetUsuarioByID(int id)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
             Usuario oUsuario = repository.GetUsuarioByID(id);

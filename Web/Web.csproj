@@ -145,6 +145,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\Entradas_SalidasController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
@@ -266,6 +267,7 @@
     <Content Include="Views\Contactos\Edit.cshtml" />
     <Content Include="Views\Contactos\Details.cshtml" />
     <Content Include="Views\Contactos\Create.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Entradas_Salidas\IndexAdmin.cshtml" />
     <Content Include="Views\Entradas_Salidas\Details.cshtml" />
     <Content Include="Views\Entradas_Salidas\_DetalleOrden.cshtml" />
@@ -274,14 +276,19 @@
     <Content Include="Views\TipoGestion\_DetalleOrden.cshtml" />
     <Content Include="Views\TipoGestion\IndexAdmin.cshtml" />
     <Content Include="Views\TipoGestion\Details.cshtml" />
+=======
+    <Content Include="Views\Contacto\Index.cshtml" />
+    <Content Include="Views\Contacto\Create.cshtml" />
+    <Content Include="Views\Contacto\IndexAdmin.cshtml" />
+    <Content Include="Views\Contacto\Details.cshtml" />
+    <Content Include="Views\Contacto\Edit.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+>>>>>>> 44aea95909f7a482f2b128d8d88c6a9e101e24fc
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Contacto\" />
-    <Folder Include="Views\Log\" />
-    <Folder Include="Views\SweetAlertHelper\" />
-    <Folder Include="Views\Util\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Calzado</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/sweetalert")
 </head>
 <body>
     @Html.Partial("_Menu")
@@ -19,6 +20,14 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap_lux")
     @RenderSection("scripts", required: false)
+
+    @if (ViewBag.NotificationMessage != null)
+    {
+        <script>
+            @Html.Raw(@ViewBag.NotificationMessage);
+        </script>
+    }
+
 </body>
 </html>
 
