@@ -9,7 +9,7 @@ namespace Web.ViewModel
     public class Carrito
     {
         public List<ViewModelOrdenDetalle> Items { get; private set; }
-       
+        public int ZapatoId { get; private set; }
 
         //Implementación Singleton
 
@@ -39,18 +39,18 @@ namespace Web.ViewModel
         /**
          * AgregarItem (): agrega un artículo a la compra
          */
-        public String AgregarItem(int zapatoId)
+        public String AgregarItem(int ZapatoId)
         {
             String mensaje = "";
             // Crear un nuevo artículo para agregar al carrito
-            ViewModelOrdenDetalle nuevoItem = new ViewModelOrdenDetalle(zapatoId);
+            ViewModelOrdenDetalle nuevoItem = new ViewModelOrdenDetalle(ZapatoId);
             // Si este artículo ya existe en lista de libros, aumente la Cantidad
             // De lo contrario, agregue el nuevo elemento a la lista
             if (nuevoItem != null)
             {
-                if (Items.Exists(x => x.idZapato == zapatoId))
+                if (Items.Exists(x => x.idZapato == ZapatoId))
                 {
-                    ViewModelOrdenDetalle item = Items.Find(x => x.idZapato == zapatoId);
+                    ViewModelOrdenDetalle item = Items.Find(x => x.idZapato == ZapatoId);
                     item.cantidadTotal++;
                 }
                 else
@@ -72,25 +72,25 @@ namespace Web.ViewModel
         /**
          * SetItemCantidad(): cambia la Cantidad de un artículo en el carrito
          */
-        public String SetItemCantidad(int zapatoId, int cantidadTotal)
+        public String SetItemCantidad(int ZapatoId, int Cantidad)
         {
             String mensaje = "";
             // Si estamos configurando la Cantidad a 0, elimine el artículo por completo
-            if (cantidadTotal == 0)
+            if (Cantidad == 0)
             {
-                EliminarItem(zapatoId);
+                EliminarItem(ZapatoId);
                 mensaje = SweetAlertHelper.Mensaje("Orden Zapato", "Zapato eliminado", SweetAlertMessageType.success);
 
             }
             else
             {
                 // Encuentra el artículo y actualiza la Cantidad
-                ViewModelOrdenDetalle actualizarItem = new ViewModelOrdenDetalle(zapatoId);
-                if (Items.Exists(x => x.idZapato == zapatoId))
+                ViewModelOrdenDetalle actualizarItem = new ViewModelOrdenDetalle(ZapatoId);
+                if (Items.Exists(x => x.idZapato == ZapatoId))
                 {
-                    ViewModelOrdenDetalle item = Items.Find(x => x.idZapato == zapatoId);
-                    item.cantidadTotal = cantidadTotal;
-                    mensaje = SweetAlertHelper.Mensaje("Orden zapato", "Cantidad actualizada", SweetAlertMessageType.success);
+                    ViewModelOrdenDetalle item = Items.Find(x => x.idZapato == ZapatoId);
+                    item.cantidadTotal = Cantidad;
+                    mensaje = SweetAlertHelper.Mensaje("Orden Libro", "Cantidad actualizada", SweetAlertMessageType.success);
 
                 }
             }
@@ -101,12 +101,12 @@ namespace Web.ViewModel
         /**
          * EliminarItem (): elimina un artículo del carrito de compras
          */
-        public String EliminarItem(int zapatoId)
+        public String EliminarItem(int ZapatoId)
         {
             String mensaje = "El zapato no existe";
-            if (Items.Exists(x => x.idZapato == zapatoId))
+            if (Items.Exists(x => x.idZapato == ZapatoId))
             {
-                var itemEliminar = Items.Single(x => x.idZapato == zapatoId);
+                var itemEliminar = Items.Single(x => x.idZapato == ZapatoId);
                 Items.Remove(itemEliminar);
                 mensaje = SweetAlertHelper.Mensaje("Orden Zapato", "zapato eliminado", SweetAlertMessageType.success);
             }

@@ -17,7 +17,6 @@ namespace Web.Controllers
         {
             return View();
         }
-
         public ActionResult Login(Usuario usuario)
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
@@ -26,22 +25,22 @@ namespace Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    oUsuario = _ServiceUsuario.GetUsuario(usuario.email, usuario.password);
-                
-                   if (oUsuario != null)
-                  {
+                    oUsuario = _ServiceUsuario.Get_Usuario(usuario.email, usuario.password);
+
+                    if (oUsuario != null)
+                    {
                         Session["User"] = oUsuario;
                         Log.Info($"Accede {oUsuario.nombre} {oUsuario.apellidos} con el rol {oUsuario.Rol.idRol}-{oUsuario.Rol.descripcion}");
                         TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Login", "Usario autenticado satisfactoriamente", SweetAlertMessageType.success);
-                        //return View("~/Views/Home/Index.cshtml", oUsuario);
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        Log.Warn($"{usuario.email} se intentó conectar y falló");
+                        Log.Warn($"{usuario.email} se intentó conectar  y falló");
                         ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Login", "Error al autenticarse", SweetAlertMessageType.warning);
+
                     }
-               }
+                }
 
                 return View("Index");
             }
@@ -55,7 +54,6 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
         public ActionResult UnAuthorized()
         {
             try

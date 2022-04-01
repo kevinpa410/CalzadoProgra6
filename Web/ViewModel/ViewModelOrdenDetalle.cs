@@ -15,14 +15,13 @@ namespace Web.ViewModel
         public int cantidadTotal{ get; set; }
         public int idUsuario { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-        public int idGestion { get; set; }
+        public Nullable<int> idGestion { get; set; }
 
 
 
         public virtual Zapato Zapato { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual TipoGestion TipoGestion { get; set; }
-        public virtual Entradas_Salidas Entradas_Salidas { get; set; }
 
 
         public ViewModelOrdenDetalle(int idZapato)

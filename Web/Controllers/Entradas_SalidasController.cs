@@ -21,10 +21,18 @@ namespace Web.Controllers
             {
                 ViewBag.NotificationMessage = TempData["NotificationMessage"];
             }
-   
+            ViewBag.idUsaurio = listaUsuarios();
 
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
             return View();
+        }
+
+        private SelectList listaUsuarios()
+        {
+            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            IEnumerable<Usuario> listaUsuarios = _ServiceUsuario.Get_Usuario();
+
+            return new SelectList(listaUsuarios, "IdUsuario", "IdUsuario");
         }
 
         public ActionResult ordenarZapato(int? idZapato)

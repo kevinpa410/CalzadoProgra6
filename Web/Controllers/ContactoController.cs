@@ -90,8 +90,8 @@ namespace Web.Controllers
             }
             return new MultiSelectList(listacontacto, "idCategoria", "Nombre", listacontactoSelect);
 
-        } 
-        private SelectList listaProveedor(int idProveedor = 0) //hay que cambiar el metodo para  que sea de muchos a muchos como listaContacto
+        }
+        private SelectList listaProveedor(int idProveedor = 0)
         {
             IServicesProveedor _ServicesProveedor = new ServicesProveedor();
             IEnumerable<Proveedor> listaProveedor = _ServicesProveedor.GetProveedor();

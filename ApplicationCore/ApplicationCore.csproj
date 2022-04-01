@@ -49,14 +49,12 @@
     <Compile Include="Services\IServiceContacto.cs" />
     <Compile Include="Services\IServiceEntradas_Salidas.cs" />
     <Compile Include="Services\IServicesProveedor.cs" />
-    <Compile Include="Services\IServiceTipoGestion.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\IServiceZapato.cs" />
     <Compile Include="Services\ServiceCategoria.cs" />
     <Compile Include="Services\ServiceContacto.cs" />
     <Compile Include="Services\ServiceEntradas_Salidas.cs" />
     <Compile Include="Services\ServicesProveedor.cs" />
-    <Compile Include="Services\ServiceTipoGestion.cs" />
     <Compile Include="Services\ServiceUsuario.cs" />
     <Compile Include="Services\ServiceZapato.cs" />
     <Compile Include="Utils\Cryptography.cs" />

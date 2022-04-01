@@ -21,7 +21,8 @@ namespace Infrastructure.Models
         {
             this.Contacto = new HashSet<Contacto>();
             this.Zapato = new HashSet<Zapato>();
-        }    
+        }
+    
         public int idProveedor { get; set; }
         public string nombre { get; set; }
         public Nullable<int> telefono { get; set; }

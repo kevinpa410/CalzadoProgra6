@@ -10,19 +10,23 @@ namespace Infrastructure.Models
 
     internal partial class UsuarioMetadata
     {
-        public int idUsuario { get; set; }
+        public int IdUsuario { get; set; }
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [DataType(DataType.EmailAddress, ErrorMessage = "{0} no tiene formato válido")]
-        public string email { get; set; }
-        public int idRol { get; set; }
+        public string Email { get; set; }
+        public int IdRol { get; set; }
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
-        public string password { get; set; }
-        public string nombre { get; set; }
-        public string apellidos { get; set; }
-        public bool estado { get; set; }
+        public string Password { get; set; }
+        public string Nombre { get; set; }
+        public string Apellidos { get; set; }
+        public bool Estado { get; set; }
         public virtual Rol Rol { get; set; }
+
+        [Display(Name = "Categoría")]
+        public virtual ICollection<Categoria> Categoria { get; set; }
+
     }
 
     internal partial class ZapatoMetadata
@@ -80,6 +84,9 @@ namespace Infrastructure.Models
     {
         [Display(Name = "ID Proveedor")]
         public int idProveedor { get; set; }
+
+        [Display(Name = "ID Contacto")]
+        public int idContacto { get; set; }
 
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
