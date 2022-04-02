@@ -16,9 +16,14 @@ namespace ApplicationCore.Services
 
             IRepositoryUsuario repository = new RepositoryUsuario();
 
-            string crytpPasswd = Cryptography.EncrypthAES(password);
+           // string crytpPasswd = Cryptography.EncrypthAES(password);
 
-            return repository.GetUsuario(email, crytpPasswd);
+            return repository.GetUsuario(email, password);
+        }
+
+        public IEnumerable<Usuario> Get_Usuario()
+        {
+            throw new NotImplementedException();
         }
 
         public Usuario Get_UsuarioByID(int id)
