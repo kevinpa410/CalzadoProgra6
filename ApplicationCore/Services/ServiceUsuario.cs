@@ -21,11 +21,6 @@ namespace ApplicationCore.Services
             return repository.GetUsuario(email, crytpPasswd);
         }
 
-        public IEnumerable<Usuario> Get_Usuario()
-        {
-            throw new NotImplementedException();
-        }
-
         public Usuario Get_UsuarioByID(int id)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();

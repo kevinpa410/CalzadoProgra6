@@ -109,3 +109,4 @@ C:\Users\Kevin PC\Downloads\Telegram Desktop\CalzadoProgra6\Infrastructure\obj\D
 C:\Users\Kevin PC\Downloads\Telegram Desktop\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.CopyComplete
 C:\Users\Kevin PC\Downloads\Telegram Desktop\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.dll
 C:\Users\Kevin PC\Downloads\Telegram Desktop\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.pdb
+C:\Users\Kevin PC\Desktop\Proyecto\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.AssemblyReference.cache
