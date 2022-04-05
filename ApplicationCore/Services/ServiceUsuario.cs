@@ -30,14 +30,20 @@ namespace ApplicationCore.Services
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
             Usuario oUsuario = repository.GetUsuarioByID(id);
-            oUsuario.password = Cryptography.DecrypthAES(oUsuario.password);
+            oUsuario.password = oUsuario.password;
+            //oUsuario.password = Cryptography.DecrypthAES(oUsuario.password);
+
             return oUsuario;
         }
 
         public Usuario Save(Usuario usuario)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
-            usuario.password = Cryptography.EncrypthAES(usuario.password);
+            usuario.password = usuario.password;
+            //usuario.password = Cryptography.EncrypthAES(usuario.password);
+
+
+
             return repository.Save(usuario);
         }
     }

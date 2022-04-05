@@ -590,10 +590,6 @@ C:\Users\Kevin PC\Downloads\Telegram Desktop\CalzadoProgra6\Web\obj\Debug\Web.cs
 C:\Users\Kevin PC\Downloads\Telegram Desktop\CalzadoProgra6\Web\obj\Debug\Web.csproj.CoreCompileInputs.cache
 C:\Users\Kevin PC\Downloads\Telegram Desktop\CalzadoProgra6\Web\obj\Debug\Web.dll
 C:\Users\Kevin PC\Downloads\Telegram Desktop\CalzadoProgra6\Web\obj\Debug\Web.pdb
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.csproj.AssemblyReference.cache
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.csproj.CoreCompileInputs.cache
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.dll
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.pdb
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\MARLONPC.mdf
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\MARLONPC_log.ldf
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\Web.dll.config
@@ -616,14 +612,14 @@ C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\Microsoft.DiaSym
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\Microsoft.Managed.Core.targets
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Buffers.dll
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.IO.FileSystem.dll
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Memory.dll
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Numerics.Vectors.dll
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Text.Encoding.CodePages.dll
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Threading.Tasks.Extensions.dll
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.ValueTuple.dll
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\vbc.exe
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\vbc.exe.config
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\vbc.rsp
@@ -655,6 +651,8 @@ C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\Infrastructure.dll.conf
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\EntityFramework.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\EntityFramework.SqlServer.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\log4net.xml
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\Newtonsoft.Json.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.Helpers.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.Mvc.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.Optimization.xml
@@ -662,14 +660,12 @@ C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.Razor.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.WebPages.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.WebPages.Razor.xml
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\Newtonsoft.Json.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\Antlr3.Runtime.pdb
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Net.Http.Formatting.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.Http.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\System.Web.Http.WebHost.xml
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.csproj.AssemblyReference.cache
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.csproj.CoreCompileInputs.cache
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.csproj.CopyComplete
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Buffers.dll
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Memory.dll
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Numerics.Vectors.dll
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.dll
+C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Web\obj\Debug\Web.pdb
