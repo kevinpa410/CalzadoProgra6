@@ -12,11 +12,6 @@ namespace Infrastructure.Repository
 {
     public class RepositoryEntradas_Salidas : IRepositoryEntradas_Salidas
     {
-        public void DeleteEntradas_Salidas(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Entradas_Salidas> GetEntradas_Salidas()
         {
             List<Entradas_Salidas> entradas_salidas = null;
@@ -79,54 +74,9 @@ namespace Infrastructure.Repository
             }
         }
 
-
-
         public Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas)
         {
-            int resultado = 0;
-            Entradas_Salidas entradas_salidas = null;
-            try
-            {
-                using (MyContext ctx = new MyContext())
-                {
-                    using (var transaccion = ctx.Database.BeginTransaction())
-                    {
-                        ctx.Entradas_Salidas.Add(pEntradas_Salidas);
-                        resultado = ctx.SaveChanges();
-                        foreach (var detalle in  GetEntradas_Salidas())
-                        {
-                            detalle.idEntradas_Salidas = pEntradas_Salidas.idEntradas_Salidas;
-
-                        }
-                        foreach (var item in GetEntradas_Salidas())
-                        {
-                            Zapato oZapato = ctx.Zapato.Find(item.idZapato);
-                            ctx.Entry(oZapato).State = EntityState.Modified;
-                            resultado = ctx.SaveChanges();
-
-                        }
-                        transaccion.Commit();
-                    }
-
-                }
-                if (resultado >= 0)
-                    entradas_salidas = GetEntradas_SalidasByID(pEntradas_Salidas.idEntradas_Salidas);
-
-                return entradas_salidas;
-            }
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "";
-                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-
+            throw new Exception();
         }
     }
 }

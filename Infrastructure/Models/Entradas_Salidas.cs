@@ -11,21 +11,24 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(Entrada_SalidaMetadata))]
+    
     public partial class Entradas_Salidas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Entradas_Salidas()
+        {
+            this.DetalleEntradas_Salidas = new HashSet<DetalleEntradas_Salidas>();
+        }
+    
         public int idEntradas_Salidas { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<int> idGestion { get; set; }
-        public int idZapato { get; set; }
         public Nullable<int> cantidadTotal { get; set; }
         public int idUsuario { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleEntradas_Salidas> DetalleEntradas_Salidas { get; set; }
         public virtual TipoGestion TipoGestion { get; set; }
         public virtual Usuario Usuario { get; set; }
-        public virtual Zapato Zapato { get; set; }
-      
     }
 }
