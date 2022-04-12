@@ -20,13 +20,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DetalleEntradas_Salidas">
+      <EntityTypeMapping TypeName="zapateriaDBModel.DetalleEntradas_Salidas">
+        <MappingFragment StoreEntitySet="DetalleEntradas_Salidas">
+          <ScalarProperty Name="idEntradas_Salidas" ColumnName="idEntradas_Salidas" />
+          <ScalarProperty Name="idZapato" ColumnName="idZapato" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Entradas_Salidas">
       <EntityTypeMapping TypeName="zapateriaDBModel.Entradas_Salidas">
         <MappingFragment StoreEntitySet="Entradas_Salidas">
           <ScalarProperty Name="idEntradas_Salidas" ColumnName="idEntradas_Salidas" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="idGestion" ColumnName="idGestion" />
-          <ScalarProperty Name="idZapato" ColumnName="idZapato" />
           <ScalarProperty Name="cantidadTotal" ColumnName="cantidadTotal" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
         </MappingFragment>

@@ -14,19 +14,20 @@ namespace Infrastructure.Repository
     {
         public IEnumerable<Entradas_Salidas> GetEntradas_Salidas()
         {
-            List<Entradas_Salidas> movimiento = null;
+            List<Entradas_Salidas> entradas_salidas = null;
             try
             {
+
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    movimiento = ctx.Entradas_Salidas.
-                               ToList<Entradas_Salidas>();
-
+                    entradas_salidas = ctx.Entradas_Salidas.
+                        Include("Usuario").
+                        ToList<Entradas_Salidas>();
                 }
-                return movimiento;
-
+                return entradas_salidas;
             }
+
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";
@@ -37,28 +38,27 @@ namespace Infrastructure.Repository
             {
                 string mensaje = "";
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
+                throw;
             }
         }
 
         public Entradas_Salidas GetEntradas_SalidasByID(int id)
         {
-
-            Entradas_Salidas movimiento = null;
+            Entradas_Salidas entradas_salidas = null;
             try
             {
+
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    movimiento = ctx.Entradas_Salidas.
-                               Include("Usuario").
-                               Include("TipoGestion").
-                               Where(p => p.idEntradas_Salidas == id).
-                               FirstOrDefault<Entradas_Salidas>();
-
+                    entradas_salidas = ctx.Entradas_Salidas.
+                        Include("Usuario").
+                        Include("Entradas_Salidas").
+                        Include("Entradas_Salidas.Zapato").
+                        Where(p => p.idGestion == id).
+                        FirstOrDefault<Entradas_Salidas>();
                 }
-                return movimiento;
-
+                return entradas_salidas;
             }
             catch (DbUpdateException dbEx)
             {
@@ -76,7 +76,7 @@ namespace Infrastructure.Repository
 
         public Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas)
         {
-            return null;
+            throw new Exception();
         }
     }
 }

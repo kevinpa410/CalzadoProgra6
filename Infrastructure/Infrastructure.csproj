@@ -79,6 +79,9 @@
     <Compile Include="Models\Contacto.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleEntradas_Salidas.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entradas_Salidas.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
