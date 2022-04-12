@@ -82,9 +82,6 @@ namespace Infrastructure.Models
         [Display(Name = "ID Proveedor")]
         public int idProveedor { get; set; }
 
-        [Display(Name = "ID Contacto")]
-        public int idContacto { get; set; }
-
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
 
