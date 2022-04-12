@@ -1,6 +1,4 @@
-﻿using Infrastructure.Models;
-using Infrastructure.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,25 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-   public  class ServiceTipoGestion : IServiceTipoGestion
+    class ServiceTipoGestion
     {
-        public IEnumerable<TipoGestion> GetTipoGestion()
-        {
-            IRepositoryTipoGestion repository = new RepositoryTipoGestion();
-            return repository.GetTipoGestion();
-        }
-
-        public TipoGestion GetTipoGestionByID(int id)
-        {
-            IRepositoryTipoGestion repository = new RepositoryTipoGestion();
-            return repository.GetTipoGestionByID(id);
-        }
-
-        public TipoGestion Save(TipoGestion tipoGestion)
-        {
-            IRepositoryTipoGestion repository = new RepositoryTipoGestion();
-            return repository.Save(tipoGestion);
-        }
     }
-}
 }

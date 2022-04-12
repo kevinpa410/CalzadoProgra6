@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Services
+namespace Infrastructure.Repository
 {
-    interface IServiceTipoGestion
+    public interface IRespositoryTipoGestion
     {
+
         IEnumerable<TipoGestion> GetTipoGestion();
         IEnumerable<TipoGestion> GetTipoGestionByProveedor(string proveedor);
         IEnumerable<TipoGestion> GetTipoGestionByZapato(int idZapato);
@@ -17,3 +18,4 @@ namespace ApplicationCore.Services
         TipoGestion Save(TipoGestion TipoGestionn, string[] selectedProveedores);
     }
 }
+
