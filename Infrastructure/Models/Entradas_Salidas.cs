@@ -22,6 +22,7 @@ namespace Infrastructure.Models
         public int idUsuario { get; set; }
         public Nullable<int> idUbicacion { get; set; }
         public Nullable<int> idProveedor { get; set; }
+        public string descripcion { get; set; }
     
         public virtual TipoGestion TipoGestion { get; set; }
         public virtual Usuario Usuario { get; set; }
