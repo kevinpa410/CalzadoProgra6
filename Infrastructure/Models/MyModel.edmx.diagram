@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="zapateriaDBModel.Categoria" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="zapateriaDBModel.Contacto" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="zapateriaDBModel.DetalleEntradas_Salidas" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="zapateriaDBModel.Entradas_Salidas" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="zapateriaDBModel.Entradas_Salidas" Width="1.5" PointX="7.625" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="zapateriaDBModel.Proveedor" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="zapateriaDBModel.Rol" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="zapateriaDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
