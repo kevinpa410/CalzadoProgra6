@@ -121,7 +121,6 @@ C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Infrastructure\bin\Debug\log4ne
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Infrastructure\bin\Debug\EntityFramework.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Infrastructure\bin\Debug\log4net.xml
-C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.AssemblyReference.cache
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.csproj.CopyComplete
 C:\Users\Kevin PC\Desktop\Project\CalzadoProgra6\Infrastructure\obj\Debug\Infrastructure.dll

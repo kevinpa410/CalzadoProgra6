@@ -6,29 +6,6 @@
         </button>
         <ul class="navbar-nav me-auto px-3">
 
-            <li class="nav-item">
-                @Html.ActionLink("Inicio", "index", "home", null, new { @class = "nav-link" });
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("Bodega", "Index", "Zapato", null, new { @class = "nav-link" });
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("Proveedor", "Index", "Proveedor", null, new { @class = "nav-link" });
-            <li class="nav-item">
-                @Html.ActionLink("Zapato", "IndexAdmin", "Zapato", null, new { @class = "nav-link" });
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("A Cerca de", "about", "home", null, new { @class = "nav-link" });
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("Contacto", "contact", "home", null, new { @class = "nav-link" });
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("Orden", "IndexAdmin", "Entradas_Salidas", null, new { @class = "nav-link" });
-            </li>
-        </ul>
-
-        <ul class="navbar-nav mr-auto">
             @* Información usuario *@
 
             @{
@@ -47,8 +24,89 @@
                 }
             }
 
-            <li class="nav-item ">
 
+
+            @{
+                //Validar si existe en la sesión
+                if (Session["User"] == null)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Inicio", "index", "home", null, new { @class = "nav-link" });
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("A Cerca de", "about", "home", null, new { @class = "nav-link" });
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Contacto", "contact", "home", null, new { @class = "nav-link" });
+                    </li>
+                }
+                else
+                {
+                    if (Session["User"] != null)
+                    {
+                        oUsuario = (Infrastructure.Models.Usuario)Session["User"];
+
+                        if (oUsuario.idRol == 1)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" });
+                            </li>
+
+                            <li class="nav-item">
+                                @Html.ActionLink("Proveedor", "IndexAdmin", "Proveedor", null, new { @class = "nav-link" });
+                            </li>
+
+                            <li class="nav-item">
+                                @Html.ActionLink("Zapato", "IndexAdmin", "Zapato", null, new { @class = "nav-link" });
+                            </li>
+
+                            <li class="nav-item">
+                                @Html.ActionLink("A Cerca de", "about", "home", null, new { @class = "nav-link" });
+                            </li>
+
+                            <li class="nav-item">
+                                @Html.ActionLink("Contacto", "contact", "home", null, new { @class = "nav-link" });
+                            </li>
+                        }
+                        else
+                        {
+                            if (oUsuario.idRol == 2)
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" });
+                                </li>
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("Proveedor", "Index", "Proveedor", null, new { @class = "nav-link" });
+                                </li>
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("Zapato", "IndexAdmin", "Zapato", null, new { @class = "nav-link" });
+                                </li>
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("A Cerca de", "about", "home", null, new { @class = "nav-link" });
+                                </li>
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("Contacto", "contact", "home", null, new { @class = "nav-link" });
+                                </li>
+                            }
+
+                        }
+
+                    }
+
+
+
+                }
+            }
+
+
+            @* -------------------------------------------Nombre del Usuario------------------------------------- *@
+            <li class="nav-item ">
                 <div>
                     @if (Session["User"] != null)
                     {
@@ -59,6 +117,9 @@
                     }
                 </div>
             </li>
+
+
+            @* -------------------------------------------Boton login------------------------------------- *@
             <li>
                 <div>
                     @if (Session["User"] == null)
@@ -71,7 +132,8 @@
                     }
                 </div>
             </li>
-    </div>
+        </ul>
+</div>
    
 </nav>
 
