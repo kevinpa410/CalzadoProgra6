@@ -27,7 +27,6 @@ namespace Infrastructure.Models
     
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Contacto> Contacto { get; set; }
-        public virtual DbSet<DetalleEntradas_Salidas> DetalleEntradas_Salidas { get; set; }
         public virtual DbSet<Entradas_Salidas> Entradas_Salidas { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
