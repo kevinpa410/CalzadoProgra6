@@ -153,7 +153,7 @@ namespace Web.Controllers
                         Entradas_Salidas entradas_Salidas = new Entradas_Salidas();
                         //entradas_Salidas.idZapato = item.idZapato;
                         entradas_Salidas.idUsuario = item.idUsuario;
-                        entradas_Salidas.cantidadTotal = item.cantidadTotal;
+                        entradas_Salidas.cantidadProducto = item.cantidadTotal;
                        // entradas_Salidas.Entradas_Salidas.Add(entradas_Salidas);
                     }
                 }
