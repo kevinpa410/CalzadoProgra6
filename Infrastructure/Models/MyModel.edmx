@@ -34,6 +34,7 @@
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="idUbicacion" Type="int" />
           <Property Name="idProveedor" Type="int" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -353,6 +354,7 @@
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="idUbicacion" Type="Int32" />
           <Property Name="idProveedor" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TipoGestion" Relationship="Self.FKEntradas_Salidas_Gestion" FromRole="Entradas_Salidas" ToRole="TipoGestion" />
           <NavigationProperty Name="Usuario" Relationship="Self.FKEntradas_Salidas_Usuario" FromRole="Entradas_Salidas" ToRole="Usuario" />
           <NavigationProperty Name="Zapato" Relationship="Self.FKEntradas_Salidas_Zapato" FromRole="Entradas_Salidas" ToRole="Zapato" />
@@ -587,6 +589,7 @@
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idUbicacion" ColumnName="idUbicacion" />
                 <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
