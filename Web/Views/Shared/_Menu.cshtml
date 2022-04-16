@@ -59,16 +59,22 @@
                             </li>
 
                             <li class="nav-item">
+                                @Html.ActionLink("Contactos de Proveedor", "IndexAdmin", "Contacto", null, new { @class = "nav-link" });
+                            </li>
+
+                            <li class="nav-item">
                                 @Html.ActionLink("Zapato", "IndexAdmin", "Zapato", null, new { @class = "nav-link" });
                             </li>
 
                             <li class="nav-item">
-                                @Html.ActionLink("A Cerca de", "about", "home", null, new { @class = "nav-link" });
+                                @Html.ActionLink("A Cerca de", "about", "Home", null, new { @class = "nav-link" });
                             </li>
 
                             <li class="nav-item">
-                                @Html.ActionLink("Contacto", "contact", "home", null, new { @class = "nav-link" });
+                                @Html.ActionLink("Contacto", "contact", "Home", null, new { @class = "nav-link" });
                             </li>
+
+
                         }
                         else
                         {
@@ -83,7 +89,11 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    @Html.ActionLink("Zapato", "IndexAdmin", "Zapato", null, new { @class = "nav-link" });
+                                    @Html.ActionLink("Contactos de Proveedor", "Index", "Contacto", null, new { @class = "nav-link" });
+                                </li>
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("Zapato", "Index", "Zapato", null, new { @class = "nav-link" });
                                 </li>
 
                                 <li class="nav-item">
@@ -91,7 +101,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    @Html.ActionLink("Contacto", "contact", "home", null, new { @class = "nav-link" });
+                                    @Html.ActionLink("Contacto", "Contacto", "home", null, new { @class = "nav-link" });
                                 </li>
                             }
 

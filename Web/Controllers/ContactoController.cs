@@ -13,7 +13,40 @@ namespace Web.Controllers
 {
     public class ContactoController : Controller
     {
-        // GET: Contacto
+        public ActionResult Index()
+        {
+            IEnumerable<Contacto> lista = null;
+            try
+            {
+                IServiceContacto _ServiceContacto = new ServiceContacto();
+                lista = _ServiceContacto.GetContacto();
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+            }
+            return View(lista);
+        }
+        public ActionResult IndexAdmin()
+        {
+            IEnumerable<Contacto> lista = null;
+            try
+            {
+                IServiceContacto _ServiceContacto = new ServiceContacto();
+                lista = _ServiceContacto.GetContacto();
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                return RedirectToAction("Default", "Error");
+            }
+            return View(lista);
+        }
         public ActionResult Details(int? id)
         {
             IServiceContacto _IServiceContacto = new ServiceContacto();
@@ -22,7 +55,7 @@ namespace Web.Controllers
             {
                 if (id == null)
                 {
-                    return RedirectToAction("IndexAdmin");
+                    return RedirectToAction("Index");
 
                 }
                 contacto = _IServiceContacto.GetContactoByID(id.Value);

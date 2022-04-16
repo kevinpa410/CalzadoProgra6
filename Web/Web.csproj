@@ -261,11 +261,11 @@
     <Content Include="Views\Zapato\Edit.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Proveedor\Create.cshtml" />
-    <Content Include="Views\Contactos\IndexAdmin.cshtml" />
-    <Content Include="Views\Contactos\Index.cshtml" />
-    <Content Include="Views\Contactos\Edit.cshtml" />
-    <Content Include="Views\Contactos\Details.cshtml" />
-    <Content Include="Views\Contactos\Create.cshtml" />
+    <Content Include="Views\Contacto\IndexAdmin.cshtml" />
+    <Content Include="Views\Contacto\Index.cshtml" />
+    <Content Include="Views\Contacto\Edit.cshtml" />
+    <Content Include="Views\Contacto\Details.cshtml" />
+    <Content Include="Views\Contacto\Create.cshtml" />
     <Content Include="Views\Entradas_Salidas\IndexAdmin.cshtml" />
     <Content Include="Views\Entradas_Salidas\Details.cshtml" />
     <Content Include="Views\Entradas_Salidas\_DetalleOrden.cshtml" />
