@@ -28,16 +28,7 @@ namespace Web.Controllers
             }
             return View(lista);
         }
-
-
-        // GET: Autor/Create
-        public ActionResult Create()
-        {
-            ViewBag.idZapato= listaZapato();
-            return View();
-        }
-
-     
+             
         private SelectList listaZapato(int idZapato = 0)
         {
             IServiceZapato _ServiceZapato = new ServiceZapato();
@@ -47,7 +38,6 @@ namespace Web.Controllers
 
         }
 
-        // GET: Autor/Edit/5
         public ActionResult Edit(int? id)
         {
 
@@ -82,8 +72,7 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
-    
+            
         public ActionResult IndexAdmin()
         {
             IEnumerable<Proveedor> lista = null;
@@ -103,7 +92,6 @@ namespace Web.Controllers
             return View(lista);
         }
 
-        // GET: Autor/Details/5
         public ActionResult Details(int? id)
         {
             ServicesProveedor _ServicesProveedor = new ServicesProveedor();
@@ -136,11 +124,11 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Autor/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
+
         public ActionResult Save(Proveedor proveedor)
         {
             IServicesProveedor _ServicesProveedor = new ServicesProveedor();
