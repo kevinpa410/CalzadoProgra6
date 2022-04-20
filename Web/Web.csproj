@@ -251,7 +251,6 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
-    <Content Include="Views\Entradas_Salidas\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Zapato\Details.cshtml" />
     <Content Include="Views\Proveedor\Details.cshtml" />
@@ -266,10 +265,12 @@
     <Content Include="Views\Contactos\Edit.cshtml" />
     <Content Include="Views\Contactos\Details.cshtml" />
     <Content Include="Views\Contactos\Create.cshtml" />
-    <Content Include="Views\Entradas_Salidas\IndexAdmin.cshtml" />
-    <Content Include="Views\Entradas_Salidas\Details.cshtml" />
-    <Content Include="Views\Entradas_Salidas\_DetalleOrden.cshtml" />
     <Content Include="Views\Shared\_OrdenCantidad.cshtml" />
+    <Content Include="Views\Entradas_Salidas\Index.cshtml" />
+    <Content Include="Views\Entradas_Salidas\Details.cshtml" />
+    <Content Include="Views\Entradas_Salidas\Create.cshtml" />
+    <Content Include="Views\Entradas_Salidas\Edit.cshtml" />
+    <Content Include="Views\Entradas_Salidas\IndexAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

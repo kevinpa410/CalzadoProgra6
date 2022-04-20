@@ -9,6 +9,12 @@ namespace Infrastructure.Repository
 {
     public interface IRepositoryEntradas_Salidas
     {
-       
+        IEnumerable<Entradas_Salidas> GetEntradas_Salidas();
+        Entradas_Salidas GetEntradas_SalidasByID(int id);
+        void DeleteEntradas_Salidas(int id);
+        Entradas_Salidas Save(Entradas_Salidas entradas_salidas);
+        IEnumerable<Entradas_Salidas> GetEntradas_SalidasByUbicacion(int idUbicacion);
+        IEnumerable<Entradas_Salidas> GetEntradas_SalidasByZapato(int idZapato);
+        IEnumerable<Entradas_Salidas> GetEntradas_SalidasByTipoGestion(int idTipoGestion);
     }
 }

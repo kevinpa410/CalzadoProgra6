@@ -9,5 +9,13 @@ namespace ApplicationCore.Services
 {
     public interface IServiceEntradas_Salidas
     {
+        IEnumerable<Entradas_Salidas> GetEntradas_Salidas();
+        Entradas_Salidas GetEntradas_SalidasByID(int id);
+      
+        Entradas_Salidas Save(Entradas_Salidas entradas_salidas);
+        IEnumerable<Entradas_Salidas> GetEntradas_SalidasByUbicacion(int idUbicacion);
+        IEnumerable<Entradas_Salidas> GetEntradas_SalidasByZapato(int idZapato);
+        IEnumerable<Entradas_Salidas> GetEntradas_SalidasByTipoGestion(int idTipoGestion);
+
     }
 }

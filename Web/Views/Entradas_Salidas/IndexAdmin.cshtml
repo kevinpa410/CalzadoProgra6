@@ -1,11 +1,5 @@
 ﻿@model IEnumerable<Infrastructure.Models.Entradas_Salidas>
 
-@{
-    ViewBag.Title = "IndexAdmin";
-}
-
-<h2>IndexAdmin</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -21,10 +15,22 @@
             @Html.DisplayNameFor(model => model.idGestion)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.idZapato)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.cantidadProducto)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.idUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idUbicacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idProveedor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
         </th>
         <th></th>
     </tr>
@@ -41,15 +47,27 @@
             @Html.DisplayFor(modelItem => item.idGestion)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.idZapato)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.cantidadProducto)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.idUsuario)
         </td>
         <td>
-
-            @Html.ActionLink("Details", "Details", new { id = item.idEntradas_Salidas }) 
-
+            @Html.DisplayFor(modelItem => item.idUbicacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idProveedor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }
