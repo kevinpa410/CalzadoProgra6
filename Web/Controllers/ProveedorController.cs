@@ -38,6 +38,50 @@ namespace Web.Controllers
 
         }
 
+
+        private MultiSelectList listaZapatos(ICollection<Zapato> zapatos)
+        {
+            //Lista de Categorias
+            IServiceZapato _ServiceZapato = new ServiceZapato();
+            IEnumerable<Zapato> listaZapato = _ServiceZapato.GetZapato();
+            int[] listaZapatoSelect = null;
+
+            if (zapatos != null)
+            {
+
+                listaZapatoSelect = zapatos.Select(c => c.idZapato).ToArray();
+            }
+
+            return new MultiSelectList(listaZapato, "idZapato", "Nombre", listaZapatoSelect);
+
+        }
+
+
+        private MultiSelectList listaContactos(ICollection<Contacto> contactos)
+        {
+            //Lista de Categorias
+            IServiceContacto _ServiceContacto = new ServiceContacto();
+            IEnumerable<Contacto> listaContacto = _ServiceContacto.GetContacto();
+            int[] listaContactoSelect = null;
+
+            if (contactos != null)
+            {
+
+                listaContactoSelect = contactos.Select(c => c.idContacto).ToArray();
+            }
+
+            return new MultiSelectList(listaContacto, "idContacto", "Nombre", listaContactoSelect);
+
+        }
+
+        public ActionResult Create()
+        {
+            //Lista de autores
+            ViewBag.IdZapatos = listaZapatos(null);
+            ViewBag.Contactos = listaContactos(null);
+            return View();
+        }
+
         public ActionResult Edit(int? id)
         {
 
@@ -129,12 +173,12 @@ namespace Web.Controllers
             return View();
         }
 
-        public ActionResult Save(Proveedor proveedor)
+        public ActionResult Save(Proveedor proveedor, string[] selectedContactos)
         {
             IServicesProveedor _ServicesProveedor = new ServicesProveedor();
             if (ModelState.IsValid)
             {
-                Proveedor oProvedorI = _ServicesProveedor.Save(proveedor);
+                Proveedor oProvedorI = _ServicesProveedor.Save(proveedor, selectedContactos);
 
             }
             else

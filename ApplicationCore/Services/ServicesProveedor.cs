@@ -28,10 +28,10 @@ namespace ApplicationCore.Services
             return repository.GetProveedorByID(id);
         }
 
-        public Proveedor Save(Proveedor proveedor)
+        public Proveedor Save(Proveedor proveedor, string[] selectedContactos)
         {
             IRepositoryProveedor repository = new RepositoryProveedor(); 
-                return repository.Save(proveedor);
+                return repository.Save(proveedor, selectedContactos);
         }
 
         

@@ -137,7 +137,7 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        public ActionResult Save(Contacto contacto, string[] selectedContacto)
+        public ActionResult Save(Contacto contacto)
         {
 
             IServiceContacto _ServiceContacto = new ServiceContacto();

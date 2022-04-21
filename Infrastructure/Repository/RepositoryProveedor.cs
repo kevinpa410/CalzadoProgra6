@@ -63,37 +63,74 @@ namespace Infrastructure.Repository
             return oProveedor;
         }
 
-        public Proveedor Save(Proveedor proveedor)
+        public Proveedor Save(Proveedor proveedor, string[] selectedContactos)
         {
             int retorno = 0;
             Proveedor oProveedor = null;
 
             using (MyContext ctx = new MyContext())
             {
-
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oProveedor = GetProveedorByID((int)proveedor.idProveedor);
+                IRepositoryContacto _RepositoryCategoria = new RepositoryContacto();
+                IRepositoryZapato _RepositoryZapato = new RepositoryZapato();
+
                 if (oProveedor == null)
                 {
+
+                    //Insertar
+                    if (selectedContactos != null)
+                    {
+
+                        proveedor.Contacto = new List<Contacto>();
+                        foreach (var contacto in selectedContactos)
+                        {
+                            var contactoToAdd = _RepositoryCategoria.GetContactoByID(int.Parse(contacto));
+                            ctx.Contacto.Attach(contactoToAdd); //sin esto, EF intentará crear una categoría
+                            proveedor.Contacto.Add(contactoToAdd);// asociar a la categoría existente con el libro
+
+
+                        }
+                    }
                     ctx.Proveedor.Add(proveedor);
+                    //SaveChanges
+                    //guarda todos los cambios realizados en el contexto de la base de datos.
                     retorno = ctx.SaveChanges();
+                    //retorna número de filas afectadas
                 }
                 else
                 {
+                    //Registradas: 1,2,3
+                    //Actualizar: 1,3,4
+
+                    //Actualizar Libro
                     ctx.Proveedor.Add(proveedor);
                     ctx.Entry(proveedor).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
+                    //Actualizar Categorias
+                    var selectedContactosID = new HashSet<string>(selectedContactos);
+                    if (selectedContactos != null)
+                    {
+                        ctx.Entry(proveedor).Collection(p => p.Contacto).Load();
+                        var newCategoriaForLibro = ctx.Contacto
+                         .Where(x => selectedContactosID.Contains(x.idContacto.ToString())).ToList();
+                        proveedor.Contacto = newCategoriaForLibro;
+
+                        ctx.Entry(proveedor).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
+                    }
                 }
-
-
-
             }
-            if (retorno >= 0)
-                oProveedor = GetProveedorByID(proveedor.idProveedor);
+
+
+
+
+            if (retorno >= 0)oProveedor = GetProveedorByID((int)proveedor.idProveedor);
 
             return oProveedor;
         }
-           
+
+
     }
 
 }

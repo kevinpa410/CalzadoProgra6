@@ -12,6 +12,9 @@ namespace Infrastructure.Repository
         IEnumerable<Proveedor> GetProveedor();
         Proveedor GetProveedorByID(int id);
         void DeleteProveedor(int id);
-        Proveedor Save(Proveedor proveedor);
+        Proveedor Save(Proveedor proveedor, string[] selectedContactos);
+
+
+
     }
 }
