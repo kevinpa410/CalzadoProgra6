@@ -13,7 +13,8 @@ namespace ApplicationCore.Services
     {
         public void DeleteProveedor(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repositoryProveedor = new RepositoryProveedor();
+            repositoryProveedor.DeleteProveedor(id);
         }
 
         public IEnumerable<Proveedor> GetProveedor()
@@ -28,10 +29,10 @@ namespace ApplicationCore.Services
             return repository.GetProveedorByID(id);
         }
 
-        public Proveedor Save(Proveedor proveedor, string[] selectedContactos)
+        public Proveedor Save(Proveedor proveedor, string[] selectedContactos, string[] selectedZapatos)
         {
-            IRepositoryProveedor repository = new RepositoryProveedor(); 
-                return repository.Save(proveedor, selectedContactos);
+            IRepositoryProveedor repositoryProveedor = new RepositoryProveedor();
+            return repositoryProveedor.Save(proveedor, selectedContactos, selectedZapatos);
         }
 
         
