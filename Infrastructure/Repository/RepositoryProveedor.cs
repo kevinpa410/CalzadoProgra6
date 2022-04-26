@@ -139,34 +139,32 @@ namespace Infrastructure.Repository
                             proveedor.Zapato.Add(zapatoToAdd);
                           proveedor.Contacto.Add(contactoToAdd);
                         }
-
-
-
-
-                        //foreach (var zapato in selectedZapatos)
-                        //{
-
-                        //    var zapatoToAdd = _RepositoryZapato.GetZapatoByID(int.Parse(zapato));
-                        //    var check = ctx.Zapato.Where(x => x.idCategoria == zapatoToAdd.idCategoria).FirstOrDefault();
-                        //    if (check != null)
-                        //    {
-                        //        zapatoToAdd = check;
-                        //        ctx.Zapato.Attach(zapatoToAdd);
-                        //        proveedor.Zapato.Add(zapatoToAdd);
-                        //    }
-                        //}
-
-
-                        //foreach (var contacto in selectedContactos )
-                        //{
-                        //    var contactoToAdd = _RepositoryContacto.GetContactoByID(int.Parse(contacto));
-                        //    ctx.Contacto.Attach(contactoToAdd); //sin esto, EF intentará crear una categoría
-
-                        //    proveedor.Contacto.Add(contactoToAdd);// asociar a la categoría existente con el libro<===============
-                        //}
-
-
                     }
+
+                    //foreach (var zapato in selectedZapatos)
+                    //{
+
+                    //    var zapatoToAdd = _RepositoryZapato.GetZapatoByID(int.Parse(zapato));
+                    //    var check = ctx.Zapato.Where(x => x.idCategoria == zapatoToAdd.idCategoria).FirstOrDefault();
+                    //    if (check != null)
+                    //    {
+                    //        zapatoToAdd = check;
+                    //        ctx.Zapato.Attach(zapatoToAdd);
+                    //        proveedor.Zapato.Add(zapatoToAdd);
+                    //    }
+                    //}
+
+
+                    //foreach (var contacto in selectedContactos )
+                    //{
+                    //    var contactoToAdd = _RepositoryContacto.GetContactoByID(int.Parse(contacto));
+                    //    ctx.Contacto.Attach(contactoToAdd); //sin esto, EF intentará crear una categoría
+
+                    //    proveedor.Contacto.Add(contactoToAdd);// asociar a la categoría existente con el libro
+                    //}
+
+
+
                     ctx.Proveedor.Add(proveedor);
                     retorno = ctx.SaveChanges();
 

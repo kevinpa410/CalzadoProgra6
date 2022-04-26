@@ -177,7 +177,7 @@ namespace Web.Controllers
             else
             {
                 ViewBag.idZapato = listaZapatos(proveedor.Zapato);
-                ViewBag.idZapato = listaContactos(proveedor.Contacto);
+                ViewBag.idCategoria = listaContactos(proveedor.Contacto);
                 return View("Create", proveedor);
             }
             return RedirectToAction("IndexAdmin");

@@ -33,10 +33,10 @@ namespace ApplicationCore.Services
             IRepositoryZapato repository = new RepositoryZapato();
             return repository.GetZapatoByUbicacion(ubicacion);
         }
-        public Zapato Save(Zapato zapato)
+        public Zapato Save(Zapato zapato, string[] selectedProveedor, string[] selectedUbicacion)
         {
             IRepositoryZapato repository = new RepositoryZapato();
-            return repository.Save(zapato);
+            return repository.Save(zapato, selectedProveedor, selectedUbicacion);
 
         }
 
