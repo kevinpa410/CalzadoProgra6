@@ -18,21 +18,6 @@ namespace ApplicationCore.Services
             IRepositoryZapato repository = new RepositoryZapato();
             return repository.GetZapatoByID(id);
         }
-
-        public IEnumerable<Zapato> GetZapatoByProveedor(int idProveedor)
-        {
-            IRepositoryZapato repository = new RepositoryZapato();
-            return repository.GetZapatoByProveedor(idProveedor);
-        }
-        public IEnumerable<Zapato> GetZapatoByCategoria(int idCategoria)
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<Zapato> GetZapatoByUbicacion(string ubicacion)
-        {
-            IRepositoryZapato repository = new RepositoryZapato();
-            return repository.GetZapatoByUbicacion(ubicacion);
-        }
         public Zapato Save(Zapato zapato, string[] selectedProveedor, string[] selectedUbicacion)
         {
             IRepositoryZapato repository = new RepositoryZapato();

@@ -64,19 +64,6 @@ namespace Infrastructure.Repository
             }
             return oZapato;
         }
-        public IEnumerable<Zapato> GetZapatoByUbicacion(string ubicacion)
-        {
-            throw new NotImplementedException();
-        }
-        //{
-        // IEnumerable<Zapato> lista = null;
-        //using (MyContext ctx = new MyContext())
-        // {
-        // ctx.Configuration.LazyLoadingEnabled = false;
-        //lista = ctx.Zapato.ToList().
-        //FindAll(l => l.Ubicacion.ToLower().Contains(Ubicacion.ToLower()));
-        // }
-        // }
 
         public Zapato Save(Zapato zapato, string[] selectedProveedor, string[] selectedUbicacion) //string[] selectedCategorias
         {
@@ -88,7 +75,7 @@ namespace Infrastructure.Repository
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oZapato = GetZapatoByID((int)zapato.idZapato);
                 IRepositoryProveedor _RepositoryProveedor = new RepositoryProveedor();
-                //IRepositoryUbicacion _RepositoryUbicacion = new RepositoryUbicacion(); <====================
+                IRepositoryUbicacion _RepositoryUbicacion = new RepositoryUbicacion();
 
                 if (oZapato == null)
                 {
@@ -104,23 +91,23 @@ namespace Infrastructure.Repository
                         foreach (var pu in ProveedorAndUbicacion)
                         {
 
-                            //var proveedorToAdd = _RepositoryProveedor.GetProveedorByID(int.Parse(pu.Proveedor));
-                            //var check = ctx.Zapato.Where(x => x.idCategoria == zapatoToAdd.idCategoria).FirstOrDefault();
-                            //if (check != null)
-                            //{
-                            //    zapatoToAdd = check;
-                            //    ctx.Zapato.Attach(zapatoToAdd);
-                            //    proveedor.Zapato.Add(zapatoToAdd);
-                            //}
-
                             var proveedorToAdd = _RepositoryProveedor.GetProveedorByID(int.Parse(pu.Proveedor));
-                            //var UbicacionToAdd = _RepositoryUbicacion.GetContactoByID(int.Parse(pu.Ubicacion)); <====================
+                            var check = ctx.Proveedor.Where(x => x.idProveedor == proveedorToAdd.idProveedor).FirstOrDefault();
+                            if (check != null)
+                            {
+                                proveedorToAdd = check;
+                                ctx.Proveedor.Attach(proveedorToAdd);
+                                zapato.Proveedor.Add(proveedorToAdd);
+                            }
 
-                            ctx.Proveedor.Attach(proveedorToAdd);
-                            //ctx.Ubicacion.Attach(UbicacionToAdd); <====================
+                            //var proveedorToAdd = _RepositoryProveedor.GetProveedorByID(int.Parse(pu.Proveedor));
+                            var UbicacionToAdd = _RepositoryUbicacion.GetUbicacionByID(int.Parse(pu.Ubicacion)); 
+
+                            ctx.Proveedor.Attach(proveedorToAdd); //<=========================
+                            ctx.Ubicacion.Attach(UbicacionToAdd); 
 
                             zapato.Proveedor.Add(proveedorToAdd);
-                            //zapato.Ubicacion.Add(UbicacionToAdd); <====================
+                            zapato.Ubicacion.Add(UbicacionToAdd); 
                         }
                     }
 
@@ -134,33 +121,42 @@ namespace Infrastructure.Repository
                     retorno = ctx.SaveChanges();
                     //Actualizar Categorias
                     var selectedproveedorID = new HashSet<string>(selectedProveedor);
-                    if (selectedProveedor != null)
+                    var selectedUbicacionID = new HashSet<string>(selectedUbicacion);
+
+
+                    if (selectedProveedor != null & selectedUbicacion != null)
                     {
                         ctx.Entry(zapato).Collection(p => p.Proveedor).Load();
-                        var newProveedorForLibro = ctx.Proveedor
+                        ctx.Entry(zapato).Collection(p => p.Ubicacion).Load();
+
+                        var newProveedorForZapato = ctx.Proveedor
                          .Where(x => selectedproveedorID.Contains(x.idProveedor.ToString())).ToList();
-                        zapato.Proveedor = newProveedorForLibro;
+                        zapato.Proveedor = newProveedorForZapato;
+
+                        var newUbicacionForZapato = ctx.Ubicacion
+                         .Where(x => selectedUbicacion.Contains(x.idUbicacion.ToString())).ToList();
+                        zapato.Ubicacion = newUbicacionForZapato;
+
 
                         ctx.Entry(zapato).State = EntityState.Modified;
-                        retorno = ctx.SaveChanges();
+                        
                     }
                 }
-            }
+                if (retorno >= 0)
+                    oZapato = GetZapatoByID((int)zapato.idZapato);
 
-            if (retorno >= 0)
-                oZapato = GetZapatoByID((int)zapato.idZapato);
+                try
+                {
+                    retorno = ctx.SaveChanges();
+                    return oZapato;
+                }
+                catch (Exception)
+                {
+                    return oZapato;
+                }
 
-            return oZapato;
+            }           
 
-        }
-
-        public IEnumerable<Zapato> GetZapatoByProveedor(int idProveedor)
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<Zapato> GetZapatoByCategoria(int idCategoria)
-        {
-            throw new NotImplementedException();
         }
     
     }
