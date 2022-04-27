@@ -19,8 +19,8 @@ namespace Web.Controllers
             IEnumerable<Zapato> lista = null;
             try
             {
-                IServiceZapato _SeviceZapato = new ServiceZapato();
-                lista = _SeviceZapato.GetZapato();
+                IServiceZapato _ServiceZapato = new ServiceZapato();
+                lista = _ServiceZapato.GetZapato();
             }
             catch (Exception ex)
             {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Repository
+namespace ApplicationCore.Services
 {
-    public interface IRepositoryTipoGestion
+   public  interface IServiceTipoGestion
     {
         IEnumerable<TipoGestion> GetTipoGestion();
         TipoGestion GetTipoGestionByID(int id);

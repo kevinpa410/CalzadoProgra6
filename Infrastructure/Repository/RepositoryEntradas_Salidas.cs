@@ -56,7 +56,7 @@ namespace Infrastructure.Repository
                 oEntradas_Salidas = ctx.Entradas_Salidas.
                       Where(l => l.idEntradas_Salidas == id).
                       Include(a => a.Zapato).
-                      Include(c => c.TipoGestion).
+                       Include(c => c.Proveedor).
                       FirstOrDefault();
 
                 oEntradas_Salidas = ctx.Entradas_Salidas.Find(id);
@@ -64,19 +64,10 @@ namespace Infrastructure.Repository
             }
             return oEntradas_Salidas;
         }
-        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByUbicacion(int idubicacion)
+        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByUbicacion(string Ubicacion)
         {
-            throw new NotImplementedException();
-        }
-        //{
-        // IEnumerable<Zapato> lista = null;
-        //using (MyContext ctx = new MyContext())
-        // {
-        // ctx.Configuration.LazyLoadingEnabled = false;
-        //lista = ctx.Zapato.ToList().
-        //FindAll(l => l.Ubicacion.ToLower().Contains(Ubicacion.ToLower()));
-        // }
-        // }
+        throw new NotImplementedException();
+         }
         public Entradas_Salidas Save(Entradas_Salidas entradas_salidas) //string[] selectedCategorias
         {
             int retorno = 0;
@@ -91,7 +82,7 @@ namespace Infrastructure.Repository
                 {
                     ctx.Entradas_Salidas.Add(entradas_salidas);
                     retorno = ctx.SaveChanges();
-
+                    
 
                 }
                 else
@@ -99,22 +90,22 @@ namespace Infrastructure.Repository
                     ctx.Entradas_Salidas.Add(entradas_salidas);
                     ctx.Entry(entradas_salidas).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
-
                 }
             }
             if (retorno >= 0)
                 oEntradas_Salidas = GetEntradas_SalidasByID((int)entradas_salidas.idEntradas_Salidas);
             return oEntradas_Salidas;
-            
         }
 
         public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByZapato(int idZapato)
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByTipoGestion(int idTipoGestion)
+       
+        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByProveedor(int idProveedor)
         {
             throw new NotImplementedException();
+
         }
 
     }

@@ -22,18 +22,19 @@ namespace ApplicationCore.Services
             return repository.GetEntradas_SalidasByID(id);
         }
 
-        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByZapato(int idZapato)
+        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByProveedor(int idProveedor)
         {
             IRepositoryEntradas_Salidas repository = new RepositoryEntradas_Salidas();
-            return repository.GetEntradas_SalidasByZapato(idZapato);
+            return repository.GetEntradas_SalidasByProveedor(idProveedor);
         }
-        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByTipoGestion(int idTipoGestion)
+        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByZapato(int idZapato)
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByUbicacion(int idUbicacion)
+        public IEnumerable<Entradas_Salidas> GetEntradas_SalidasByUbicacion(string Ubicacion)
         {
-            throw new NotImplementedException();
+            IRepositoryEntradas_Salidas repository = new RepositoryEntradas_Salidas();
+            return repository.GetEntradas_SalidasByUbicacion(Ubicacion);
         }
         public Entradas_Salidas Save(Entradas_Salidas entradas_salidas)
         {
@@ -41,6 +42,7 @@ namespace ApplicationCore.Services
             return repository.Save(entradas_salidas);
 
         }
+
 
     }
 }

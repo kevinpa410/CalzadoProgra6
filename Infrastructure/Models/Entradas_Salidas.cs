@@ -11,7 +11,7 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+   
     public partial class Entradas_Salidas
     {
         public int idEntradas_Salidas { get; set; }
@@ -24,8 +24,10 @@ namespace Infrastructure.Models
         public Nullable<int> idProveedor { get; set; }
         public string descripcion { get; set; }
     
-        public virtual TipoGestion TipoGestion { get; set; }
+    
         public virtual Usuario Usuario { get; set; }
-        public virtual Zapato Zapato { get; set; }
+        public virtual ICollection<Zapato> Zapato { get; set; }
+        public virtual ICollection<Proveedor >Proveedor { get; set; }
+        public virtual ICollection<TipoGestion> TipoGestion { get; set; }
     }
 }
