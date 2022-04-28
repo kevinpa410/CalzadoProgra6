@@ -98,35 +98,30 @@ namespace Infrastructure.Repository
                     if (selectedUbicacion != null)
                     {
                         zapatoMovimiento.Ubicacion = new List<Ubicacion>();
+                        
 
                         foreach (var ubicacion in selectedUbicacion)
                         {
-                            var UbicacionToAdd = _RepositoryUbicacion.GetUbicacionByID(int.Parse(ubicacion));
-                            ctx.Ubicacion.Attach(UbicacionToAdd);
-                            zapatoMovimiento.Ubicacion.Add(UbicacionToAdd);
+                            var checkZapato = ctx.Zapato.Where(x => x.idCategoria == zapatoMovimiento.idCategoria).FirstOrDefault();
+
+                            if (checkZapato != null)
+                            {
+                                zapatoMovimiento = checkZapato;
+                                var UbicacionToAdd = _RepositoryUbicacion.GetUbicacionByID(int.Parse(ubicacion));
+                                ctx.Ubicacion.Attach(UbicacionToAdd);
+                                zapatoMovimiento.Ubicacion.Add(UbicacionToAdd);
+
+                            }
                         }
-                    }
 
-                    var checkZapato = ctx.Zapato.Where(x => x.idCategoria == zapatoMovimiento.idCategoria).FirstOrDefault();
-                    var checkUsuario = ctx.Usuario.Where(x => x.idUsuario == entradas_Salidas.idUsuario).FirstOrDefault();
 
-                    foreach (var ubicacion in selectedUbicacion)
-                    {
-                        if (checkZapato != null)
+                        var checkUsuario = ctx.Usuario.Where(x => x.idUsuario == entradas_Salidas.idUsuario).FirstOrDefault();
+                        if (checkUsuario != null)
                         {
-                            var zapatoToAdd = _RepositoryZapato.GetZapatoByID(int.Parse(ubicacion));
-                            zapatoMovimiento = checkZapato;
+                            usuarioMovimiento = checkUsuario;
 
-                            ctx.Zapato.Attach(zapatoMovimiento);
-
+                            ctx.Usuario.Attach(usuarioMovimiento);
                         }
-                    }
-
-                    if (checkUsuario != null)
-                    {
-                        usuarioMovimiento = checkUsuario;
-
-                        ctx.Usuario.Attach(usuarioMovimiento);
 
                     }
 
