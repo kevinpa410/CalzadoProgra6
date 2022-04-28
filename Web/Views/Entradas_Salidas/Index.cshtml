@@ -19,9 +19,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TipoGestion.Descripcion)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Zapato.descripcion)
-        </th>
+        
     </tr>
 
     @foreach (var item in Model)
@@ -34,11 +32,9 @@
                 @Html.DisplayFor(modelItem => item.fecha)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoGestion.Descripcion)
+                @Html.DisplayFor(modelItem => item.descripcion)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zapato.descripcion)
-            </td>
+          
             <td>
                 @Html.ActionLink("Detalles", "Details", new { id = item.idEntradas_Salidas })
 

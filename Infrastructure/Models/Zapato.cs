@@ -9,9 +9,10 @@
 
 namespace Infrastructure.Models
 {
+    using System.ComponentModel.DataAnnotations;
     using System;
     using System.Collections.Generic;
-    
+    [MetadataType(typeof(ZapatoMetadata))]
     public partial class Zapato
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

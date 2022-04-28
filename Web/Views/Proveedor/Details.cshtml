@@ -22,23 +22,35 @@
 
 
                     <div class="col p-4 d-flex flex-column position-static">
-                        
-                                <b>@Html.DisplayNameFor(model => model.Contacto):</b>
-                                <ul>
-                                    @foreach (var c in Model.Contacto)
-                                    {
-                                        <li>@c.idContacto</li>
-                                    }
-                                </ul>
-                            </div>
-                        
 
-                            <p class="card-text mb-auto">
-                                <b>@Html.DisplayNameFor(model => model.email):</b> @Html.DisplayFor(model => model.email)<br />
-                                <b>@Html.DisplayNameFor(model => model.direccion):</b> @Html.DisplayFor(model => model.direccion)<br />
-                            </p>
+                        <b>@Html.DisplayNameFor(model => model.Contacto):</b>
+                        <ul>
+                            @foreach (var c in Model.Contacto)
+                            {
 
+                                <li>@c.nombre</li>
+                            }
+                        </ul>
                     </div>
+
+                    <div class="col p-4 d-flex flex-column position-static">
+
+                        <b>@Html.DisplayNameFor(model => model.Zapato):</b>
+                        <ul>
+                            @foreach (var c in Model.Zapato)
+                            {
+
+                                <li>@c.descripcion</li>
+                            }
+                        </ul>
+                    </div>
+
+                    <p class="card-text mb-auto">
+                        <b>@Html.DisplayNameFor(model => model.email):</b> @Html.DisplayFor(model => model.email)<br />
+                        <b>@Html.DisplayNameFor(model => model.direccion):</b> @Html.DisplayFor(model => model.direccion)<br />
+                    </p>
+
+                </div>
 
                 </div>
             </div>
