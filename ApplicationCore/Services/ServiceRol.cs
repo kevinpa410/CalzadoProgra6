@@ -7,16 +7,16 @@ namespace ApplicationCore.Services
 {
     public class ServiceRol : IServiceRol
     {
-        public IEnumerable<TipoGestion> GetTipoGestion()
+        public IEnumerable<Rol> GetRol()
         {
-            IRepositoryTipoGestion repository = new RepositoryTipoGestion();
-            return repository.GetTipoGestion();
+            IRepositoryRol repository = new RepositoryRol();
+            return repository.GetRol();
         }
 
-        public TipoGestion GetTipoGestionByID(int id)
+        public Rol GetRolByID(int id)
         {
-            IRepositoryTipoGestion repository = new RepositoryTipoGestion();
-            return repository.GetTipoGestionByID(id);
+            IRepositoryRol repository = new RepositoryRol();
+            return repository.GetRolByID(id);
         }
     }
 }

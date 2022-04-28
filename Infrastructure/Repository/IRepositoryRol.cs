@@ -9,8 +9,8 @@ namespace Infrastructure.Repository
 {
     public interface IRepositoryRol
     {
-        IEnumerable<Rol> GetTipoGestion();
-        Rol GetTipoGestionByID(int id);
+        IEnumerable<Rol> GetRol();
+        Rol GetRolByID(int id);
 
     }
 }

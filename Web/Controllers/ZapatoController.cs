@@ -79,7 +79,7 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        private SelectList  listaCategoria (int idCategoria = 0 )
+        private SelectList listaCategoria (int idCategoria = 0 )
         {
             IServiceCategoria _ServicesCategoria = new ServiceCategoria();
             IEnumerable<Categoria> listaCategoria = _ServicesCategoria.GetCategoria();
@@ -87,7 +87,6 @@ namespace Web.Controllers
             return new SelectList(listaCategoria, "idCategoria", "nombre", idCategoria);
 
         }
-
         private MultiSelectList listaUbicacion(ICollection<Ubicacion> ubicacion)
         {
             IServiceUbicacion _ServicesUbicacion = new ServiceUbicacion();
@@ -99,7 +98,6 @@ namespace Web.Controllers
             }
             return new MultiSelectList(listaUbicacion, "idUbicacion", "descripcion", listaUbicacionSelect);
         } 
-
         private MultiSelectList listaProveedor(ICollection<Proveedor> proveedor)
         {
 

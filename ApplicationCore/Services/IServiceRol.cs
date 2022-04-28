@@ -9,8 +9,8 @@ namespace ApplicationCore.Services
 {
     public interface IServiceRol
     {
-        IEnumerable<TipoGestion> GetTipoGestion();
-        TipoGestion GetTipoGestionByID(int id);
+        IEnumerable<Rol> GetRol();
+        Rol GetRolByID(int id);
 
 
     }
