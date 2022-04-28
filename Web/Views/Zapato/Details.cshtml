@@ -12,39 +12,40 @@
     <div class="row">
         <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-              
-                    <b>@Html.DisplayNameFor(model => model.idZapato):</b> @Html.DisplayFor(model => model.idZapato)<br />
-                    <b>@Html.DisplayNameFor(model => model.idCategoria):</b> @Html.DisplayFor(model => model.idCategoria)<br />
-                
+
+                <b>@Html.DisplayNameFor(model => model.idZapato):</b> @Html.DisplayFor(model => model.idZapato)<br />
+                <b>@Html.DisplayNameFor(model => model.idCategoria):</b> @Html.DisplayFor(model => model.idCategoria)<br />
+                @Html.DisplayNameFor(model => model.Categoria):
+                <strong class="d-inline-block mb-2 text-primary"> @Html.DisplayFor(model => model.Categoria.nombre) </strong>
+
                 <div class="col p-4 d-flex flex-column position-static">
                     <b>
-                        @Html.DisplayNameFor(model => model.Categoria):
-                    <strong class="d-inline-block mb-2 text-primary"> @Html.DisplayFor(model => model.Categoria.nombre) </strong>
-                    <div class="mb-1 text-muted">
-                        <b>@Html.DisplayNameFor(model => model.Ubicacion):</b>
-                        <ul>
-                            @foreach (var c in Model.Ubicacion)
-                            {
-                                <li>@c.descripcion</li>
-                            }
-                        </ul>
-                    </div>
-                    <div class="mb-1 text-muted">
-                        <b>@Html.DisplayNameFor(model => model.Proveedor):</b>
-                        <ul>
-                            @foreach (var c in Model.Proveedor)
-                            {
-                                <li>@c.nombre</li>
-                            }
-                        </ul>
-                    </div>
 
-                    <p class="card-text mb-auto">
-                        <b>@Html.DisplayNameFor(model => model.cantidadTot):</b> @Html.DisplayFor(model => model.cantidadTot)<br />
-                        <b>@Html.DisplayNameFor(model => model.color):</b> @Html.DisplayFor(model => model.color)<br />
-                    </p>
+                        <div class="mb-1 text-muted">
+                            <b>@Html.DisplayNameFor(model => model.Ubicacion):</b>
+                            <ul>
+                                @foreach (var c in Model.Ubicacion)
+                                {
+                                    <li>@c.descripcion</li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="mb-1 text-muted">
+                            <b>@Html.DisplayNameFor(model => model.Proveedor):</b>
+                            <ul>
+                                @foreach (var c in Model.Proveedor)
+                                {
+                                    <li>@c.nombre</li>
+                                }
+                            </ul>
+                        </div>
 
-            </div>
+                        <p class="card-text mb-auto">
+                            <b>@Html.DisplayNameFor(model => model.cantidadTot):</b> @Html.DisplayFor(model => model.cantidadTot)<br />
+                            <b>@Html.DisplayNameFor(model => model.color):</b> @Html.DisplayFor(model => model.color)<br />
+                        </p>
+
+                </div>
 
             </div>
         </div>
