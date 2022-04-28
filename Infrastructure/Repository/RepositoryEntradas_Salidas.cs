@@ -98,35 +98,30 @@ namespace Infrastructure.Repository
                     if (selectedUbicacion != null)
                     {
                         zapatoMovimiento.Ubicacion = new List<Ubicacion>();
+                        
 
                         foreach (var ubicacion in selectedUbicacion)
                         {
-                            var UbicacionToAdd = _RepositoryUbicacion.GetUbicacionByID(int.Parse(ubicacion));
-                            ctx.Ubicacion.Attach(UbicacionToAdd);
-                            zapatoMovimiento.Ubicacion.Add(UbicacionToAdd);
+                            var checkZapato = ctx.Zapato.Where(x => x.idCategoria == zapatoMovimiento.idCategoria).FirstOrDefault();
+
+                            if (checkZapato != null)
+                            {
+                                zapatoMovimiento = checkZapato;
+                                var UbicacionToAdd = _RepositoryUbicacion.GetUbicacionByID(int.Parse(ubicacion));
+                                ctx.Ubicacion.Attach(UbicacionToAdd);
+                                zapatoMovimiento.Ubicacion.Add(UbicacionToAdd);
+
+                            }
                         }
-                    }
 
-                    var checkZapato = ctx.Zapato.Where(x => x.idCategoria == zapatoMovimiento.idCategoria).FirstOrDefault();
-                    var checkUsuario = ctx.Usuario.Where(x => x.idUsuario == entradas_Salidas.idUsuario).FirstOrDefault();
 
-                    foreach (var ubicacion in selectedUbicacion)
-                    {
-                        if (checkZapato != null)
+                        var checkUsuario = ctx.Usuario.Where(x => x.idUsuario == entradas_Salidas.idUsuario).FirstOrDefault();
+                        if (checkUsuario != null)
                         {
-                            var zapatoToAdd = _RepositoryZapato.GetZapatoByID(int.Parse(ubicacion));
-                            zapatoMovimiento = checkZapato;
+                            usuarioMovimiento = checkUsuario;
 
-                            ctx.Zapato.Attach(zapatoMovimiento);
-
+                            ctx.Usuario.Attach(usuarioMovimiento);
                         }
-                    }
-
-                    if (checkUsuario != null)
-                    {
-                        usuarioMovimiento = checkUsuario;
-
-                        ctx.Usuario.Attach(usuarioMovimiento);
 
                     }
 
@@ -147,34 +142,36 @@ namespace Infrastructure.Repository
 
                     if ( selectedUbicacion != null)
                     {
+                        try
+                        {
+                            ctx.Entry(entradas_Salidas).Collection(p => p.Zapato.Ubicacion).Load();
 
-                        ctx.Entry(entradas_Salidas).Collection(p => p.Zapato. Ubicacion).Load();
+                            var newProveedorForUbicacion = ctx.Ubicacion
+                             .Where(x => selectedUbicacionID.Contains(x.idUbicacion.ToString())).ToList();
+                            entradas_Salidas.Zapato.Ubicacion = newProveedorForUbicacion;
 
-                        var newProveedorForZapato = ctx.Ubicacion
-                         .Where(x => selectedUbicacionID.Contains(x.idUbicacion.ToString())).ToList();
-                        entradas_Salidas.Zapato.Ubicacion = newProveedorForZapato;
+                            ctx.Entry(entradas_Salidas).State = EntityState.Modified;
+                            retorno = ctx.SaveChanges();
+                        }
+                        catch (Exception)
+                        {
 
-                        ctx.Entry(entradas_Salidas).State = EntityState.Modified;
+                            if (retorno >= 0)
+                                oEntradas_Salidas = GetEntradas_SalidasByID((int)entradas_Salidas.idEntradas_Salidas);
 
+                            return oEntradas_Salidas;
+                        }
+                        
                     }
                 }
                 if (retorno >= 0)
                     oEntradas_Salidas = GetEntradas_SalidasByID((int)entradas_Salidas.idEntradas_Salidas);
 
-                try
-                {
-                    retorno = ctx.SaveChanges();
                     return oEntradas_Salidas;
                 }
-                catch (Exception)
-                {
-                    return oEntradas_Salidas;
-                }
-
             }
         }
     }
-}
 
     
 

@@ -269,6 +269,10 @@
     <Content Include="Views\Entradas_Salidas\Create.cshtml" />
     <Content Include="Views\Entradas_Salidas\Details.cshtml" />
     <Content Include="Views\Entradas_Salidas\Index.cshtml" />
+    <Content Include="Views\Usuario\IndexAdmin.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
