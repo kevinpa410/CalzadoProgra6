@@ -21,9 +21,7 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    entradas_salidas = ctx.Entradas_Salidas.
-                        Include("Usuario").
-                        ToList<Entradas_Salidas>();
+                    entradas_salidas = ctx.Entradas_Salidas.ToList<Entradas_Salidas>();
                 }
                 return entradas_salidas;
             }
@@ -44,21 +42,21 @@ namespace Infrastructure.Repository
 
         public Entradas_Salidas GetEntradas_SalidasByID(int id)
         {
-            Entradas_Salidas entradas_salidas = null;
             try
             {
-
+                Entradas_Salidas oEntradas_salidas = null;
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    entradas_salidas = ctx.Entradas_Salidas.
-                        Include("Usuario").
-                        Include("Entradas_Salidas").
-                        Include("Entradas_Salidas.Zapato").
-                        Where(p => p.idGestion == id).
-                        FirstOrDefault<Entradas_Salidas>();
+                    oEntradas_salidas = ctx.Entradas_Salidas.
+                        Where(i => i.idEntradas_Salidas == id).
+                        Include(u => u.Usuario).
+                        Include(tg => tg.TipoGestion).
+                        FirstOrDefault();
+
+                    oEntradas_salidas = ctx.Entradas_Salidas.Find(id);
                 }
-                return entradas_salidas;
+                return oEntradas_salidas;
             }
             catch (DbUpdateException dbEx)
             {
@@ -74,9 +72,106 @@ namespace Infrastructure.Repository
             }
         }
 
-        public Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas)
+        ///<==========================================================>\\\ 
+
+        public Entradas_Salidas Save(Entradas_Salidas entradas_Salidas, string[] selectedUbicacion)
         {
-            throw new Exception();
+            int retorno = 0;
+            Entradas_Salidas oEntradas_Salidas = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oEntradas_Salidas = GetEntradas_SalidasByID((int)entradas_Salidas.idEntradas_Salidas);
+
+                IRepositoryUbicacion _RepositoryUbicacion = new RepositoryUbicacion();
+                IRepositoryZapato _RepositoryZapato = new RepositoryZapato();
+                IRepositoryUsuario _RepositoryUsuario = new RepositoryUsuario();
+
+
+                Zapato zapatoMovimiento = _RepositoryZapato.GetZapatoByID((int)entradas_Salidas.idZapato);
+                Usuario usuarioMovimiento = _RepositoryUsuario.GetUsuarioByID((int)entradas_Salidas.idUsuario);
+
+
+                if (oEntradas_Salidas == null)
+                {
+                    if (selectedUbicacion != null)
+                    {
+                        zapatoMovimiento.Ubicacion = new List<Ubicacion>();
+
+                        foreach (var ubicacion in selectedUbicacion)
+                        {
+                            var UbicacionToAdd = _RepositoryUbicacion.GetUbicacionByID(int.Parse(ubicacion));
+                            ctx.Ubicacion.Attach(UbicacionToAdd);
+                            zapatoMovimiento.Ubicacion.Add(UbicacionToAdd);
+                        }
+                    }
+
+                    var checkZapato = ctx.Zapato.Where(x => x.idCategoria == zapatoMovimiento.idCategoria).FirstOrDefault();
+                    var checkUsuario = ctx.Usuario.Where(x => x.idUsuario == entradas_Salidas.idUsuario).FirstOrDefault();
+
+                    foreach (var ubicacion in selectedUbicacion)
+                    {
+                        if (checkZapato != null)
+                        {
+                            var zapatoToAdd = _RepositoryZapato.GetZapatoByID(int.Parse(ubicacion));
+                            zapatoMovimiento = checkZapato;
+
+                            ctx.Zapato.Attach(zapatoMovimiento);
+
+                        }
+                    }
+
+                    if (checkUsuario != null)
+                    {
+                        usuarioMovimiento = checkUsuario;
+
+                        ctx.Usuario.Attach(usuarioMovimiento);
+
+                    }
+
+                    entradas_Salidas.Zapato = zapatoMovimiento;
+                    entradas_Salidas.Usuario = usuarioMovimiento;
+
+                    ctx.Entradas_Salidas.Add(entradas_Salidas);
+                    retorno = ctx.SaveChanges();
+                }
+                else
+                {
+                    ctx.Entradas_Salidas.Add(entradas_Salidas);
+                    ctx.Entry(entradas_Salidas).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+
+                    var selectedUbicacionID = new HashSet<string>(selectedUbicacion);
+
+
+                    if ( selectedUbicacion != null)
+                    {
+
+                        ctx.Entry(entradas_Salidas).Collection(p => p.Zapato. Ubicacion).Load();
+
+                        var newProveedorForZapato = ctx.Ubicacion
+                         .Where(x => selectedUbicacionID.Contains(x.idUbicacion.ToString())).ToList();
+                        entradas_Salidas.Zapato.Ubicacion = newProveedorForZapato;
+
+                        ctx.Entry(entradas_Salidas).State = EntityState.Modified;
+
+                    }
+                }
+                if (retorno >= 0)
+                    oEntradas_Salidas = GetEntradas_SalidasByID((int)entradas_Salidas.idEntradas_Salidas);
+
+                try
+                {
+                    retorno = ctx.SaveChanges();
+                    return oEntradas_Salidas;
+                }
+                catch (Exception)
+                {
+                    return oEntradas_Salidas;
+                }
+
+            }
         }
     }
 }

@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface IServiceTipoGestion
+    public interface IServiceUbicacion
     {
-
-        IEnumerable<TipoGestion> GetTipoGestion();
-        TipoGestion GetTipoGestionByID(int id);
-
+        IEnumerable<Ubicacion> GetUbicacion();
+        Ubicacion GetUbicacionByID(int id);
     }
 }

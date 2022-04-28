@@ -11,6 +11,6 @@ namespace Infrastructure.Repository
     {
         IEnumerable<Entradas_Salidas> GetEntradas_Salidas();
         Entradas_Salidas GetEntradas_SalidasByID(int id);
-        Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas);
+        Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas, string[] selectedUbicacion);
     }
 }

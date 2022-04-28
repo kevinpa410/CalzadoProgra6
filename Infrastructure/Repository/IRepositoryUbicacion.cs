@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public interface IRepositoryTipoGestion
+    public interface IRepositoryUbicacion
     {
 
-        IEnumerable<TipoGestion> GetTipoGestion();
-        TipoGestion GetTipoGestionByID(int id);
+        IEnumerable<Ubicacion> GetUbicacion();
+        Ubicacion GetUbicacionByID(int id);
 
     }
 }

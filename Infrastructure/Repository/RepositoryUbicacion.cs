@@ -1,7 +1,6 @@
 ﻿using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -10,19 +9,18 @@ using Web.Utils;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryTipoGestion : IRepositoryTipoGestion
+    public class RepositoryUbicacion : IRepositoryUbicacion
     {
-        public IEnumerable<TipoGestion> GetTipoGestion()
+        public IEnumerable<Ubicacion> GetUbicacion()
         {
             try
             {
 
-                IEnumerable<TipoGestion> lista = null;
+                IEnumerable<Ubicacion> lista = null;
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Select * from Zapato
-                    lista = ctx.TipoGestion.ToList<TipoGestion>();
+                    lista = ctx.Ubicacion.ToList<Ubicacion>();
                 }
                 return lista;
             }
@@ -41,18 +39,17 @@ namespace Infrastructure.Repository
             }
         }
 
-        public TipoGestion GetTipoGestionByID(int id)
+        public Ubicacion GetUbicacionByID(int id)
         {
-            TipoGestion oTipoGestion = null;
+            Ubicacion oUbicacion = null;
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oTipoGestion = ctx.TipoGestion.FirstOrDefault();
-
-                oTipoGestion = ctx.TipoGestion.Find(id);
-
+                oUbicacion = ctx.Ubicacion.
+                      Where(l => l. idUbicacion == id).FirstOrDefault();
+                oUbicacion = ctx.Ubicacion.Find(id);
             }
-            return oTipoGestion;
+            return oUbicacion;
         }
     }
 }

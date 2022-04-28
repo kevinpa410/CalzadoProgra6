@@ -79,31 +79,46 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        private MultiSelectList listaCategoria(ICollection<Categoria> categoria)
+        private SelectList  listaCategoria (int idCategoria = 0 )
         {
-            IServiceCategoria _ServiceCategoria = new ServiceCategoria();
-            IEnumerable<Categoria> listaCategorias = _ServiceCategoria.GetCategoria();
-            int[] listaCategoriasSelect = null;
-            if (categoria != null)
-            {
-                listaCategoriasSelect = categoria.Select(c => c.idCategoria).ToArray();
-            }
-            return new MultiSelectList(listaCategorias, "idCategoria", "Nombre", listaCategoriasSelect);
+            IServiceCategoria _ServicesCategoria = new ServiceCategoria();
+            IEnumerable<Categoria> listaCategoria = _ServicesCategoria.GetCategoria();
+            //Proveedor SelectProveedor = listaProveedor.Where(c => c.idProveedor == idProveedor).FirstOrDefault();
+            return new SelectList(listaCategoria, "idCategoria", "nombre", idCategoria);
 
         }
-        private SelectList listaProveedor(int idProveedor = 0)
+
+        private MultiSelectList listaUbicacion(ICollection<Ubicacion> ubicacion)
         {
+            IServiceUbicacion _ServicesUbicacion = new ServiceUbicacion();
+            IEnumerable<Ubicacion> listaUbicacion = _ServicesUbicacion.GetUbicacion();
+            int[] listaUbicacionSelect = null;
+            if (ubicacion != null)
+            {
+                listaUbicacionSelect = ubicacion.Select(c => c.idUbicacion).ToArray();
+            }
+            return new MultiSelectList(listaUbicacion, "idUbicacion", "descripcion", listaUbicacionSelect);
+        } 
+
+        private MultiSelectList listaProveedor(ICollection<Proveedor> proveedor)
+        {
+
             IServicesProveedor _ServicesProveedor = new ServicesProveedor();
             IEnumerable<Proveedor> listaProveedor = _ServicesProveedor.GetProveedor();
-            //Proveedor SelectProveedor = listaProveedor.Where(c => c.idProveedor == idProveedor).FirstOrDefault();
-            return new SelectList(listaProveedor, "idProveedor", "nombre", idProveedor);
+            int[] listaProveedorSelect = null;
+            if (proveedor != null)
+            {
+                listaProveedorSelect = proveedor.Select(c => c.idProveedor).ToArray();
+            }
+            return new MultiSelectList(listaProveedor, "idProveedor", "nombre", listaProveedorSelect);
+                        
 
         }
         public ActionResult Create()
         {
-
-            ViewBag.idProveedor = listaProveedor();
-            ViewBag.idCategoria = listaCategoria(null);
+            ViewBag.idUbicacion = listaUbicacion(null);
+            ViewBag.idProveedor = listaProveedor(null);
+            ViewBag.idCategoria = listaCategoria();
             return View();
 
         }       
@@ -126,8 +141,10 @@ namespace Web.Controllers
                     TempData["Redirect"] = "IndexAdmin";
                     return RedirectToAction("Default", "Error");
                 }
-                //ViewBag.idProveedor = listaProveedor(zapato.idProveedor);
-                //ViewBag.idCategoria = listaCategorias(zapato.Categoria);
+                ViewBag.idUbicacion = listaUbicacion(zapato.Ubicacion);
+                ViewBag.IdCategoria = listaCategoria(zapato.idCategoria);
+                ViewBag.idProveedor = listaProveedor(zapato.Proveedor);
+
                 return View(zapato);
             }
             catch (Exception ex)
@@ -140,25 +157,22 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        private dynamic listaCategorias(Categoria categoria)
-        {
-            throw new NotImplementedException();
-        }
-        public ActionResult Save(Zapato zapato, string[] selectedCategorias)
+        public ActionResult Save(Zapato zapato, string[] selectedProveedor, string[] selectedUbicacion)
         {
 
             IServiceZapato _ServiceZapato = new ServiceZapato();
 
             if (ModelState.IsValid)
             {
-                Zapato oZapatoI = _ServiceZapato.Save(zapato);
+                Zapato oZapatoI = _ServiceZapato.Save(zapato, selectedProveedor, selectedUbicacion);
             }
             else
             {
-                // Valida Errores si Javascript está deshabilitado
-                //Util.ValidateErrors(this);
-                ViewBag.idProveedor = listaProveedor();
-                ViewBag.idCategorias = listaCategorias(zapato.Categoria);
+
+                ViewBag.idProveedor = listaProveedor(zapato.Proveedor);
+                ViewBag.idCategoria = listaCategoria(zapato.idCategoria);
+                ViewBag.idUbicacion = listaUbicacion(zapato.Ubicacion);
+
                 return View("Create", zapato);
             }
             return RedirectToAction("IndexAdmin");

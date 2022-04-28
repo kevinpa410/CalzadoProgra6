@@ -251,7 +251,6 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
-    <Content Include="Views\Entradas_Salidas\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Zapato\Details.cshtml" />
     <Content Include="Views\Proveedor\Details.cshtml" />
@@ -261,19 +260,18 @@
     <Content Include="Views\Zapato\Edit.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Proveedor\Create.cshtml" />
-    <Content Include="Views\Contactos\IndexAdmin.cshtml" />
-    <Content Include="Views\Contactos\Index.cshtml" />
-    <Content Include="Views\Contactos\Edit.cshtml" />
-    <Content Include="Views\Contactos\Details.cshtml" />
-    <Content Include="Views\Contactos\Create.cshtml" />
-    <Content Include="Views\Entradas_Salidas\IndexAdmin.cshtml" />
-    <Content Include="Views\Entradas_Salidas\Details.cshtml" />
-    <Content Include="Views\Entradas_Salidas\_DetalleOrden.cshtml" />
+    <Content Include="Views\Contacto\IndexAdmin.cshtml" />
+    <Content Include="Views\Contacto\Index.cshtml" />
+    <Content Include="Views\Contacto\Edit.cshtml" />
+    <Content Include="Views\Contacto\Details.cshtml" />
+    <Content Include="Views\Contacto\Create.cshtml" />
     <Content Include="Views\Shared\_OrdenCantidad.cshtml" />
+    <Content Include="Views\Entradas_Salidas\Create.cshtml" />
+    <Content Include="Views\Entradas_Salidas\Details.cshtml" />
+    <Content Include="Views\Entradas_Salidas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

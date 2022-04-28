@@ -14,19 +14,30 @@ namespace Web.Controllers
 {
     public class Entradas_SalidasController : Controller
     {
-        public List<ViewModelOrdenDetalle> Items { get; private set; }
+        
         public ActionResult Index()
         {
-            if (TempData.ContainsKey("NotificationMessage"))
+            IEnumerable<Entradas_Salidas> lista = null;
+            try
             {
-                ViewBag.NotificationMessage = TempData["NotificationMessage"];
+                IServiceEntradas_Salidas _ServiceEntradas_Salidas = new ServiceEntradas_Salidas();
+                lista = _ServiceEntradas_Salidas.GetEntradas_Salidas();
             }
-            ViewBag.idUsaurio = listaUsuarios();
-
-            ViewBag.DetalleOrden = Carrito.Instancia.Items;
-            return View();
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+            }
+            return View(lista);
         }
+        public ActionResult Create()
+        {
+            ViewBag.idUbicacion = listaUbicacion(null);
+            ViewBag.idGestion = listaTipoGestion();
+            ViewBag.idZapato = listaZapatos();
 
+            return View();
+
+        }
         private SelectList listaUsuarios()
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
@@ -34,7 +45,6 @@ namespace Web.Controllers
 
             return new SelectList(listaUsuarios, "IdUsuario", "IdUsuario");
         }
-
         public ActionResult ordenarZapato(int? idZapato)
         {
             int cantidadZapatos = Carrito.Instancia.Items.Count();
@@ -71,6 +81,31 @@ namespace Web.Controllers
             TempData.Keep();
             return PartialView("_DetalleOrden", Carrito.Instancia.Items);
 
+        }
+
+        //Listas
+        private SelectList listaTipoGestion(int idTipoGestion = 0)
+        {
+            IServiceTipoGestion _ServicesTipoGestion = new ServiceTipoGestion();
+            IEnumerable<TipoGestion> listaServiceTipoGestion = _ServicesTipoGestion.GetTipoGestion();
+            return new SelectList(listaServiceTipoGestion, "idGestion", "Descripcion", idTipoGestion);
+        }
+        private SelectList listaZapatos(int idZapatos = 1)
+        {
+            IServiceZapato _ServicesZapatos = new ServiceZapato();
+            IEnumerable<Zapato> listaZapatos = _ServicesZapatos.GetZapato();
+            return new SelectList(listaZapatos, "idZapato", "descripcion", idZapatos);
+        }
+        private MultiSelectList listaUbicacion(ICollection<Ubicacion> ubicacion)
+        {
+            IServiceUbicacion _ServicesUbicacion = new ServiceUbicacion();
+            IEnumerable<Ubicacion> listaUbicacion = _ServicesUbicacion.GetUbicacion();
+            int[] listaUbicacionSelect = null;
+            if (ubicacion != null)
+            {
+                listaUbicacionSelect = ubicacion.Select(c => c.idUbicacion).ToArray();
+            }
+            return new MultiSelectList(listaUbicacion, "idUbicacion", "descripcion", listaUbicacionSelect);
         }
 
 
@@ -130,53 +165,23 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        public ActionResult Save(Entradas_Salidas entradas_salidas)
+        public ActionResult Save(Entradas_Salidas entradas_salidas, string[] selectedUbicacion)
         {
 
-            try
+            IServiceEntradas_Salidas _ServiceEntradas_Salidas = new ServiceEntradas_Salidas();
+
+            if (ModelState.IsValid)
             {
-
-                // Si no existe la sesión no hay nada
-                if (Carrito.Instancia.Items.Count() <= 0)
-                {
-                    // Validaciones de datos requeridos.
-                    TempData["NotificationMessage"] = Util.SweetAlertHelper.Mensaje("Orden", "Seleccione los libros a ordenar", SweetAlertMessageType.warning);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-
-                    var listaDetalle = Carrito.Instancia.Items;
-
-                    foreach (var item in listaDetalle)
-                    {
-                        Entradas_Salidas entradas_Salidas = new Entradas_Salidas();
-                        //entradas_Salidas.idZapato = item.idZapato;
-                        entradas_Salidas.idUsuario = item.idUsuario;
-                        entradas_Salidas.cantidadProducto = item.cantidadTotal;
-                       // entradas_Salidas.Entradas_Salidas.Add(entradas_Salidas);
-                    }
-                }
-
-                IServiceEntradas_Salidas _ServiceEntradas_Salidas = new ServiceEntradas_Salidas();
-                Entradas_Salidas entradas_salidasSave = _ServiceEntradas_Salidas.Save(entradas_salidas);
-
-                // Limpia el Carrito de compras
-                Carrito.Instancia.eliminarCarrito();
-                TempData["NotificationMessage"] = Util.SweetAlertHelper.Mensaje("Orden", "Orden guardada satisfactoriamente!", SweetAlertMessageType.success);
-                // Reporte orden
-                return RedirectToAction("Index");
+                Entradas_Salidas oEntradas_Salidas = _ServiceEntradas_Salidas.Save(entradas_salidas, selectedUbicacion);
             }
-            catch (Exception ex)
+            else
             {
-                // Salvar el error  
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Orden";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
+                ViewBag.idGestion = listaTipoGestion((int)entradas_salidas.idGestion);
+                ViewBag.idZapato = listaZapatos((int)entradas_salidas.idZapato);
+
+                return View("Create", entradas_salidas);
             }
+            return RedirectToAction("IndexAdmin");
         }
 
 

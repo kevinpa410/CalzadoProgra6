@@ -1,13 +1,12 @@
 ﻿@model Infrastructure.Models.Entradas_Salidas
-
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalle Zapato</h2>
 
 <div>
-    <h4>Entradas_Salidas</h4>
+    <h4>Zapato</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -18,8 +17,7 @@
             @Html.DisplayFor(model => model.idEntradas_Salidas)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fecha)
+        <dts @Html.DisplayNameFor(model => model.fecha)
         </dt>
 
         <dd>
@@ -27,40 +25,41 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.idGestion)
+            @Html.DisplayNameFor(model => model.Zapato.descripcion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.idGestion)
+            @Html.DisplayFor(model => model.cantidadProducto)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.idZapato)
+            @Html.DisplayNameFor(model => model.Usuario.nombre)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.idZapato)
+            @Html.DisplayFor(model => model.Usuario.nombre)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.cantidadTotal)
+            @Html.DisplayNameFor(model => model.idUbicacion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.cantidadTotal)
+            @Html.DisplayFor(model => model.idUbicacion)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zapato.descripcion)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.idUsuario)
+            @Html.DisplayNameFor(model => model.cantidadProducto)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idUsuario)
-        </dd>
 
     </dl>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idZapato }) |
+    @Html.ActionLink("Volver", "Index")
 </p>
