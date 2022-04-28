@@ -15,9 +15,6 @@ namespace ApplicationCore.Services
         {
 
             IRepositoryUsuario repository = new RepositoryUsuario();
-
-           // string crytpPasswd = Cryptography.EncrypthAES(password);
-
             return repository.GetUsuario(email, password);
         }
 
@@ -31,7 +28,6 @@ namespace ApplicationCore.Services
             IRepositoryUsuario repository = new RepositoryUsuario();
             Usuario oUsuario = repository.GetUsuarioByID(id);
             oUsuario.password = oUsuario.password;
-            //oUsuario.password = Cryptography.DecrypthAES(oUsuario.password);
 
             return oUsuario;
         }
@@ -40,9 +36,6 @@ namespace ApplicationCore.Services
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
             usuario.password = usuario.password;
-            //usuario.password = Cryptography.EncrypthAES(usuario.password);
-
-
 
             return repository.Save(usuario);
         }

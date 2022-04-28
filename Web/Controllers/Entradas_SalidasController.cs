@@ -181,7 +181,7 @@ namespace Web.Controllers
 
                 return View("Create", entradas_salidas);
             }
-            return RedirectToAction("IndexAdmin");
+            return RedirectToAction("Index");
         }
 
 
