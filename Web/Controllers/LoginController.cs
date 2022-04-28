@@ -25,7 +25,7 @@ namespace Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    oUsuario = _ServiceUsuario.Get_Usuario(usuario.email, usuario.password);
+                    oUsuario = _ServiceUsuario.GetUsuario(usuario.email, usuario.password);
 
                     if (oUsuario != null)
                     {

@@ -1,7 +1,7 @@
-﻿@model IEnumerable <Infrastructure.Models.Usuario>
+﻿@model IEnumerable<Infrastructure.Models.Usuario>
 
 @{
-    ViewBag.Title = "IndexAdmin";
+    ViewBag.Title = "Index";
 }
 
 <h2>Usuarios</h2>
@@ -26,7 +26,6 @@
         <th>
             @Html.DisplayNameFor(model => model.apellidos)
         </th>
-
     </tr>
 
     @foreach (var item in Model)
@@ -51,8 +50,10 @@
                 @Html.ActionLink("Edit", "Edit", new { id = item.idUsuario }) |
                 @Html.ActionLink("Details", "Details", new { id = item.idUsuario }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.idUsuario })
+
             </td>
         </tr>
     }
 
 </table>
+

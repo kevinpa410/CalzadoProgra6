@@ -12,7 +12,7 @@ namespace Infrastructure.Repository
 {
     public class RepositoryRol : IRepositoryRol
     {
-        public IEnumerable<Rol> GetTipoGestion()
+        public IEnumerable<Rol> GetRol()
         {
             try
             {
@@ -41,7 +41,7 @@ namespace Infrastructure.Repository
             }
         }
 
-        public Rol GetTipoGestionByID(int id)
+        public Rol GetRolByID(int id)
         {
             Rol oRol = null;
             using (MyContext ctx = new MyContext())

@@ -41,7 +41,7 @@ namespace Web.Controllers
         private SelectList listaUsuarios()
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
-            IEnumerable<Usuario> listaUsuarios = _ServiceUsuario.Get_Usuario();
+            IEnumerable<Usuario> listaUsuarios = _ServiceUsuario.GetUsuarios();
 
             return new SelectList(listaUsuarios, "IdUsuario", "IdUsuario");
         }
