@@ -4,7 +4,7 @@
     ViewBag.Title = "Crear Contacto";
 }
 
-<h2>Crear Proveedor</h2>
+<h2>Crear Contacto Proveedor</h2>
 
 
 @using (Html.BeginForm("Save", "Contacto", FormMethod.Post, new { enctype = "multipart/data" }))
@@ -57,7 +57,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "IndexAdmin")
+    @Html.ActionLink("Regresar a Contactos", "IndexAdmin")
 </div>
 
 @section Scripts {

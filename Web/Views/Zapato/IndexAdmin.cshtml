@@ -4,65 +4,51 @@
     ViewBag.Title = "IndexAdmin";
 }
 
-<h2>Lista Calzado</h2>
+<h2> Calzado</h2>
 
 <p>
-    @Html.ActionLink("Crear Nuevo", "Create")
+    @Html.ActionLink("Añadir Nuevo" , "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idZapato)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCategoria)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.color)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.descripcion)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantMax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantMin)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.cantidadTot)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Ubicacion)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proveedor)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
 <tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.idZapato)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.idCategoria)
-    </td>
+
     <td>
         @Html.DisplayFor(modelItem => item.color)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.descripcion)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.cantMax)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.cantMin)
-    </td>
+
     <td>
         @Html.DisplayFor(modelItem => item.cantidadTot)
     </td>
     <th>
-        @Html.DisplayNameFor(model => model.Ubicacion)
+        @Html.DisplayFor(modelItem => item.Ubicacion)
+    </th>
+    <th>
+        @Html.DisplayFor(modelItem => item.Proveedor)
     </th>
     <td>
         @Html.ActionLink("Editar", "Edit", new { id = item.idZapato }) |

@@ -4,10 +4,10 @@
     ViewBag.Title = "IndexAdmin";
 }
 
-<h2>Lista Proveedores</h2>
+<h2> Proveedores</h2>
 
 <p>
-    @Html.ActionLink("Nuevo", "Create")
+    @Html.ActionLink("Añadir nuevo ", "Create")
 </p>
 <table class="table">
     <tr>
@@ -52,9 +52,9 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.idProveedor }) |
-            @Html.ActionLink("Details", "Details", new { id = item.idProveedor }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.idProveedor })
+            @Html.ActionLink("Editar", "Edit", new { id = item.idProveedor }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.idProveedor }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.idProveedor })
         </td>
     </tr>
 }
