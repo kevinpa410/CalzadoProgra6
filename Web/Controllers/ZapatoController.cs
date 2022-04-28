@@ -98,8 +98,7 @@ namespace Web.Controllers
                 listaUbicacionSelect = ubicacion.Select(c => c.idUbicacion).ToArray();
             }
             return new MultiSelectList(listaUbicacion, "idUbicacion", "descripcion", listaUbicacionSelect);
-        }
-
+        } 
 
         private MultiSelectList listaProveedor(ICollection<Proveedor> proveedor)
         {

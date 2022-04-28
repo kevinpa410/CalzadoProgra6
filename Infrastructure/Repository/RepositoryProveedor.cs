@@ -123,6 +123,7 @@ namespace Infrastructure.Repository
                         {
 
                             var zapatoToAdd = _RepositoryZapato.GetZapatoByID(int.Parse(cz.Zapatos));
+
                             var check = ctx.Zapato.Where(x => x.idCategoria == zapatoToAdd.idCategoria).FirstOrDefault();
                             if (check != null)
                             {
@@ -162,8 +163,6 @@ namespace Infrastructure.Repository
 
                     //    proveedor.Contacto.Add(contactoToAdd);// asociar a la categoría existente con el libro
                     //}
-
-
 
                     ctx.Proveedor.Add(proveedor);
                     retorno = ctx.SaveChanges();

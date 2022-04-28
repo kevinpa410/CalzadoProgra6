@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-   public interface IServiceTipoGestion
+    public interface IServiceTipoGestion
     {
 
-        TipoGestion GetTipoGestionByID(int id);
         IEnumerable<TipoGestion> GetTipoGestion();
-        TipoGestion Save(TipoGestion tipoGestion);
+        TipoGestion GetTipoGestionByID(int id);
+
     }
 }

@@ -27,10 +27,10 @@ namespace ApplicationCore.Services
             return repository.GetEntradas_SalidasByID(id);
         }
 
-        public Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas)
+        public Entradas_Salidas Save(Entradas_Salidas pEntradas_Salidas, string[] selectedUbicacion)
         {
             IRepositoryEntradas_Salidas repository = new RepositoryEntradas_Salidas();
-            return repository.Save(pEntradas_Salidas);
+            return repository.Save(pEntradas_Salidas, selectedUbicacion);
         }
     }
 }

@@ -9,8 +9,9 @@ namespace Infrastructure.Repository
 {
     public interface IRepositoryTipoGestion
     {
-        TipoGestion GetTipoGestionByID(int id);
+
         IEnumerable<TipoGestion> GetTipoGestion();
-        TipoGestion Save(TipoGestion tipoGestion);
+        TipoGestion GetTipoGestionByID(int id);
+
     }
 }

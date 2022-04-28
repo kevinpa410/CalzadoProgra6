@@ -51,30 +51,32 @@
                         if (oUsuario.idRol == 1)
                         {
                             <li class="nav-item">
-                                @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" });
+                                @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
                             </li>
 
                             <li class="nav-item">
-                                @Html.ActionLink("Proveedor", "IndexAdmin", "Proveedor", null, new { @class = "nav-link" });
+                                @Html.ActionLink("Zapato", "IndexAdmin", "Zapato", null, new { @class = "nav-link" })
                             </li>
 
                             <li class="nav-item">
-                                @Html.ActionLink("Contactos de Proveedor", "IndexAdmin", "Contacto", null, new { @class = "nav-link" });
+                                @Html.ActionLink("Proveedor", "IndexAdmin", "Proveedor", null, new { @class = "nav-link" })
                             </li>
 
                             <li class="nav-item">
-                                @Html.ActionLink("Zapato", "IndexAdmin", "Zapato", null, new { @class = "nav-link" });
+                                @Html.ActionLink("Contactos de Proveedor", "IndexAdmin", "Contacto", null, new { @class = "nav-link" })
                             </li>
 
                             <li class="nav-item">
-                                @Html.ActionLink("A Cerca de", "about", "Home", null, new { @class = "nav-link" });
+                                @Html.ActionLink("Movimientos", "Index", "Entradas_Salidas", null, new { @class = "nav-link" })
                             </li>
 
                             <li class="nav-item">
-                                @Html.ActionLink("Contacto", "contact", "Home", null, new { @class = "nav-link" });
+                                @Html.ActionLink("A Cerca de", "about", "Home", null, new { @class = "nav-link" })
                             </li>
 
-
+                            <li class="nav-item">
+                                @Html.ActionLink("Contacto", "contact", "Home", null, new { @class = "nav-link" })
+                            </li>
                         }
                         else
                         {
@@ -82,6 +84,10 @@
                             {
                                 <li class="nav-item">
                                     @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" });
+                                </li>
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("Zapato", "Index", "Zapato", null, new { @class = "nav-link" });
                                 </li>
 
                                 <li class="nav-item">
@@ -93,7 +99,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    @Html.ActionLink("Zapato", "Index", "Zapato", null, new { @class = "nav-link" });
+                                    @Html.ActionLink("Movimientos", "Index", "Entradas_Salidas", null, new { @class = "nav-link" })
                                 </li>
 
                                 <li class="nav-item">

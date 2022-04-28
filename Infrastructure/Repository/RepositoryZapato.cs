@@ -27,8 +27,8 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Select * from Zapato
-                    lista = ctx.Zapato.Include(x => x.Proveedor).ToList<Zapato>();
+                    lista = ctx.Zapato.ToList<Zapato>();
+
                 }
                 return lista;
             }
@@ -49,23 +49,43 @@ namespace Infrastructure.Repository
 
         public Zapato GetZapatoByID(int id)
         {
-            Zapato oZapato = null;
-            using (MyContext ctx = new MyContext())
+
+            try
             {
-                ctx.Configuration.LazyLoadingEnabled = false;
-                oZapato = ctx.Zapato.
-                      Where(l => l.idZapato == id).
-                      Include(a => a.Proveedor).
-                      Include(c => c.Categoria).
-                      FirstOrDefault();
+                Zapato oZapato = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oZapato = ctx.Zapato.
+                          Where(l => l.idZapato == id).
+                          Include(a => a.Proveedor).
+                          Include(c => c.Categoria).
+                          FirstOrDefault();
 
-                oZapato = ctx.Zapato.Find(id);
+                    oZapato = ctx.Zapato.Find(id);
 
+                }
+                return oZapato;
             }
-            return oZapato;
+            catch (DbUpdateException dbEx)
+            {
+
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
+
+
         }
 
-        public Zapato Save(Zapato zapato, string[] selectedProveedor, string[] selectedUbicacion) //string[] selectedCategorias
+        public Zapato Save(Zapato zapato, string[] selectedProveedor, string[] selectedUbicacion)
         {
             int retorno = 0;
             Zapato oZapato = null;
