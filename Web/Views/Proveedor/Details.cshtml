@@ -7,70 +7,45 @@
 <h2>Detalle Proveedor</h2>
 
 <div>
-    
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.idProveedor)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.idProveedor)
-        </dd>
+    <div>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+
+                    <b>@Html.DisplayNameFor(model => model.idProveedor):</b> @Html.DisplayFor(model => model.idProveedor)<br />
+                    <b>@Html.DisplayNameFor(model => model.nombre):</b> @Html.DisplayFor(model => model.nombre)<br />
+                    <b>@Html.DisplayNameFor(model => model.telefono):</b> @Html.DisplayFor(model => model.telefono)<br />
+                    <b>@Html.DisplayNameFor(model => model.pais):</b> @Html.DisplayFor(model => model.pais)<br />
 
 
-        @*
-        <dt>
-            @Html.DisplayNameFor(model => model.idContacto)
-        </dt>
+                    <div class="col p-4 d-flex flex-column position-static">
+                        
+                                <b>@Html.DisplayNameFor(model => model.Contacto):</b>
+                                <ul>
+                                    @foreach (var c in Model.Contacto)
+                                    {
+                                        <li>@c.idContacto</li>
+                                    }
+                                </ul>
+                            </div>
+                        
 
-        <dd>
-            @Html.DisplayFor(model => model.idContacto)
-        </dd>*@
+                            <p class="card-text mb-auto">
+                                <b>@Html.DisplayNameFor(model => model.email):</b> @Html.DisplayFor(model => model.email)<br />
+                                <b>@Html.DisplayNameFor(model => model.direccion):</b> @Html.DisplayFor(model => model.direccion)<br />
+                            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+                </div>
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.telefono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pais)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pais)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.direccion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.direccion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.idProveedor }) |
-    @Html.ActionLink("Regresar a Proveedores", "Index")
-</p>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.idProveedor }) |
+        @Html.ActionLink("Regresar a Proveedores", "Index")
+    </p>

@@ -13,20 +13,18 @@
     <tr>
 
         <th>
+            @Html.DisplayNameFor(model => model.idZapato)
+        </th>
+       
+
+        <th>
             @Html.DisplayNameFor(model => model.color)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.descripcion)
         </th>
-
         <th>
             @Html.DisplayNameFor(model => model.cantidadTot)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ubicacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Proveedor)
         </th>
         <th></th>
     </tr>
@@ -35,20 +33,17 @@
 <tr>
 
     <td>
-        @Html.DisplayFor(modelItem => item.color)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.descripcion)
+        @Html.DisplayFor(modelItem => item.idZapato)
     </td>
 
     <td>
-        @Html.DisplayFor(modelItem => item.cantidadTot)
+        @Html.DisplayFor(modelItem => item.color)
     </td>
     <th>
-        @Html.DisplayFor(modelItem => item.Ubicacion)
+        @Html.DisplayFor(modelItem => item.descripcion)
     </th>
     <th>
-        @Html.DisplayFor(modelItem => item.Proveedor)
+        @Html.DisplayFor(modelItem => item.cantidadTot)
     </th>
     <td>
         @Html.ActionLink("Editar", "Edit", new { id = item.idZapato }) |

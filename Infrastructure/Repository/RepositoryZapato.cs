@@ -58,8 +58,8 @@ namespace Infrastructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oZapato = ctx.Zapato.
                           Where(l => l.idZapato == id).
-                          Include(a => a.Proveedor).
-                          Include(c => c.Categoria).
+                          Include(a => a.Proveedor). Include(c => c.Categoria).
+                           Include(c => c.Ubicacion).
                           FirstOrDefault();
 
                     oZapato = ctx.Zapato.Find(id);
