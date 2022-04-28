@@ -97,14 +97,16 @@ namespace Infrastructure.Models
         [Display(Name = "Email")]
         public string email { get; set; }
 
-        [Display(Name = "Contacto")]
-        public virtual Contacto Contacto { get; set; }
-
         [Display(Name = "Zapato")]
         public virtual ICollection<Categoria> Zapato { get; set; }
 
 
+
+
     }
+
+
+
 
 
 
