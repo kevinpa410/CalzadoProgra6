@@ -6,10 +6,29 @@
 
 <h2>Crear Calzado</h2>
 
+@* Información usuario *@
+
+@{
+    string nombre = "";
+    string email = "Perfil";
+    Infrastructure.Models.Usuario oUsuario;
+    //Validar si existe en la sesión
+    if (Session["User"] != null)
+    {
+        oUsuario = (Infrastructure.Models.Usuario)Session["User"];
+        if (oUsuario != null)
+        {
+            nombre = $"{oUsuario.nombre} {oUsuario.apellidos}";
+            email = oUsuario.email;
+        }
+    }
+}
+
 
 @using (Html.BeginForm("Save", "Entradas_Salidas", FormMethod.Post, new { enctype = "multipart/data" }))
 {
     @Html.AntiForgeryToken()
+
 
     <div class="form-horizontal">
         <h4></h4>
@@ -130,5 +149,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-</html>
 
